@@ -36,7 +36,7 @@ DiagDispatcher::DiagDispatcher(
 : IDiagDispatcher(sessionManager, jobRoot)
 , AbstractTransportLayer(configuration.DiagBusId)
 , fConfiguration(configuration)
-, fConnectionManager(fConfiguration, *this, getProvidingListenerHelper(), context, *this)
+, fConnectionManager(fConfiguration, *this, fProvidingListenerHelper, context, *this)
 , fShutdownDelegate()
 , fDefaultTransportMessageProcessedListener()
 , fBusyMessage()
@@ -63,7 +63,7 @@ ESR_NO_INLINE AbstractTransportLayer::ErrorCode DiagDispatcher::send_local(
     if (connection != nullptr)
     {
         ITransportMessageListener::ReceiveResult const status
-            = getProvidingListenerHelper().messageReceived(
+            = fProvidingListenerHelper.messageReceived(
                 fConfiguration.DiagBusId, transportMessage, pNotificationListener);
         if (status == ITransportMessageListener::ReceiveResult::RECEIVED_NO_ERROR)
         {
@@ -124,15 +124,14 @@ TransportMessage* DiagDispatcher::copyFunctionalRequest(
     ITransportMessageProvidingListener& providingListener,
     AbstractDiagnosisConfiguration& configuration)
 {
-    TransportMessage* pRequest = nullptr;
-    ITransportMessageProvider::ErrorCode const result
-        = providingListener.getTransportMessage(
-            configuration.DiagBusId,
-            request.sourceAddress(),
-            configuration.DiagAddress,
-            TransportConfiguration::DIAG_PAYLOAD_SIZE,
-            {},
-            pRequest);
+    TransportMessage* pRequest                        = nullptr;
+    ITransportMessageProvider::ErrorCode const result = providingListener.getTransportMessage(
+        configuration.DiagBusId,
+        request.sourceAddress(),
+        configuration.DiagAddress,
+        TransportConfiguration::DIAG_PAYLOAD_SIZE,
+        {},
+        pRequest);
     if ((ITransportMessageProvider::ErrorCode::TPMSG_OK == result) && (nullptr != pRequest))
     {
         pRequest->resetValidBytes();
@@ -201,7 +200,7 @@ void DiagDispatcher::processQueue()
                 fConfiguration,
                 fConnectionManager,
                 fDiagJobRoot,
-                getProvidingListenerHelper(),
+                fProvidingListenerHelper,
                 this,
                 SendBusyResponseCallback::create<DiagDispatcher, &DiagDispatcher::sendBusyResponse>(
                     *this));
@@ -218,7 +217,7 @@ uint8_t DiagDispatcher::dispatchTriggerEventRequest(TransportMessage& tmsg)
          * is obsolete because ALL triggerEvent are of this type  -
          * so exchange transport message against buffer and copy */
         TransportMessage* const pRequest
-            = copyFunctionalRequest(tmsg, getProvidingListenerHelper(), fConfiguration);
+            = copyFunctionalRequest(tmsg, fProvidingListenerHelper, fConfiguration);
         if (pRequest != nullptr)
         {
             IncomingDiagConnection* const pConnection
@@ -370,8 +369,7 @@ void DiagDispatcher::sendBusyResponse(TransportMessage const* const message)
     fBusyMessage.getPayload()[1] = message->getServiceId();
 
     ITransportMessageListener::ReceiveResult const status
-        = getProvidingListenerHelper().messageReceived(
-            fConfiguration.DiagBusId, fBusyMessage, nullptr);
+        = fProvidingListenerHelper.messageReceived(fConfiguration.DiagBusId, fBusyMessage, nullptr);
 
     if (status != ITransportMessageListener::ReceiveResult::RECEIVED_NO_ERROR)
     {
@@ -427,7 +425,7 @@ void DiagDispatcher::connectionManagerShutdownComplete()
 void DiagDispatcher::transportMessageProcessed(
     TransportMessage& transportMessage, ProcessingResult const /* result */)
 {
-    getProvidingListenerHelper().releaseTransportMessage(transportMessage);
+    fProvidingListenerHelper.releaseTransportMessage(transportMessage);
 }
 
 } // namespace uds

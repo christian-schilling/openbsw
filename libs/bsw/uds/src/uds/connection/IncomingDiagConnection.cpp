@@ -7,9 +7,9 @@
 #include "transport/ITransportMessageProvider.h"
 #include "transport/TransportConfiguration.h"
 #include "transport/TransportMessage.h"
+#include "uds/DiagDispatcher.h"
 #include "uds/UdsLogger.h"
 #include "uds/base/AbstractDiagJob.h"
-#include "uds/connection/DiagConnectionManager.h"
 #include "uds/connection/NestedDiagRequest.h"
 #include "uds/connection/PositiveResponse.h"
 #include "uds/session/IDiagSessionManager.h"
@@ -574,15 +574,13 @@ void IncomingDiagConnection::setSourceId(TransportMessage& transportMessage) con
 {
     if (TransportConfiguration::isFunctionalAddress(fTargetId))
     {
-        if (nullptr == fpDiagConnectionManager)
+        if (nullptr == fpDiagDispatcher)
         {
             Logger::critical(
-                UDS,
-                "IncomingDiagConnection::setSourceId(): "
-                "fpDiagConnectionManager == nullptr!");
-            estd_assert(fpDiagConnectionManager != nullptr);
+                UDS, "IncomingDiagConnection::setSourceId(): fpDiagDispatcher == nullptr!");
+            estd_assert(fpDiagDispatcher != nullptr);
         }
-        transportMessage.setSourceId(fpDiagConnectionManager->getSourceDiagId());
+        transportMessage.setSourceId(fpDiagDispatcher->getSourceId());
     }
     else
     {
@@ -651,17 +649,14 @@ void IncomingDiagConnection::terminate()
     }
     fResponsePendingTimeout._asyncTimeout.cancel();
     fGlobalPendingTimeout._asyncTimeout.cancel();
-    if (nullptr == fpDiagConnectionManager)
+    if (nullptr == fpDiagDispatcher)
     {
-        Logger::critical(
-            UDS,
-            "IncomingDiagConnection::terminate(): fpDiagConnectionManager == "
-            "nullptr!");
-        estd_assert(fpDiagConnectionManager != nullptr);
+        Logger::critical(UDS, "IncomingDiagConnection::terminate(): fpDiagDispatcher == nullptr!");
+        estd_assert(fpDiagDispatcher != nullptr);
     }
     fConnectionTerminationIsPending = false;
     fpSender                        = nullptr;
-    fpDiagConnectionManager->diagConnectionTerminated(*this);
+    fpDiagDispatcher->diagConnectionTerminated(*this);
 }
 
 } // namespace uds

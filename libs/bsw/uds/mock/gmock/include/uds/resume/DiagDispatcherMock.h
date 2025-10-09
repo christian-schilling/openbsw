@@ -13,9 +13,7 @@ namespace uds
 class DiagDispatcherMock : public IDiagDispatcher
 {
 public:
-    DiagDispatcherMock(IDiagSessionManager& sessionManager, DiagJobRoot& jobRoot)
-    : IDiagDispatcher(sessionManager, jobRoot)
-    {}
+    DiagDispatcherMock(IDiagSessionManager& sessionManager) : IDiagDispatcher(sessionManager) {}
 
     MOCK_CONST_METHOD0(getSourceId, uint16_t());
 

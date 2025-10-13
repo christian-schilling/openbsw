@@ -274,7 +274,7 @@ public:
      * id will be set to source id of the DiagDispatcher, otherwise
      * it'll be set to the target id of this IncomingDiagConnection.
      */
-    void setSourceId(transport::TransportMessage& transportMessage) const;
+    void setDiagConnectionSourceId(transport::TransportMessage& transportMessage) const;
 
     void asyncTransportMessageProcessed(
         transport::TransportMessage* pTransportMessage, ProcessingResult status);

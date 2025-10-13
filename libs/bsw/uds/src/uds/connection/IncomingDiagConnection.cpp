@@ -120,7 +120,7 @@ void IncomingDiagConnection::asyncSendPositiveResponse(
     uint16_t const tmpSourceId = fSourceId;
     if (nullptr != fpResponseMessage)
     {
-        setSourceId(*fpResponseMessage);
+        setDiagConnectionSourceId(*fpResponseMessage);
         fpResponseMessage->setTargetId(tmpSourceId);
         if (DiagReturnCode::NEGATIVE_RESPONSE_IDENTIFIER == fpResponseMessage->getServiceId())
         { // we did send a negative response before --> restore payload
@@ -299,7 +299,7 @@ void IncomingDiagConnection::asyncSendNegativeResponse(
     }
     fpResponseMessage->setPayloadLength(DiagCodes::NEGATIVE_RESPONSE_MESSAGE_LENGTH);
     // invert source and target because we are a incoming connection
-    setSourceId(*fpResponseMessage);
+    setDiagConnectionSourceId(*fpResponseMessage);
     fpResponseMessage->setTargetId(fSourceId);
     if (DiagReturnCode::NEGATIVE_RESPONSE_IDENTIFIER != fpResponseMessage->getServiceId())
     { // make a backup only the first time a negative response is sent!
@@ -542,7 +542,7 @@ void IncomingDiagConnection::sendResponsePending()
         return;
     }
     fPendingMessage.setTargetId(fSourceId);
-    setSourceId(fPendingMessage);
+    setDiagConnectionSourceId(fPendingMessage);
     fPendingMessage.resetValidBytes();
     (void)fPendingMessage.append(DiagReturnCode::NEGATIVE_RESPONSE_IDENTIFIER);
     (void)fPendingMessage.append(fServiceId);
@@ -570,17 +570,18 @@ void IncomingDiagConnection::sendResponsePending()
     }
 }
 
-void IncomingDiagConnection::setSourceId(TransportMessage& transportMessage) const
+void IncomingDiagConnection::setDiagConnectionSourceId(TransportMessage& transportMessage) const
 {
     if (TransportConfiguration::isFunctionalAddress(fTargetId))
     {
         if (nullptr == fpDiagDispatcher)
         {
             Logger::critical(
-                UDS, "IncomingDiagConnection::setSourceId(): fpDiagDispatcher == nullptr!");
+                UDS,
+                "IncomingDiagConnection::setDiagConnectionSourceId(): fpDiagDispatcher == nullptr!");
             estd_assert(fpDiagDispatcher != nullptr);
         }
-        transportMessage.setSourceId(fpDiagDispatcher->getSourceId());
+        transportMessage.setSourceId(fpDiagDispatcher->getDispatcherSourceId());
     }
     else
     {

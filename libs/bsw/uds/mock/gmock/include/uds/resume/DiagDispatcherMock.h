@@ -15,7 +15,7 @@ class DiagDispatcherMock : public IDiagDispatcher
 public:
     DiagDispatcherMock(IDiagSessionManager& sessionManager) : IDiagDispatcher(sessionManager) {}
 
-    MOCK_CONST_METHOD0(getSourceId, uint16_t());
+    MOCK_CONST_METHOD0(getDispatcherSourceId, uint16_t());
 
     MOCK_METHOD2(
         resume,

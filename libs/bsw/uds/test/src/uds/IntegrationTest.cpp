@@ -240,7 +240,7 @@ TEST_F(UdsIntegration, positive_response)
             SaveArg<2>(&pProcessedListener),
             Return(transport::ITransportMessageListener::ReceiveResult::RECEIVED_NO_ERROR)));
 
-    EXPECT_EQ(_udsDispatcher.getSourceId(), 0x10);
+    EXPECT_EQ(_udsDispatcher.getDispatcherSourceId(), 0x10);
 
     _udsDispatcher.processQueue();
     CONTEXT_EXECUTE;

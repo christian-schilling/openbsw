@@ -31,7 +31,7 @@ public:
     : fSessionManager(sessionManager), fEnabled(true)
     {}
 
-    virtual uint16_t getSourceId() const = 0;
+    virtual uint16_t getDispatcherSourceId() const = 0;
 
 #ifdef IS_VARIANT_HANDLING_NEEDED
     virtual void setSourceId(uint16_t) = 0;

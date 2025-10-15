@@ -77,7 +77,7 @@ TEST_F(
     uint16_t const serviceId         = request[0];
     uint16_t const functionalAddress = 0xDF;
     fIncomingConnection.fTargetId    = functionalAddress;
-    fIncomingConnection.fServiceId   = serviceId;
+    fIncomingConnection.serviceId    = serviceId;
 
     EXPECT_CALL(fSessionManager, isSessionTimeoutActive()).WillOnce(Return(false));
 
@@ -97,7 +97,7 @@ TEST_F(
     uint16_t const serviceId         = request[0];
     uint16_t const functionalAddress = 0xDF;
     fIncomingConnection.fTargetId    = functionalAddress;
-    fIncomingConnection.fServiceId   = serviceId;
+    fIncomingConnection.serviceId    = serviceId;
 
     EXPECT_CALL(fSessionManager, isSessionTimeoutActive()).WillOnce(Return(true));
 
@@ -122,7 +122,7 @@ TEST_F(
     uint16_t const serviceId         = request[0];
     uint16_t const functionalAddress = 0xDF;
     fIncomingConnection.fTargetId    = functionalAddress;
-    fIncomingConnection.fServiceId   = serviceId;
+    fIncomingConnection.serviceId    = serviceId;
 
     EXPECT_CALL(fSessionManager, getActiveSession()).WillOnce(ReturnRef(fApplicationSession));
 
@@ -145,7 +145,7 @@ TEST_F(
     uint16_t const serviceId         = request[0];
     uint16_t const functionalAddress = 0xDF;
     fIncomingConnection.fTargetId    = functionalAddress;
-    fIncomingConnection.fServiceId   = serviceId;
+    fIncomingConnection.serviceId    = serviceId;
 
     EXPECT_CALL(fSessionManager, isSessionTimeoutActive()).WillOnce(Return(false));
 
@@ -171,7 +171,7 @@ TEST_F(
     uint16_t const serviceId         = request[0];
     uint16_t const functionalAddress = 0xDF;
     fIncomingConnection.fTargetId    = functionalAddress;
-    fIncomingConnection.fServiceId   = serviceId;
+    fIncomingConnection.serviceId    = serviceId;
 
     EXPECT_CALL(fSessionManager, isSessionTimeoutActive()).WillOnce(Return(false));
 

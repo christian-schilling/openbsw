@@ -277,11 +277,11 @@ void DiagDispatcher::dispatchIncomingRequest(
             Logger::debug(
                 UDS,
                 "Opening incoming connection 0x%x --> 0x%x, service 0x%x",
-                pConnection->fSourceId,
+                pConnection->sourceAddress,
                 pConnection->fTargetId,
-                pConnection->fServiceId);
-            pConnection->fpRequestNotificationListener = job.getProcessedListener();
-            DiagReturnCode::Type const result          = diagJobRoot.execute(
+                pConnection->serviceId);
+            pConnection->requestNotificationListener = job.getProcessedListener();
+            DiagReturnCode::Type const result        = diagJobRoot.execute(
                 *pConnection,
                 job.getTransportMessage()->getPayload(),
                 job.getTransportMessage()->getPayloadLength());
@@ -322,15 +322,15 @@ IncomingDiagConnection* DiagDispatcher::requestIncomingConnection(TransportMessa
     }
     if (pConnection != nullptr)
     {
-        pConnection->fpDiagDispatcher     = this;
-        pConnection->fpMessageSender      = this;
-        pConnection->fpDiagSessionManager = &fSessionManager;
-        pConnection->fSourceId            = requestMessage.getSourceId();
-        pConnection->fTargetId            = requestMessage.getTargetId();
-        pConnection->fServiceId           = requestMessage.getServiceId();
+        pConnection->diagDispatcher     = this;
+        pConnection->messageSender      = this;
+        pConnection->diagSessionManager = &fSessionManager;
+        pConnection->sourceAddress      = requestMessage.getSourceId();
+        pConnection->fTargetId          = requestMessage.getTargetId();
+        pConnection->serviceId          = requestMessage.getServiceId();
         pConnection->open(fConfiguration.ActivateOutgoingPending);
-        pConnection->fpRequestMessage  = &requestMessage;
-        pConnection->fpResponseMessage = nullptr;
+        pConnection->requestMessage  = &requestMessage;
+        pConnection->responseMessage = nullptr;
         return pConnection;
     }
 
@@ -345,9 +345,9 @@ IncomingDiagConnection* DiagDispatcher::requestIncomingConnection(TransportMessa
 
 void DiagDispatcher::diagConnectionTerminated(IncomingDiagConnection& diagConnection)
 {
-    transport::TransportMessage* const requestMessage = diagConnection.fpRequestMessage;
+    transport::TransportMessage* const requestMessage = diagConnection.requestMessage;
     transport::ITransportMessageProcessedListener* const notificationListener
-        = diagConnection.fpRequestNotificationListener;
+        = diagConnection.requestNotificationListener;
     if ((notificationListener != nullptr) && (requestMessage != nullptr))
     {
         requestMessage->resetValidBytes();
@@ -357,7 +357,7 @@ void DiagDispatcher::diagConnectionTerminated(IncomingDiagConnection& diagConnec
             transport::ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR);
     }
 
-    transport::TransportMessage* const responseMessage = diagConnection.fpResponseMessage;
+    transport::TransportMessage* const responseMessage = diagConnection.responseMessage;
     if (responseMessage != nullptr)
     {
         fProvidingListenerHelper.releaseTransportMessage(*responseMessage);
@@ -368,11 +368,11 @@ void DiagDispatcher::diagConnectionTerminated(IncomingDiagConnection& diagConnec
         fConfiguration.releaseIncomingDiagConnection(diagConnection);
     }
 
-    diagConnection.fpRequestMessage              = nullptr;
-    diagConnection.fpResponseMessage             = nullptr;
-    diagConnection.fpDiagDispatcher              = nullptr;
-    diagConnection.fpMessageSender               = nullptr;
-    diagConnection.fpRequestNotificationListener = nullptr;
+    diagConnection.requestMessage              = nullptr;
+    diagConnection.responseMessage             = nullptr;
+    diagConnection.diagDispatcher              = nullptr;
+    diagConnection.messageSender               = nullptr;
+    diagConnection.requestNotificationListener = nullptr;
 
     checkConnectionShutdownProgress();
 }

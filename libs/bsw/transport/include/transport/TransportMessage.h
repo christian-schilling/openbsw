@@ -111,7 +111,7 @@ public:
     /**
      * \pre   fpBuffer != NULL
      */
-    void setSourceId(uint16_t sourceId);
+    void setSourceId(uint16_t sourceAddress);
 
     /**
      * Returns the target id of the TransportMessage.
@@ -281,7 +281,7 @@ private:
     ::etl::span<uint8_t> fBuffer;
 
     /** source id of TransportMessage */
-    uint16_t fSourceId;
+    uint16_t _sourceAddress;
 
     /** target id of TransportMessage */
     uint16_t fTargetId;
@@ -304,9 +304,12 @@ private:
 
 inline uint16_t TransportMessage::getSourceId() const { return sourceAddress(); }
 
-inline void TransportMessage::setSourceId(uint16_t const sourceId) { fSourceId = sourceId; }
+inline void TransportMessage::setSourceId(uint16_t const sourceAddress)
+{
+    _sourceAddress = sourceAddress;
+}
 
-inline uint16_t TransportMessage::sourceAddress() const { return fSourceId; }
+inline uint16_t TransportMessage::sourceAddress() const { return _sourceAddress; }
 
 inline uint16_t TransportMessage::getTargetId() const { return targetAddress(); }
 

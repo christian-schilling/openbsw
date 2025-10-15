@@ -46,7 +46,7 @@ public:
     }
 
     virtual IOutgoingDiagConnectionProvider::ErrorCode getOutgoingDiagConnection(
-        uint16_t targetId,
+        uint16_t targetAddress,
         OutgoingDiagConnection*& pConnection,
         transport::TransportMessage* pRequestMessage)
     {

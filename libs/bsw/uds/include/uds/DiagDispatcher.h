@@ -5,13 +5,14 @@
 #include "uds/DiagnosisConfiguration.h"
 #include "uds/IDiagDispatcher.h"
 #include "uds/UdsConfig.h"
-#include "uds/connection/DiagConnectionManager.h"
 
 #include <async/Async.h>
 #include <async/util/Call.h>
+#include <etl/delegate.h>
 #include <etl/uncopyable.h>
 #include <transport/AbstractTransportLayer.h>
 #include <transport/ITransportMessageProcessedListener.h>
+#include <transport/ITransportMessageProvidingListener.h>
 #include <transport/TransportMessage.h>
 
 #ifdef IS_VARIANT_HANDLING_NEEDED
@@ -34,6 +35,7 @@ class TransportJob;
 namespace uds
 {
 class IDiagSessionManager;
+class IncomingDiagConnection;
 
 /**
  * DiagDispatcher is the ITransportMessageSender for a uds instance.
@@ -58,8 +60,7 @@ public:
     DiagDispatcher(
         AbstractDiagnosisConfiguration& configuration,
         IDiagSessionManager& sessionManager,
-        DiagJobRoot& jobRoot,
-        ::async::ContextType context);
+        DiagJobRoot& jobRoot);
 
     /**
      * \see     AbstractTransportLayer::init()
@@ -91,22 +92,18 @@ public:
 
     void processQueue();
 
-    DiagConnectionManager& getConnectionManager() { return fConnectionManager; }
+    void shutdownIncomingConnections(::etl::delegate<void()> delegate);
 
-    uint16_t getSourceId() const override { return fConfiguration.DiagAddress; }
+    uint16_t getDispatcherSourceId() const override { return fConfiguration.DiagAddress; }
 
 #ifdef IS_VARIANT_HANDLING_NEEDED
     virtual void setSourceId(uint16_t diagAddress) { fConfiguration.DiagAddress = diagAddress; }
 #endif
 
-    /*
-     * \param msg - preset message to trigger uds flow
-     * \return - 0 successful, 1 - not successful
-     * \note - will only be executed in case no incoming diag message
-     */
-    uint8_t dispatchTriggerEventRequest(transport::TransportMessage& tmsg) override;
-
 private:
+    using SendBusyResponseCallback
+        = ::etl::delegate<void(transport::TransportMessage const* const)>;
+
     // workaround for large non virtual thunks
     bool shutdown_local(ShutdownDelegate delegate);
     transport::AbstractTransportLayer::ErrorCode send_local(
@@ -116,7 +113,7 @@ private:
     static uint8_t const BUSY_MESSAGE_LENGTH = 3U;
 
     friend class ::http::html::UdsController;
-    friend class DiagConnectionManager;
+    friend class IncomingDiagConnection;
 
     class DefaultTransportMessageProcessedListener
     : public transport::ITransportMessageProcessedListener
@@ -143,7 +140,14 @@ private:
 
     void trigger();
 
-    void dispatchIncomingRequest(transport::TransportJob& job);
+    static void dispatchIncomingRequest(
+        transport::TransportJob& job,
+        AbstractDiagnosisConfiguration& configuration,
+        DiagDispatcher& dispatcher,
+        DiagJobRoot& diagJobRoot,
+        transport::ITransportMessageProvidingListener& providingListener,
+        transport::ITransportMessageProcessedListener* dispatcherProcessedListener,
+        SendBusyResponseCallback sendBusyResponse);
 
     void sendBusyResponse(transport::TransportMessage const* const message);
 
@@ -156,16 +160,27 @@ private:
      * is instantiated on a gateway. Thus, its content must not be altered
      * which is why a copy is made for further processing.
      */
-    transport::TransportMessage* copyFunctionalRequest(transport::TransportMessage& request);
+    static transport::TransportMessage* copyFunctionalRequest(
+        transport::TransportMessage& request,
+        transport::ITransportMessageProvidingListener& providingListener,
+        AbstractDiagnosisConfiguration& configuration);
+
+    IncomingDiagConnection* requestIncomingConnection(transport::TransportMessage& requestMessage);
+
+    void diagConnectionTerminated(IncomingDiagConnection& diagConnection);
+
+    void checkConnectionShutdownProgress();
 
     AbstractDiagnosisConfiguration& fConfiguration;
-    DiagConnectionManager fConnectionManager;
+    ::etl::delegate<void()> fConnectionShutdownDelegate;
+    bool fConnectionShutdownRequested;
 
     ShutdownDelegate fShutdownDelegate;
     DefaultTransportMessageProcessedListener fDefaultTransportMessageProcessedListener;
     transport::TransportMessage fBusyMessage;
     uint8_t fBusyMessageBuffer[BUSY_MESSAGE_LENGTH + UdsVmsConstants::BUSY_MESSAGE_EXTRA_BYTES];
     ::async::Function fAsyncProcessQueue;
+    DiagJobRoot& fDiagJobRoot;
 };
 
 } // namespace uds

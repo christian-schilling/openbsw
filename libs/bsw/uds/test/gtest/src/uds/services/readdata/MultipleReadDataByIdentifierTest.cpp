@@ -151,7 +151,7 @@ public:
         fDiagRoot.addAbstractDiagJob(fDiagJob);
         fMyMultipleReadDataByIdentifier.setDefaultDiagSessionManager(fSessionManager);
         fMyMultipleReadDataByIdentifierWithFirstJob.setDefaultDiagSessionManager(fSessionManager);
-        fIncomingDiagConnection.isOpen    = true;
+        fIncomingDiagConnection.open      = true;
         fIncomingDiagConnection.serviceId = ::ServiceId::READ_DATA_BY_IDENTIFIER;
 
         fMyMultipleReadDataByIdentifier.addAbstractDiagJob(fDiagJob);

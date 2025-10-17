@@ -8,6 +8,7 @@
 #include "transport/TransportJob.h"
 #include "uds/DiagCodes.h"
 #include "uds/UdsLogger.h"
+#include "uds/connection/IncomingDiagConnection.h"
 #include "uds/session/IDiagSessionManager.h"
 
 #include <etl/delegate.h>
@@ -19,6 +20,7 @@ namespace uds
 using ::transport::AbstractTransportLayer;
 using ::transport::ITransportMessageListener;
 using ::transport::ITransportMessageProvider;
+using ::transport::ITransportMessageProvidingListener;
 using ::transport::TransportConfiguration;
 using ::transport::TransportJob;
 using ::transport::TransportMessage;
@@ -30,18 +32,19 @@ using ::util::logger::UDS;
 DiagDispatcher::DiagDispatcher(
     AbstractDiagnosisConfiguration& configuration,
     IDiagSessionManager& sessionManager,
-    DiagJobRoot& jobRoot,
-    ::async::ContextType context)
-: IDiagDispatcher(sessionManager, jobRoot)
+    DiagJobRoot& jobRoot)
+: IDiagDispatcher(sessionManager)
 , AbstractTransportLayer(configuration.DiagBusId)
 , fConfiguration(configuration)
-, fConnectionManager(fConfiguration, *this, getProvidingListenerHelper(), context, *this)
+, fConnectionShutdownDelegate()
+, fConnectionShutdownRequested(false)
 , fShutdownDelegate()
 , fDefaultTransportMessageProcessedListener()
 , fBusyMessage()
 , fBusyMessageBuffer()
 , fAsyncProcessQueue(
       ::async::Function::CallType::create<DiagDispatcher, &DiagDispatcher::processQueue>(*this))
+, fDiagJobRoot(jobRoot)
 {
     fBusyMessage.init(
         &fBusyMessageBuffer[0], BUSY_MESSAGE_LENGTH + UdsVmsConstants::BUSY_MESSAGE_EXTRA_BYTES);
@@ -62,7 +65,7 @@ ESR_NO_INLINE AbstractTransportLayer::ErrorCode DiagDispatcher::send_local(
     if (connection != nullptr)
     {
         ITransportMessageListener::ReceiveResult const status
-            = getProvidingListenerHelper().messageReceived(
+            = fProvidingListenerHelper.messageReceived(
                 fConfiguration.DiagBusId, transportMessage, pNotificationListener);
         if (status == ITransportMessageListener::ReceiveResult::RECEIVED_NO_ERROR)
         {
@@ -118,17 +121,19 @@ AbstractTransportLayer::ErrorCode DiagDispatcher::resume(
     return enqueueMessage(transportMessage, pNotificationListener);
 }
 
-TransportMessage* DiagDispatcher::copyFunctionalRequest(TransportMessage& request)
+TransportMessage* DiagDispatcher::copyFunctionalRequest(
+    TransportMessage& request,
+    ITransportMessageProvidingListener& providingListener,
+    AbstractDiagnosisConfiguration& configuration)
 {
-    TransportMessage* pRequest = nullptr;
-    ITransportMessageProvider::ErrorCode const result
-        = getProvidingListenerHelper().getTransportMessage(
-            getBusId(),
-            request.sourceAddress(),
-            fConfiguration.DiagAddress,
-            TransportConfiguration::DIAG_PAYLOAD_SIZE,
-            {},
-            pRequest);
+    TransportMessage* pRequest                        = nullptr;
+    ITransportMessageProvider::ErrorCode const result = providingListener.getTransportMessage(
+        configuration.DiagBusId,
+        request.sourceAddress(),
+        configuration.DiagAddress,
+        TransportConfiguration::DIAG_PAYLOAD_SIZE,
+        {},
+        pRequest);
     if ((ITransportMessageProvider::ErrorCode::TPMSG_OK == result) && (nullptr != pRequest))
     {
         pRequest->resetValidBytes();
@@ -149,7 +154,7 @@ AbstractTransportLayer::ErrorCode DiagDispatcher::enqueueMessage(
     TransportMessage& transportMessage,
     ITransportMessageProcessedListener* const pNotificationListener)
 {
-    if (!isEnabled())
+    if (!fEnabled)
     {
         return AbstractTransportLayer::ErrorCode::TP_SEND_FAIL;
     }
@@ -192,75 +197,37 @@ void DiagDispatcher::processQueue()
             TransportJob* const pSendJob = &fConfiguration.SendJobQueue.front();
             fConfiguration.SendJobQueue.pop();
             lock.unlock();
-            dispatchIncomingRequest(*pSendJob);
+            dispatchIncomingRequest(
+                *pSendJob,
+                fConfiguration,
+                *this,
+                fDiagJobRoot,
+                fProvidingListenerHelper,
+                this,
+                SendBusyResponseCallback::create<DiagDispatcher, &DiagDispatcher::sendBusyResponse>(
+                    *this));
             lock.lock();
         }
     }
 }
 
-uint8_t DiagDispatcher::dispatchTriggerEventRequest(TransportMessage& tmsg)
-{
-    if ((fConfiguration.SendJobQueue.empty()) && (isEnabled()))
-    {
-        /* check for TransportConfiguration::isFunctionallyAddressed
-         * is obsolete because ALL triggerEvent are of this type  -
-         * so exchange transport message against buffer and copy */
-        TransportMessage* const pRequest = copyFunctionalRequest(tmsg);
-        if (pRequest != nullptr)
-        {
-            IncomingDiagConnection* const pConnection
-                = fConnectionManager.requestIncomingConnection(*pRequest);
-            if (pConnection != nullptr)
-            {
-                Logger::debug(
-                    UDS,
-                    "Opening triggered connection 0x%x --> 0x%x, service 0x%x",
-                    pConnection->fSourceId,
-                    pConnection->fTargetId,
-                    pConnection->fServiceId);
-                // pConnection->setRequestNotificationListener(*job.getProcessedListener());
-                DiagReturnCode::Type const result = fDiagJobRoot.execute(
-                    *pConnection, pRequest->getPayload(), pRequest->getPayloadLength());
-                if (result != DiagReturnCode::OK)
-                {
-                    (void)pConnection->sendNegativeResponse(
-                        static_cast<uint8_t>(result), fDiagJobRoot);
-                    pConnection->terminate();
-                }
-                /* release the transport message immediately */
-                transportMessageProcessed(
-                    *pRequest,
-                    ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR);
-                return 0U;
-            }
-            else
-            {
-                /* release the transport message immediately */
-                transportMessageProcessed(
-                    *pRequest,
-                    ITransportMessageProcessedListener::ProcessingResult::PROCESSED_ERROR);
-                return 1U;
-            }
-        }
-        else
-        {
-            /* enable for debugging */
-            sendBusyResponse(&tmsg);
-        }
-    }
-    return 1U;
-}
-
 // METRIC STCYC 11 // The function is already in use as is
-void DiagDispatcher::dispatchIncomingRequest(TransportJob& job)
+void DiagDispatcher::dispatchIncomingRequest(
+    TransportJob& job,
+    AbstractDiagnosisConfiguration& configuration,
+    DiagDispatcher& dispatcher,
+    DiagJobRoot& diagJobRoot,
+    ITransportMessageProvidingListener& providingListener,
+    ITransportMessageProcessedListener* const dispatcherProcessedListener,
+    SendBusyResponseCallback sendBusyResponse)
 {
     bool const isResuming
         = job.getTransportMessage()->getTargetId() == TransportMessage::INVALID_ADDRESS;
     if (isResuming)
     {
-        job.getTransportMessage()->setTargetId(fConfiguration.DiagAddress);
+        job.getTransportMessage()->setTargetId(configuration.DiagAddress);
     }
-    if (!fConfiguration.AcceptAllRequests)
+    if (!configuration.AcceptAllRequests)
     { // check if source is a tester or functional request
         if (!isFromValidSender(*job.getTransportMessage()))
         {
@@ -277,10 +244,10 @@ void DiagDispatcher::dispatchIncomingRequest(TransportJob& job)
     bool sendBusyNegativeResponse      = false;
     TransportMessage& transportMessage = *job.getTransportMessage();
     TransportMessage* pRequest         = &transportMessage;
-    if (fConfiguration.CopyFunctionalRequests
+    if (configuration.CopyFunctionalRequests
         && TransportConfiguration::isFunctionallyAddressed(transportMessage))
     {
-        pRequest = copyFunctionalRequest(transportMessage);
+        pRequest = copyFunctionalRequest(transportMessage, providingListener, configuration);
         if (pRequest != nullptr)
         {
             if (job.getProcessedListener() != nullptr)
@@ -289,7 +256,10 @@ void DiagDispatcher::dispatchIncomingRequest(TransportJob& job)
                     transportMessage,
                     ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR);
             }
-            job.setProcessedListener(this);
+            if (dispatcherProcessedListener != nullptr)
+            {
+                job.setProcessedListener(dispatcherProcessedListener);
+            }
             job.setTransportMessage(*pRequest);
         }
         else
@@ -298,27 +268,26 @@ void DiagDispatcher::dispatchIncomingRequest(TransportJob& job)
             sendBusyNegativeResponse = true;
         }
     }
-
     if (!sendBusyNegativeResponse)
     {
         IncomingDiagConnection* const pConnection
-            = fConnectionManager.requestIncomingConnection(*job.getTransportMessage());
+            = dispatcher.requestIncomingConnection(*job.getTransportMessage());
         if (pConnection != nullptr)
         {
             Logger::debug(
                 UDS,
                 "Opening incoming connection 0x%x --> 0x%x, service 0x%x",
-                pConnection->fSourceId,
+                pConnection->sourceAddress,
                 pConnection->fTargetId,
-                pConnection->fServiceId);
-            pConnection->setRequestNotificationListener(*job.getProcessedListener());
-            DiagReturnCode::Type const result = fDiagJobRoot.execute(
+                pConnection->serviceId);
+            pConnection->requestNotificationListener = job.getProcessedListener();
+            DiagReturnCode::Type const result        = diagJobRoot.execute(
                 *pConnection,
                 job.getTransportMessage()->getPayload(),
                 job.getTransportMessage()->getPayloadLength());
             if (result != DiagReturnCode::OK)
             {
-                (void)pConnection->sendNegativeResponse(static_cast<uint8_t>(result), fDiagJobRoot);
+                (void)pConnection->sendNegativeResponse(static_cast<uint8_t>(result), diagJobRoot);
                 pConnection->terminate();
             }
         }
@@ -331,10 +300,110 @@ void DiagDispatcher::dispatchIncomingRequest(TransportJob& job)
     if (sendBusyNegativeResponse)
     {
         TransportMessage* const pMessage = job.getTransportMessage();
-        sendBusyResponse(pMessage);
+        if (sendBusyResponse.is_valid())
+        {
+            sendBusyResponse(pMessage);
+        }
         job.getProcessedListener()->transportMessageProcessed(
             *pMessage, ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR);
     }
+}
+
+IncomingDiagConnection* DiagDispatcher::requestIncomingConnection(TransportMessage& requestMessage)
+{
+    if (fConnectionShutdownRequested)
+    {
+        return nullptr;
+    }
+    IncomingDiagConnection* pConnection = nullptr;
+    {
+        ::async::LockType const lock;
+        pConnection = fConfiguration.acquireIncomingDiagConnection();
+    }
+    if (pConnection != nullptr)
+    {
+        pConnection->diagDispatcher     = this;
+        pConnection->messageSender      = this;
+        pConnection->diagSessionManager = &fSessionManager;
+        pConnection->sourceAddress      = requestMessage.getSourceId();
+        pConnection->fTargetId          = requestMessage.getTargetId();
+        pConnection->serviceId          = requestMessage.getServiceId();
+        pConnection->open(fConfiguration.ActivateOutgoingPending);
+        pConnection->requestMessage  = &requestMessage;
+        pConnection->responseMessage = nullptr;
+        return pConnection;
+    }
+
+    Logger::warn(
+        UDS,
+        "No incoming diag connection available for 0x%x --> 0x%x, service 0x%x",
+        requestMessage.getSourceId(),
+        requestMessage.getTargetId(),
+        requestMessage.getServiceId());
+    return nullptr;
+}
+
+void DiagDispatcher::diagConnectionTerminated(IncomingDiagConnection& diagConnection)
+{
+    transport::TransportMessage* const requestMessage = diagConnection.requestMessage;
+    transport::ITransportMessageProcessedListener* const notificationListener
+        = diagConnection.requestNotificationListener;
+    if ((notificationListener != nullptr) && (requestMessage != nullptr))
+    {
+        requestMessage->resetValidBytes();
+        (void)requestMessage->increaseValidBytes(requestMessage->getPayloadLength());
+        notificationListener->transportMessageProcessed(
+            *requestMessage,
+            transport::ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR);
+    }
+
+    transport::TransportMessage* const responseMessage = diagConnection.responseMessage;
+    if (responseMessage != nullptr)
+    {
+        fProvidingListenerHelper.releaseTransportMessage(*responseMessage);
+    }
+
+    {
+        ::async::LockType const lock;
+        fConfiguration.releaseIncomingDiagConnection(diagConnection);
+    }
+
+    diagConnection.requestMessage              = nullptr;
+    diagConnection.responseMessage             = nullptr;
+    diagConnection.diagDispatcher              = nullptr;
+    diagConnection.messageSender               = nullptr;
+    diagConnection.requestNotificationListener = nullptr;
+
+    checkConnectionShutdownProgress();
+}
+
+void DiagDispatcher::shutdownIncomingConnections(::etl::delegate<void()> delegate)
+{
+    fConnectionShutdownDelegate  = delegate;
+    fConnectionShutdownRequested = true;
+    checkConnectionShutdownProgress();
+}
+
+void DiagDispatcher::checkConnectionShutdownProgress()
+{
+    if (!fConnectionShutdownRequested)
+    {
+        return;
+    }
+
+    ::etl::ipool const& incomingDiagConnections = fConfiguration.incomingDiagConnectionPool();
+
+    if (!incomingDiagConnections.full())
+    {
+        Logger::error(
+            UDS,
+            "DiagDispatcher::problem at shutdown(in: %d/%d)",
+            incomingDiagConnections.size(),
+            incomingDiagConnections.max_size());
+        fConfiguration.clearIncomingDiagConnections();
+    }
+    Logger::debug(UDS, "DiagDispatcher incoming connection shutdown complete");
+    fConnectionShutdownDelegate();
 }
 
 void DiagDispatcher::sendBusyResponse(TransportMessage const* const message)
@@ -346,8 +415,7 @@ void DiagDispatcher::sendBusyResponse(TransportMessage const* const message)
     fBusyMessage.getPayload()[1] = message->getServiceId();
 
     ITransportMessageListener::ReceiveResult const status
-        = getProvidingListenerHelper().messageReceived(
-            fConfiguration.DiagBusId, fBusyMessage, nullptr);
+        = fProvidingListenerHelper.messageReceived(fConfiguration.DiagBusId, fBusyMessage, nullptr);
 
     if (status != ITransportMessageListener::ReceiveResult::RECEIVED_NO_ERROR)
     {
@@ -376,17 +444,18 @@ void DiagDispatcher::trigger() { ::async::execute(fConfiguration.Context, fAsync
 
 AbstractTransportLayer::ErrorCode DiagDispatcher::init()
 {
-    fConnectionManager.init();
-    enable();
+    fConnectionShutdownDelegate  = ::etl::delegate<void()>();
+    fConnectionShutdownRequested = false;
+    fEnabled                     = true;
     return AbstractTransportLayer::ErrorCode::TP_OK;
 }
 
 ESR_NO_INLINE bool DiagDispatcher::shutdown_local(ShutdownDelegate const delegate)
 {
     Logger::debug(UDS, "DiagDispatcher::shutdown()");
-    disable();
+    fEnabled          = false;
     fShutdownDelegate = delegate;
-    fConnectionManager.shutdown(
+    shutdownIncomingConnections(
         ::etl::delegate<void()>::
             create<DiagDispatcher, &DiagDispatcher::connectionManagerShutdownComplete>(*this));
     return false;
@@ -403,7 +472,7 @@ void DiagDispatcher::connectionManagerShutdownComplete()
 void DiagDispatcher::transportMessageProcessed(
     TransportMessage& transportMessage, ProcessingResult const /* result */)
 {
-    getProvidingListenerHelper().releaseTransportMessage(transportMessage);
+    fProvidingListenerHelper.releaseTransportMessage(transportMessage);
 }
 
 } // namespace uds

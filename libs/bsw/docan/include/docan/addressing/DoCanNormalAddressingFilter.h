@@ -187,11 +187,11 @@ DoCanNormalAddressingFilter<DataLinkLayer, AddressEntry>::getTransmissionParamet
     DoCanTransportAddressPair const& transportAddressPair,
     DataLinkAddressPairType& dataLinkAddressPair) const
 {
-    uint16_t const sourceId = transportAddressPair.getTargetId();
-    uint16_t const targetId = transportAddressPair.getSourceId();
+    uint16_t const sourceAddress = transportAddressPair.getTargetId();
+    uint16_t const targetId      = transportAddressPair.getSourceId();
     for (AddressEntryType const& entry : _entries)
     {
-        if ((entry._transportSourceId == sourceId) && (entry._transportTargetId == targetId))
+        if ((entry._transportSourceId == sourceAddress) && (entry._transportTargetId == targetId))
         {
             dataLinkAddressPair
                 = DataLinkAddressPairType(entry._canReceptionId, entry._canTransmissionId);

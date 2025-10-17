@@ -16,7 +16,7 @@ public:
     using AddressType = uint16_t;
 
     DoCanTransportAddressPair();
-    DoCanTransportAddressPair(AddressType sourceId, AddressType targetId);
+    DoCanTransportAddressPair(AddressType sourceAddress, AddressType targetId);
     DoCanTransportAddressPair(DoCanTransportAddressPair const&) = default;
 
     bool isValid() const;
@@ -40,8 +40,8 @@ private:
 inline DoCanTransportAddressPair::DoCanTransportAddressPair() : DoCanTransportAddressPair(0, 0) {}
 
 inline DoCanTransportAddressPair::DoCanTransportAddressPair(
-    AddressType const sourceId, AddressType const targetId)
-: _sourceId(sourceId), _targetId(targetId)
+    AddressType const sourceAddress, AddressType const targetId)
+: _sourceId(sourceAddress), _targetId(targetId)
 {}
 
 inline bool DoCanTransportAddressPair::isValid() const { return _sourceId != _targetId; }

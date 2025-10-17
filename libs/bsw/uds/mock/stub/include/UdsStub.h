@@ -37,9 +37,7 @@ public:
     : IDiagDispatcher(sessionManager, fDiagJobRoot)
     {}
 
-    virtual uint16_t getSourceId() const { return 0xab; }
-
-    virtual uint8_t dispatchTriggerEventRequest(transport::TransportMessage& msg) { return 0; }
+    virtual uint16_t getDispatcherSourceId() const { return 0xab; }
 
     virtual transport::AbstractTransportLayer::ErrorCode
     resume(transport::TransportMessage&, transport::ITransportMessageProcessedListener*)
@@ -48,7 +46,7 @@ public:
     }
 
     virtual IOutgoingDiagConnectionProvider::ErrorCode getOutgoingDiagConnection(
-        uint16_t targetId,
+        uint16_t targetAddress,
         OutgoingDiagConnection*& pConnection,
         transport::TransportMessage* pRequestMessage)
     {

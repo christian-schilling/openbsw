@@ -36,13 +36,13 @@ TransportMessageProvidingListenerMock::TransportMessageProvidingListenerMock(boo
 ITransportMessageProvider::ErrorCode
 TransportMessageProvidingListenerMock::getTransportMessageImplementation(
     uint8_t /* srcBusId */,
-    uint16_t sourceId,
+    uint16_t sourceAddress,
     uint16_t targetId,
     uint16_t size,
     ::etl::span<uint8_t const> const& /* peek */,
     TransportMessage*& pTransportMessage)
 {
-    if (fRefusedSourceIds.count(sourceId) > 0)
+    if (fRefusedSourceIds.count(sourceAddress) > 0)
     {
         pTransportMessage = 0L;
         return ITransportMessageProvidingListener::ErrorCode::TPMSG_INVALID_SRC_ID;
@@ -81,9 +81,9 @@ TransportMessageProvidingListenerMock::messageReceivedImplementation(
     return ITransportMessageListener::ReceiveResult::RECEIVED_NO_ERROR;
 }
 
-void TransportMessageProvidingListenerMock::refuseSourceIdImplementation(uint8_t sourceId)
+void TransportMessageProvidingListenerMock::refuseSourceIdImplementation(uint8_t sourceAddress)
 {
-    fRefusedSourceIds.insert(sourceId);
+    fRefusedSourceIds.insert(sourceAddress);
 }
 
 void TransportMessageProvidingListenerMock::refuseTargetIdImplementation(uint8_t targetId)

@@ -35,7 +35,7 @@ void TransportRouterSimple::shutdown() { _transportLayers.clear(); }
 
 ITransportMessageProvidingListener::ErrorCode TransportRouterSimple::getTransportMessage(
     uint8_t const /* srcBusId */,
-    uint16_t const sourceId,
+    uint16_t const sourceAddress,
     uint16_t const targetId,
     uint16_t const size,
     ::etl::span<uint8_t const> const& /* peek */,
@@ -43,8 +43,8 @@ ITransportMessageProvidingListener::ErrorCode TransportRouterSimple::getTranspor
 {
     Logger::debug(
         TPROUTER,
-        "TransportRouterSimple::getTransportMessage : sourceId 0x%x, targetId 0x%x",
-        sourceId,
+        "TransportRouterSimple::getTransportMessage : sourceAddress 0x%x, targetId 0x%x",
+        sourceAddress,
         targetId);
     pTransportMessage = 0L;
     ::async::LockType const lockGuard;
@@ -153,8 +153,8 @@ void TransportRouterSimple::addTransportLayer(AbstractTransportLayer& transportL
             return;
         }
     }
-    transportLayer.setTransportMessageListener(this);
-    transportLayer.setTransportMessageProvider(this);
+    transportLayer.fProvidingListenerHelper.fpMessageListener = this;
+    transportLayer.fProvidingListenerHelper.fpMessageProvider = this;
     _transportLayers.push_back(transportLayer);
 }
 
@@ -164,8 +164,8 @@ void TransportRouterSimple::removeTransportLayer(AbstractTransportLayer& transpo
     {
         return;
     }
-    transportLayer.setTransportMessageListener(0L);
-    transportLayer.setTransportMessageProvider(0L);
+    transportLayer.fProvidingListenerHelper.fpMessageListener = nullptr;
+    transportLayer.fProvidingListenerHelper.fpMessageProvider = nullptr;
     _transportLayers.erase(transportLayer);
 }
 

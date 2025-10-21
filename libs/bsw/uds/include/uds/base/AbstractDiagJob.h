@@ -100,12 +100,12 @@ public:
     , fpFirstChild(nullptr)
     , fpNextJob(nullptr)
     , fAllowedSessions(sessionMask)
-    , fResponseLength(VARIABLE_RESPONSE_LENGTH)
+    , _responseLength(VARIABLE_RESPONSE_LENGTH)
     , fRequestLength(requestLength)
     , fPrefixLength(prefixLength)
     , fRequestPayloadLength(VARIABLE_REQUEST_LENGTH)
     , fDefaultDiagReturnCode(DiagReturnCode::ISO_GENERAL_REJECT)
-    , fSuppressPositiveResponseBitEnabled(false)
+    , _suppressPositiveResponseBitEnabled(false)
     {
         if (requestLength > 0U)
         {
@@ -141,12 +141,12 @@ public:
     , fpFirstChild(nullptr)
     , fpNextJob(nullptr)
     , fAllowedSessions(sessionMask)
-    , fResponseLength(responseLength)
+    , _responseLength(responseLength)
     , fRequestLength(requestLength)
     , fPrefixLength(prefixLength)
     , fRequestPayloadLength(requestPayloadLength)
     , fDefaultDiagReturnCode(DiagReturnCode::ISO_GENERAL_REJECT)
-    , fSuppressPositiveResponseBitEnabled(false)
+    , _suppressPositiveResponseBitEnabled(false)
     {
         if (requestLength > 0U)
         {
@@ -249,12 +249,12 @@ protected:
     , fpFirstChild(nullptr)
     , fpNextJob(nullptr)
     , fAllowedSessions(pJob->fAllowedSessions)
-    , fResponseLength(pJob->fResponseLength)
+    , _responseLength(pJob->_responseLength)
     , fRequestLength(pJob->fRequestLength)
     , fPrefixLength(pJob->fPrefixLength)
     , fRequestPayloadLength(pJob->fRequestPayloadLength)
     , fDefaultDiagReturnCode(DiagReturnCode::ISO_GENERAL_REJECT)
-    , fSuppressPositiveResponseBitEnabled(false)
+    , _suppressPositiveResponseBitEnabled(false)
     {}
 
     /**
@@ -369,12 +369,12 @@ protected:
      */
     inline void enableSuppressPositiveResponse(bool const set = true)
     {
-        fSuppressPositiveResponseBitEnabled = set;
+        _suppressPositiveResponseBitEnabled = set;
     }
 
     inline void setEnableSuppressPositiveResponse(AbstractDiagJob& job) const
     {
-        job.fSuppressPositiveResponseBitEnabled = fSuppressPositiveResponseBitEnabled;
+        job._suppressPositiveResponseBitEnabled = _suppressPositiveResponseBitEnabled;
     }
 
     /**
@@ -414,7 +414,7 @@ private:
     /** Mask with bits set for session in which this job may be executed */
     DiagSession::DiagSessionMask const fAllowedSessions;
     /** Required length of response */
-    uint8_t const fResponseLength;
+    uint8_t const _responseLength;
     /** Length of fpImplementedRequest */
     uint8_t const fRequestLength;
     /** Number of bytes of fpImplementedRequest that need to be implemented by prior job in the tree
@@ -425,7 +425,7 @@ private:
     /** Default DiagReturnCode::Type for a non leaf node */
     DiagReturnCode::Type fDefaultDiagReturnCode;
     /** Indication if positive response bit handling is enabled */
-    bool fSuppressPositiveResponseBitEnabled;
+    bool _suppressPositiveResponseBitEnabled;
 };
 
 /**

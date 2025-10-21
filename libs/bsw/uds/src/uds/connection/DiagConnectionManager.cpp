@@ -42,9 +42,9 @@ DiagConnectionManager::DiagConnectionManager(
 
 void DiagConnectionManager::diagConnectionTerminated(IncomingDiagConnection& diagConnection)
 {
-    TransportMessage* const requestMessage = diagConnection.fpRequestMessage;
+    TransportMessage* const requestMessage = diagConnection.requestMessage;
     ITransportMessageProcessedListener* const notificationListener
-        = diagConnection.fpRequestNotificationListener;
+        = diagConnection.requestNotificationListener;
     if ((nullptr != notificationListener) && (nullptr != requestMessage))
     {
         requestMessage->resetValidBytes();
@@ -54,7 +54,7 @@ void DiagConnectionManager::diagConnectionTerminated(IncomingDiagConnection& dia
             ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR);
     }
 
-    TransportMessage* const responseMessage = diagConnection.fpResponseMessage;
+    TransportMessage* const responseMessage = diagConnection.responseMessage;
     if (responseMessage != nullptr)
     {
         fOutgoingTransportMessageProvider.releaseTransportMessage(*responseMessage);
@@ -83,14 +83,14 @@ DiagConnectionManager::requestIncomingConnection(TransportMessage& requestMessag
     if (pConnection != nullptr)
     {
         pConnection->fpDiagConnectionManager = this;
-        pConnection->fpMessageSender         = &fOutgoingTransportMessageSender;
-        pConnection->fpDiagSessionManager    = &fDiagDispatcher.fSessionManager;
-        pConnection->fSourceId               = requestMessage.getSourceId();
+        pConnection->messageSender           = &fOutgoingTransportMessageSender;
+        pConnection->diagSessionManager      = &fDiagDispatcher.fSessionManager;
+        pConnection->sourceAddress           = requestMessage.getSourceId();
         pConnection->fTargetId               = requestMessage.getTargetId();
-        pConnection->fServiceId              = requestMessage.getServiceId();
+        pConnection->serviceId               = requestMessage.getServiceId();
         pConnection->open(fConfiguration.ActivateOutgoingPending);
-        pConnection->fpRequestMessage  = &requestMessage;
-        pConnection->fpResponseMessage = nullptr;
+        pConnection->requestMessage  = &requestMessage;
+        pConnection->responseMessage = nullptr;
         return pConnection;
     }
     else

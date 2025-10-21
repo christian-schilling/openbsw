@@ -29,14 +29,14 @@ bool AbstractTransportLayer::shutdown(ShutdownDelegate) { return SYNC_SHUTDOWN_C
 
 AbstractTransportLayer::TransportMessageProvidingListenerHelper::
     TransportMessageProvidingListenerHelper(uint8_t const busId)
-: fBusId(busId), fpMessageProvider(nullptr), fpMessageListener(nullptr)
+: fpMessageProvider(nullptr), fpMessageListener(nullptr), fBusId(busId)
 {}
 
 // virtual
 ITransportMessageProvidingListener::ErrorCode
 AbstractTransportLayer::TransportMessageProvidingListenerHelper::getTransportMessage(
     uint8_t const srcBusId,
-    uint16_t const sourceId,
+    uint16_t const sourceAddress,
     uint16_t const targetId,
     uint16_t const size,
     ::etl::span<uint8_t const> const& peek,
@@ -45,7 +45,7 @@ AbstractTransportLayer::TransportMessageProvidingListenerHelper::getTransportMes
     if (fpMessageProvider != nullptr)
     {
         return fpMessageProvider->getTransportMessage(
-            srcBusId, sourceId, targetId, size, peek, pTransportMessage);
+            srcBusId, sourceAddress, targetId, size, peek, pTransportMessage);
     }
     Logger::warn(
         TRANSPORT,

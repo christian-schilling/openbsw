@@ -30,7 +30,7 @@ public:
         getTransportMessage,
         ErrorCode(
             uint8_t srcBusId,
-            uint16_t sourceId,
+            uint16_t sourceAddress,
             uint16_t targetId,
             uint16_t size,
             ::etl::span<uint8_t const> const& peek,
@@ -38,7 +38,7 @@ public:
 
     MOCK_METHOD1(releaseTransportMessage, void(TransportMessage& transportMessage));
 
-    MOCK_METHOD1(refuseSourceId, void(uint8_t sourceId));
+    MOCK_METHOD1(refuseSourceId, void(uint8_t sourceAddress));
 
     MOCK_METHOD1(refuseTargetId, void(uint8_t targetId));
 
@@ -46,7 +46,7 @@ public:
 
     ErrorCode getTransportMessageImplementation(
         uint8_t srcBusId,
-        uint16_t sourceId,
+        uint16_t sourceAddress,
         uint16_t targetId,
         uint16_t size,
         ::etl::span<uint8_t const> const& peek,
@@ -58,7 +58,7 @@ public:
     void releaseTransportMessageImplementation(TransportMessage& transportMessage);
 
 private:
-    void refuseSourceIdImplementation(uint8_t sourceId);
+    void refuseSourceIdImplementation(uint8_t sourceAddress);
     void refuseTargetIdImplementation(uint8_t targetId);
 
     std::set<uint8_t> fRefusedSourceIds;

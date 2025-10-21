@@ -973,7 +973,7 @@ TEST_F(UdsIntegration, calling_PowerDown)
     _incomingDiagConnection.diagSessionManager = &_sessionManager;
     _incomingDiagConnection.serviceId          = ECU_RESET;
 
-    _incomingDiagConnection.isOpen = true;
+    _incomingDiagConnection.open = true;
 
     EXPECT_CALL(_lifecycle, requestPowerdown(false, _)).WillOnce(Return(true));
 
@@ -1006,7 +1006,7 @@ TEST_F(UdsIntegration, calling_RapidPowerDown)
     _incomingDiagConnection.diagSessionManager = &_sessionManager;
     _incomingDiagConnection.serviceId          = ECU_RESET;
 
-    _incomingDiagConnection.isOpen = true;
+    _incomingDiagConnection.open = true;
 
     EXPECT_CALL(_lifecycle, requestPowerdown(true, _)).WillOnce(Return(true));
 

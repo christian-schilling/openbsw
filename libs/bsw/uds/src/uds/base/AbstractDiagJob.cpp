@@ -48,7 +48,7 @@ DiagReturnCode::Type AbstractDiagJob::execute(
             acceptJob(connection, request, requestLength);
             return DiagReturnCode::ISO_REQUEST_OUT_OF_RANGE;
         }
-        if (!getDiagAuthenticator().isAuthenticated(connection.fSourceId))
+        if (!getDiagAuthenticator().isAuthenticated(connection.sourceAddress))
         {
             acceptJob(connection, request, requestLength);
             return getDiagAuthenticator().getNotAuthenticatedReturnCode();
@@ -78,9 +78,9 @@ DiagReturnCode::Type AbstractDiagJob::execute(
         {
             connection.addIdentifier();
         }
-        if (fResponseLength != VARIABLE_RESPONSE_LENGTH)
+        if (_responseLength != VARIABLE_RESPONSE_LENGTH)
         {
-            if (connection.getMaximumResponseLength() < fResponseLength)
+            if (connection.getMaximumResponseLength() < _responseLength)
             {
                 acceptJob(connection, request, requestLength);
                 return DiagReturnCode::ISO_RESPONSE_TOO_LONG;
@@ -363,7 +363,7 @@ void AbstractDiagJob::acceptJob(
 void AbstractDiagJob::checkSuppressPositiveResponseBit(
     IncomingDiagConnection& connection, uint8_t const* const request) const
 {
-    if (fSuppressPositiveResponseBitEnabled)
+    if (_suppressPositiveResponseBitEnabled)
     {
         if ((request[0] & SUPPRESS_POSITIVE_RESPONSE_MASK) > 0U)
         {

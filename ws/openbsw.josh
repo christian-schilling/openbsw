@@ -1,0 +1,24 @@
+::CMakePresets.json
+::CMakeLists.txt
+::cmake/
+:<:/platforms>[
+    ::CMakeLists.txt
+]
+:<:/libs>[
+    ::CMakeLists.txt
+    ::bsp/
+    ::bsw/asyncFreeRtos/freeRtosConfiguration/
+    :[::bsw/,::safety/]:[
+        ::*/CMakeLists.txt
+        ::*/*/CMakeLists.txt
+        ::*/*/include/**/*.h
+        ::*/*/src/**/*.cpp
+    ]
+    :<:/3rdparty>[
+        ::CMakeLists.txt
+        ::etl/
+        ::freeRtos/
+        ::lwip/
+        ::printf/
+    ]
+]

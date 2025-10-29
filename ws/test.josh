@@ -1,0 +1,20 @@
+build = :+ws/dev-image
+run = :[
+    :+ws/openbsw
+    ::executables/unitTest/
+    ::platforms/posix/
+    :/ws::run.sh:replace(
+        "CMAKE_PRESET":"tests-posix-debug"
+        "EXEC":"ctest --preset tests-posix-debug"
+    )
+    :<:/libs>[
+        :[::bsw/,::safety/]:[
+            ::*/*/mock/**/*.*
+            ::*/*/test/**/*.*
+            ::*/*/examples/**/*.*
+        ]
+        :<:/3rdparty>[
+            ::googletest/
+        ]
+    ]
+]

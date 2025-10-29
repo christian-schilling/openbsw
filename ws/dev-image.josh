@@ -1,0 +1,5 @@
+:/docker/development::Dockerfile:replace(
+    "x86_64":"aarch64"
+)
+:/docker/development
+

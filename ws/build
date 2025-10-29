@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+TREE=$(git write-tree)
+COMMIT=$(echo "WIP" | git commit-tree $TREE)
+git update-ref WS_HEAD $COMMIT
+
+git diff --stat HEAD..WS_HEAD
+
+josh-filter :+ws/$1:/build --update refs/ws/$1/build WS_HEAD
+josh-filter :+ws/$1:/run --update refs/ws/$1/run WS_HEAD
+
+IMAGE_NAME=ws-image:$(git rev-parse refs/ws/$1/build^{tree})
+if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
+    echo "Image exists locally"
+else
+    echo "Image does not exist locally"
+    git archive --format=tar $(git rev-parse refs/ws/$1/build^{tree}) | docker build --build-arg user_id=$(id -u) --platform linux/aarch64 -t $IMAGE_NAME -
+fi
+
+vol=$1_snapshot
+docker volume remove "$vol" || true
+docker volume create "$vol"
+docker run --rm -v "$vol":/data busybox sh -c "chown -R $(id -u):$(id -g) /data"
+
+docker volume create build_vol
+docker run --rm -v build_vol:/data busybox sh -c "chown -R $(id -u):$(id -g) /data"
+
+git archive $(git rev-parse refs/ws/$1/run^{tree}) | docker run --rm --user $(id -u):$(id -g) -i -v "$vol":/dst busybox tar -xC /dst
+
+docker run -it --rm -v "$vol":$PWD -v "$PWD/build:$PWD/build" -w $PWD --platform linux/aarch64 --cap-add=SYS_MODULE --cap-add=NET_ADMIN --user $(id -u):$(id -g) $IMAGE_NAME sh -c "bash run.sh"

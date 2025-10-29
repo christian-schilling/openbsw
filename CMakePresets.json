@@ -16,7 +16,6 @@
             "inherits": "_config-base",
             "binaryDir": "${sourceDir}/build/tests/posix/Debug",
             "cacheVariables": {
-                "CMAKE_DEFAULT_BUILD_TYPE": "Debug",
                 "CMAKE_CONFIGURATION_TYPES": "Debug",
                 "BUILD_UNIT_TESTS": "ON",
                 "OPENBSW_PLATFORM": "posix"
@@ -29,7 +28,6 @@
             "inherits": "_config-base",
             "binaryDir": "${sourceDir}/build/tests/posix/Release",
             "cacheVariables": {
-                "CMAKE_DEFAULT_BUILD_TYPE": "Release",
                 "CMAKE_CONFIGURATION_TYPES": "Release",
                 "BUILD_UNIT_TESTS": "ON",
                 "OPENBSW_PLATFORM": "posix"
@@ -42,7 +40,6 @@
             "inherits": "_config-base",
             "binaryDir": "${sourceDir}/build/tests/s32k1xx/Debug",
             "cacheVariables": {
-                "CMAKE_DEFAULT_BUILD_TYPE": "Debug",
                 "CMAKE_CONFIGURATION_TYPES": "Debug",
                 "BUILD_UNIT_TESTS": "ON",
                 "OPENBSW_PLATFORM": "s32k1xx"
@@ -55,7 +52,6 @@
             "inherits": "_config-base",
             "binaryDir": "${sourceDir}/build/tests/s32k1xx/Release",
             "cacheVariables": {
-                "CMAKE_DEFAULT_BUILD_TYPE": "Release",
                 "CMAKE_CONFIGURATION_TYPES": "Release",
                 "BUILD_UNIT_TESTS": "ON",
                 "OPENBSW_PLATFORM": "s32k1xx"
@@ -112,8 +108,7 @@
                 "CMAKE_ASM_FLAGS_RELWITHDEBINFO": "-g3",
                 "CMAKE_CONFIGURATION_TYPES": "RelWithDebInfo;Debug;Release",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG",
-                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG",
-                "CMAKE_DEFAULT_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG"
             }
         },
         {
@@ -131,8 +126,7 @@
                 "CMAKE_ASM_FLAGS_RELWITHDEBINFO": "-g3",
                 "CMAKE_CONFIGURATION_TYPES": "RelWithDebInfo;Debug;Release",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG",
-                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG",
-                "CMAKE_DEFAULT_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG"
             }
         },
         {
@@ -150,8 +144,7 @@
                 "CMAKE_ASM_FLAGS_RELWITHDEBINFO": "-g3",
                 "CMAKE_CONFIGURATION_TYPES": "RelWithDebInfo;Debug;Release",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG",
-                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG",
-                "CMAKE_DEFAULT_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -O2 -DNDEBUG"
             }
         },
         {
@@ -171,8 +164,7 @@
                 "CMAKE_C_FLAGS_RELEASE": "-Os -DNDEBUG",
                 "CMAKE_CXX_FLAGS_RELEASE": "-Os -DNDEBUG",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG",
-                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG",
-                "CMAKE_DEFAULT_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG"
             }
         },
         {
@@ -192,8 +184,7 @@
                 "CMAKE_C_FLAGS_RELEASE": "-Os -DNDEBUG",
                 "CMAKE_CXX_FLAGS_RELEASE": "-Os -DNDEBUG",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG",
-                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG",
-                "CMAKE_DEFAULT_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG"
             }
         },
         {
@@ -213,8 +204,7 @@
                 "CMAKE_C_FLAGS_RELEASE": "-Os -DNDEBUG",
                 "CMAKE_CXX_FLAGS_RELEASE": "-Os -DNDEBUG",
                 "CMAKE_C_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG",
-                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG",
-                "CMAKE_DEFAULT_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-g3 -Os -DNDEBUG"
             }
         }
     ],

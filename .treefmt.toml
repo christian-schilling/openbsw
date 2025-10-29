@@ -27,6 +27,7 @@ excludes = [
   "*.toml",
   "*.yaml",
   "*.yml",
+  "**/requirements.txt",
   "LICENSE",
   "admin/cmake/CodeCoverage.cmake",
   "docker/**",

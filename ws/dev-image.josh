@@ -1,0 +1,5 @@
+:/docker::fbuild
+:/docker::fbuildworker
+::Dockerfile=docker/Dockerfile.dev
+::test/pyTest/requirements.txt
+::tools/UdsTool/

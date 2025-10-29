@@ -1,0 +1,10 @@
+build = :+ws/dev-image
+run = :[
+    :+ws/openbsw
+    ::executables/referenceApp/
+    ::platforms/posix/
+    :/ws::run.sh:replace(
+        "CMAKE_PRESET":"posix"
+        "EXEC":""
+    )
+]

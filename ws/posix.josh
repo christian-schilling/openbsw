@@ -1,0 +1,40 @@
+image = :[
+    :/docker::Dockerfile.dev
+    ::test/pyTest/requirements.txt
+    ::tools/UdsTool/
+]
+run = :[
+    :/ws::run.sh:replace(
+        "CMAKE_PRESET":"posix"
+        "EXEC":""
+    )
+    ::.ci/
+    ::CMakePresets.json
+    ::CMakeLists.txt
+    ::cmake/
+    ::platforms/posix/
+    ::platforms/CMakeLists.txt
+    libs = :/libs:[
+        ::CMakeLists.txt
+        ::3rdparty/CMakeLists.txt
+        ::3rdparty/etl/
+        ::3rdparty/freeRtos/
+        ::3rdparty/lwip/
+        ::3rdparty/printf/
+        ::bsp/
+        bsw = :/bsw:[
+            ::asyncFreeRtos/freeRtosConfiguration/
+            ::CMakeLists.txt
+            ::*/CMakeLists.txt
+            ::*/include/**/*.h
+            ::*/src/**/*.cpp
+        ]
+        safety = :/safety:[
+            ::CMakeLists.txt
+            ::*/CMakeLists.txt
+            ::*/include/**/*.h
+            ::*/src/**/*.cpp
+        ]
+    ]
+    ::executables/referenceApp/
+]

@@ -1,0 +1,15 @@
+run = :[
+    ::CMakePresets.json
+    ::CMakeLists.txt
+    ::cmake/
+    ::platforms/s32k1xx/
+    ::platforms/CMakeLists.txt
+    ::libs/
+    ::executables/referenceApp/
+    :/ws::run.sh:replace("CMAKE_PRESET":"s32k148-gcc")
+]
+image = :[
+    :/docker::Dockerfile.dev
+    ::test/pyTest/requirements.txt
+    ::tools/UdsTool/
+]

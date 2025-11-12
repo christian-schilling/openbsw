@@ -237,8 +237,6 @@ public:
 
     void restartPendingTimeout();
 
-    void sendResponsePending();
-
     void asyncTransportMessageProcessed(
         transport::TransportMessage* pTransportMessage, ProcessingResult status);
 

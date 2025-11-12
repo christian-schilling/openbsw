@@ -28,6 +28,43 @@ using ::util::logger::UDS;
 namespace uds
 {
 
+void sendResponsePending(
+    transport::AbstractTransportLayer& messageSender,
+    transport::TransportMessage& pendingMessage,
+    uint16_t const sourceAddress,
+    uint16_t const responseSourceAddress,
+    uint8_t const serviceId,
+    uint8_t& numPendingMessageProcessedCallbacks,
+    bool& responsePendingSent,
+    bool& responsePendingIsBeingSent,
+    transport::ITransportMessageProcessedListener& processedListener)
+{
+    pendingMessage.setTargetAddress(sourceAddress);
+    pendingMessage.setSourceAddress(responseSourceAddress);
+    pendingMessage.resetValidBytes();
+    (void)pendingMessage.append(DiagReturnCode::NEGATIVE_RESPONSE_IDENTIFIER);
+    (void)pendingMessage.append(serviceId);
+    (void)pendingMessage.append(static_cast<uint8_t>(DiagReturnCode::ISO_RESPONSE_PENDING));
+    pendingMessage.setPayloadLength(IncomingDiagConnection::PENDING_MESSAGE_PAYLOAD_LENGTH);
+    ++numPendingMessageProcessedCallbacks;
+    bool const responsePendingSentBefore           = responsePendingSent;
+    bool const responsePendingIsBeingSentBefore    = responsePendingIsBeingSent;
+    responsePendingSent                            = true;
+    responsePendingIsBeingSent                     = true;
+    AbstractTransportLayer::ErrorCode const result
+        = messageSender.send(pendingMessage, &processedListener);
+    if (result != AbstractTransportLayer::ErrorCode::TP_OK)
+    {
+        --numPendingMessageProcessedCallbacks;
+        responsePendingSent        = responsePendingSentBefore;
+        responsePendingIsBeingSent = responsePendingIsBeingSentBefore;
+        Logger::error(
+            UDS,
+            "IncomingDiagConnection: Unable to send ResponsePending: sendResult = %d!",
+            result);
+    }
+}
+
 void IncomingDiagConnection::addIdentifier()
 {
     ETL_ASSERT(!_isResponseActive, ETL_ERROR_GENERIC("response must not be active"));
@@ -291,7 +328,19 @@ void IncomingDiagConnection::asyncSendNegativeResponse(
 
             if (!_responsePendingIsPending)
             { // Only send ResponsePending while response is not being sent
-                sendResponsePending();
+                if (isOpen && (messageSender != nullptr))
+                {
+                    sendResponsePending(
+                        *messageSender,
+                        _pendingMessage,
+                        sourceAddress,
+                        responseSourceAddress,
+                        serviceId,
+                        _numPendingMessageProcessedCallbacks,
+                        _responsePendingSent,
+                        _responsePendingIsBeingSent,
+                        *this);
+                }
             }
             restartPendingTimeout();
         }
@@ -455,7 +504,19 @@ void IncomingDiagConnection::asyncTransportMessageProcessed(
         else if (_responsePendingIsPending)
         {
             _responsePendingIsPending = false;
-            sendResponsePending();
+            if (isOpen && (messageSender != nullptr))
+            {
+                sendResponsePending(
+                    *messageSender,
+                    _pendingMessage,
+                    sourceAddress,
+                    responseSourceAddress,
+                    serviceId,
+                    _numPendingMessageProcessedCallbacks,
+                    _responsePendingSent,
+                    _responsePendingIsBeingSent,
+                    *this);
+            }
         }
     }
     if (status != ITransportMessageProcessedListener::ProcessingResult::PROCESSED_NO_ERROR)
@@ -513,7 +574,19 @@ void IncomingDiagConnection::expired(::async::RunnableType const& timeout)
         if (!_responsePendingIsPending)
         {
             // Only send ResponsePending while response is not being sent
-            sendResponsePending();
+            if (isOpen && (messageSender != nullptr))
+            {
+                sendResponsePending(
+                    *messageSender,
+                    _pendingMessage,
+                    sourceAddress,
+                    responseSourceAddress,
+                    serviceId,
+                    _numPendingMessageProcessedCallbacks,
+                    _responsePendingSent,
+                    _responsePendingIsBeingSent,
+                    *this);
+            }
         }
         restartPendingTimeout();
     }
@@ -535,40 +608,6 @@ void IncomingDiagConnection::restartPendingTimeout()
             _responsePendingTimeout._asyncTimeout,
             _pendingTimeOut,
             ::async::TimeUnit::MILLISECONDS);
-    }
-}
-
-void IncomingDiagConnection::sendResponsePending()
-{
-    if ((!isOpen) || (nullptr == messageSender))
-    {
-        return;
-    }
-    _pendingMessage.setTargetAddress(sourceAddress);
-    _pendingMessage.setSourceAddress(responseSourceAddress);
-    _pendingMessage.resetValidBytes();
-    (void)_pendingMessage.append(DiagReturnCode::NEGATIVE_RESPONSE_IDENTIFIER);
-    (void)_pendingMessage.append(serviceId);
-    (void)_pendingMessage.append(static_cast<uint8_t>(DiagReturnCode::ISO_RESPONSE_PENDING));
-    _pendingMessage.setPayloadLength(PENDING_MESSAGE_PAYLOAD_LENGTH);
-    ++_numPendingMessageProcessedCallbacks;
-    // this flag indicates that pending has been sent --> a positive response must follow!
-    bool const responsePendingSent                     = _responsePendingSent;
-    bool const responsePendingIsBeingSent              = _responsePendingIsBeingSent;
-    _responsePendingSent                               = true;
-    _responsePendingIsBeingSent                        = true;
-    AbstractTransportLayer::ErrorCode const sendResult = messageSender->send(_pendingMessage, this);
-    if (sendResult != AbstractTransportLayer::ErrorCode::TP_OK)
-    {
-        --_numPendingMessageProcessedCallbacks;
-        // this flag indicates that pending has been sent --> a positive response must follow!
-        _responsePendingSent        = responsePendingSent;
-        _responsePendingIsBeingSent = responsePendingIsBeingSent;
-        Logger::error(
-            UDS,
-            "IncomingDiagConnection: Unable to send ResponsePending: "
-            "sendResult = %d!",
-            sendResult);
     }
 }
 

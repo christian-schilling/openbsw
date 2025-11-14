@@ -12,6 +12,7 @@
 #include "uds/session/IDiagSessionManager.h"
 
 #include <etl/delegate.h>
+#include <etl/queue.h>
 
 DECLARE_LOGGER_COMPONENT(GLOBAL)
 
@@ -29,12 +30,99 @@ using ::util::logger::GLOBAL;
 using ::util::logger::Logger;
 using ::util::logger::UDS;
 
+AbstractTransportLayer::ErrorCode enqueueMessage(
+    ::etl::iqueue<TransportJob>& sendJobQueue,
+    TransportMessage& transportMessage,
+    ::transport::ITransportMessageProcessedListener* const pNotificationListener,
+    ::transport::ITransportMessageProcessedListener& defaultProcessedListener)
+{
+    if (!transportMessage.isComplete())
+    {
+        return AbstractTransportLayer::ErrorCode::TP_MESSAGE_INCOMPLETE;
+    }
+
+    ::async::ModifiableLockType lock;
+    if (!sendJobQueue.full())
+    {
+        sendJobQueue.emplace();
+        TransportJob& sendJob = sendJobQueue.back();
+        lock.unlock();
+        sendJob.setTransportMessage(transportMessage);
+        if (pNotificationListener != nullptr)
+        {
+            sendJob.setProcessedListener(pNotificationListener);
+        }
+        else
+        {
+            sendJob.setProcessedListener(&defaultProcessedListener);
+        }
+        return AbstractTransportLayer::ErrorCode::TP_OK;
+    }
+
+    Logger::warn(UDS, "SendJobQueue full.");
+    return AbstractTransportLayer::ErrorCode::TP_QUEUE_FULL;
+}
+
+IncomingDiagConnection* requestIncomingConnection(
+    bool connectionShutdownRequested,
+    ::etl::ipool& incomingDiagConnectionPool,
+    DiagnosisConfiguration& configuration,
+    IDiagSessionManager& sessionManager,
+    transport::AbstractTransportLayer& messageSender,
+    TransportMessage& requestMessage)
+{
+    if (connectionShutdownRequested)
+    {
+        return nullptr;
+    }
+    if (incomingDiagConnectionPool.full())
+    {
+        Logger::warn(
+            UDS,
+            "No incoming diag connection available for 0x%x --> 0x%x, service 0x%x",
+            requestMessage.getSourceId(),
+            requestMessage.getTargetId(),
+            requestMessage.getServiceId());
+        return nullptr;
+    }
+    IncomingDiagConnection* pConnection = nullptr;
+    {
+        ::async::LockType const lock;
+        pConnection = acquireIncomingDiagConnection(
+            incomingDiagConnectionPool, ::etl::move(configuration.Context));
+    }
+    if (pConnection != nullptr)
+    {
+        auto const targetAddress = requestMessage.getTargetId();
+
+        pConnection->messageSender      = &messageSender;
+        pConnection->diagSessionManager = &sessionManager;
+        pConnection->sourceAddress      = requestMessage.getSourceId();
+        pConnection->targetAddress      = targetAddress;
+        pConnection->responseSourceAddress
+            = (TransportConfiguration::isFunctionalAddress(targetAddress))
+                  ? configuration.DiagAddress
+                  : targetAddress;
+        pConnection->serviceId = requestMessage.getServiceId();
+        pConnection->open(configuration.ActivateOutgoingPending);
+        pConnection->requestMessage  = &requestMessage;
+        pConnection->responseMessage = nullptr;
+        return pConnection;
+    }
+
+    return nullptr;
+}
+
 DiagDispatcher::DiagDispatcher(
-    AbstractDiagnosisConfiguration& configuration,
+    ::etl::ipool& incomingDiagConnectionPool,
+    ::etl::iqueue<transport::TransportJob>& sendJobQueue,
+    DiagnosisConfiguration& configuration,
     IDiagSessionManager& sessionManager,
     DiagJobRoot& jobRoot)
 : IDiagDispatcher(sessionManager)
 , AbstractTransportLayer(configuration.DiagBusId)
+, incomingDiagConnectionPool(incomingDiagConnectionPool)
+, sendJobQueue(sendJobQueue)
 , fConfiguration(configuration)
 , fConnectionShutdownDelegate()
 , fConnectionShutdownRequested(false)
@@ -55,14 +143,23 @@ DiagDispatcher::DiagDispatcher(
     fBusyMessage.setPayloadLength(BUSY_MESSAGE_LENGTH);
 }
 
-ESR_NO_INLINE AbstractTransportLayer::ErrorCode DiagDispatcher::send_local(
+ESR_NO_INLINE AbstractTransportLayer::ErrorCode DiagDispatcher::send(
     TransportMessage& transportMessage,
     ITransportMessageProcessedListener* const pNotificationListener)
 {
-    auto connection = fConfiguration.findIncomingDiagConnection(
+    if (!fEnabled)
+    {
+        return AbstractTransportLayer::ErrorCode::TP_SEND_FAIL;
+    }
+
+    // FIXME: This reinterpret_cast works for now but is somewhat frage
+    auto result = etl::find_if(
+        incomingDiagConnectionPool.begin(),
+        incomingDiagConnectionPool.end(),
         [pNotificationListener](void* const conn) -> bool
         { return reinterpret_cast<void*>(pNotificationListener) == conn; });
-    if (connection != nullptr)
+
+    if (c != incomingDiagConnectionPool.end())
     {
         ITransportMessageListener::ReceiveResult const status
             = fProvidingListenerHelper.messageReceived(
@@ -88,20 +185,27 @@ ESR_NO_INLINE AbstractTransportLayer::ErrorCode DiagDispatcher::send_local(
         return AbstractTransportLayer::ErrorCode::TP_SEND_FAIL;
     }
 
-    return enqueueMessage(transportMessage, pNotificationListener);
-}
+    auto const result = enqueueMessage(
+        sendJobQueue,
+        transportMessage,
+        pNotificationListener,
+        fDefaultTransportMessageProcessedListener);
 
-AbstractTransportLayer::ErrorCode DiagDispatcher::send(
-    TransportMessage& transportMessage,
-    ITransportMessageProcessedListener* const pNotificationListener)
-{
-    return send_local(transportMessage, pNotificationListener);
+    if (AbstractTransportLayer::ErrorCode::TP_OK == result)
+    {
+        ::async::execute(fConfiguration.Context, fAsyncProcessQueue);
+    }
+    return result;
 }
 
 AbstractTransportLayer::ErrorCode DiagDispatcher::resume(
     TransportMessage& transportMessage,
     ITransportMessageProcessedListener* const pNotificationListener)
 {
+    if (!fEnabled)
+    {
+        return AbstractTransportLayer::ErrorCode::TP_SEND_FAIL;
+    }
     if ((transportMessage.getTargetId() != fConfiguration.DiagAddress)
         && ((fConfiguration.BroadcastAddress == TransportMessage::INVALID_ADDRESS)
             || (transportMessage.getTargetId() != fConfiguration.BroadcastAddress)))
@@ -118,13 +222,22 @@ AbstractTransportLayer::ErrorCode DiagDispatcher::resume(
         transportMessage.setTargetAddress(TransportMessage::INVALID_ADDRESS);
     }
 
-    return enqueueMessage(transportMessage, pNotificationListener);
+    auto const result = enqueueMessage(
+        sendJobQueue,
+        transportMessage,
+        pNotificationListener,
+        fDefaultTransportMessageProcessedListener);
+    if (AbstractTransportLayer::ErrorCode::TP_OK == result)
+    {
+        ::async::execute(fConfiguration.Context, fAsyncProcessQueue);
+    }
+    return result;
 }
 
 TransportMessage* DiagDispatcher::copyFunctionalRequest(
     TransportMessage& request,
     ITransportMessageProvidingListener& providingListener,
-    AbstractDiagnosisConfiguration& configuration)
+    DiagnosisConfiguration& configuration)
 {
     TransportMessage* pRequest                        = nullptr;
     ITransportMessageProvider::ErrorCode const result = providingListener.getTransportMessage(
@@ -150,52 +263,14 @@ TransportMessage* DiagDispatcher::copyFunctionalRequest(
     return pRequest;
 }
 
-AbstractTransportLayer::ErrorCode DiagDispatcher::enqueueMessage(
-    TransportMessage& transportMessage,
-    ITransportMessageProcessedListener* const pNotificationListener)
-{
-    if (!fEnabled)
-    {
-        return AbstractTransportLayer::ErrorCode::TP_SEND_FAIL;
-    }
-
-    if (!transportMessage.isComplete())
-    {
-        return AbstractTransportLayer::ErrorCode::TP_MESSAGE_INCOMPLETE;
-    }
-    ::async::ModifiableLockType lock;
-    if (!fConfiguration.SendJobQueue.full())
-    {
-        fConfiguration.SendJobQueue.emplace();
-        TransportJob& sendJob = fConfiguration.SendJobQueue.back();
-        lock.unlock();
-        sendJob.setTransportMessage(transportMessage);
-        if (pNotificationListener != nullptr)
-        {
-            sendJob.setProcessedListener(pNotificationListener);
-        }
-        else
-        {
-            sendJob.setProcessedListener(&fDefaultTransportMessageProcessedListener);
-        }
-        trigger();
-        return AbstractTransportLayer::ErrorCode::TP_OK;
-    }
-    else
-    {
-        Logger::warn(UDS, "SendJobQueue full.");
-        return AbstractTransportLayer::ErrorCode::TP_QUEUE_FULL;
-    }
-}
-
 void DiagDispatcher::processQueue()
 {
     {
         ::async::ModifiableLockType lock;
-        while (!fConfiguration.SendJobQueue.empty())
+        while (!sendJobQueue.empty())
         {
-            TransportJob* const pSendJob = &fConfiguration.SendJobQueue.front();
-            fConfiguration.SendJobQueue.pop();
+            TransportJob* const pSendJob = &sendJobQueue.front();
+            sendJobQueue.pop();
             lock.unlock();
             dispatchIncomingRequest(
                 *pSendJob,
@@ -214,7 +289,7 @@ void DiagDispatcher::processQueue()
 // METRIC STCYC 11 // The function is already in use as is
 void DiagDispatcher::dispatchIncomingRequest(
     TransportJob& job,
-    AbstractDiagnosisConfiguration& configuration,
+    DiagnosisConfiguration& configuration,
     DiagDispatcher& dispatcher,
     DiagJobRoot& diagJobRoot,
     ITransportMessageProvidingListener& providingListener,
@@ -270,10 +345,16 @@ void DiagDispatcher::dispatchIncomingRequest(
     }
     if (!sendBusyNegativeResponse)
     {
-        IncomingDiagConnection* const pConnection
-            = dispatcher.requestIncomingConnection(*job.getTransportMessage());
+        IncomingDiagConnection* const pConnection = requestIncomingConnection(
+            dispatcher.fConnectionShutdownRequested,
+            dispatcher.incomingDiagConnectionPool,
+            configuration,
+            dispatcher.fSessionManager,
+            dispatcher,
+            *job.getTransportMessage());
         if (pConnection != nullptr)
         {
+            pConnection->diagDispatcher = &dispatcher;
             Logger::debug(
                 UDS,
                 "Opening incoming connection 0x%x --> 0x%x, service 0x%x",
@@ -309,40 +390,6 @@ void DiagDispatcher::dispatchIncomingRequest(
     }
 }
 
-IncomingDiagConnection* DiagDispatcher::requestIncomingConnection(TransportMessage& requestMessage)
-{
-    if (fConnectionShutdownRequested)
-    {
-        return nullptr;
-    }
-    IncomingDiagConnection* pConnection = nullptr;
-    {
-        ::async::LockType const lock;
-        pConnection = fConfiguration.acquireIncomingDiagConnection();
-    }
-    if (pConnection != nullptr)
-    {
-        pConnection->diagDispatcher     = this;
-        pConnection->messageSender      = this;
-        pConnection->diagSessionManager = &fSessionManager;
-        pConnection->sourceAddress      = requestMessage.getSourceId();
-        pConnection->targetAddress      = requestMessage.getTargetId();
-        pConnection->serviceId          = requestMessage.getServiceId();
-        pConnection->open(fConfiguration.ActivateOutgoingPending);
-        pConnection->requestMessage  = &requestMessage;
-        pConnection->responseMessage = nullptr;
-        return pConnection;
-    }
-
-    Logger::warn(
-        UDS,
-        "No incoming diag connection available for 0x%x --> 0x%x, service 0x%x",
-        requestMessage.getSourceId(),
-        requestMessage.getTargetId(),
-        requestMessage.getServiceId());
-    return nullptr;
-}
-
 void DiagDispatcher::diagConnectionTerminated(IncomingDiagConnection& diagConnection)
 {
     transport::TransportMessage* const requestMessage = diagConnection.requestMessage;
@@ -365,7 +412,7 @@ void DiagDispatcher::diagConnectionTerminated(IncomingDiagConnection& diagConnec
 
     {
         ::async::LockType const lock;
-        fConfiguration.releaseIncomingDiagConnection(diagConnection);
+        incomingDiagConnectionPool.destroy(&diagConnection);
     }
 
     diagConnection.requestMessage              = nullptr;
@@ -391,7 +438,7 @@ void DiagDispatcher::checkConnectionShutdownProgress()
         return;
     }
 
-    ::etl::ipool const& incomingDiagConnections = fConfiguration.incomingDiagConnectionPool();
+    ::etl::ipool const& incomingDiagConnections = incomingDiagConnectionPool;
 
     if (!incomingDiagConnections.empty())
     {
@@ -400,7 +447,7 @@ void DiagDispatcher::checkConnectionShutdownProgress()
             "DiagDispatcher::problem at shutdown(in: %d/%d)",
             incomingDiagConnections.size(),
             incomingDiagConnections.max_size());
-        fConfiguration.clearIncomingDiagConnections();
+        incomingDiagConnectionPool.release_all();
     }
     Logger::debug(UDS, "DiagDispatcher incoming connection shutdown complete");
     fConnectionShutdownDelegate();
@@ -440,8 +487,6 @@ bool DiagDispatcher::isFromValidSender(TransportMessage const& transportMessage)
     return TransportConfiguration::isFromTester(transportMessage);
 }
 
-void DiagDispatcher::trigger() { ::async::execute(fConfiguration.Context, fAsyncProcessQueue); }
-
 AbstractTransportLayer::ErrorCode DiagDispatcher::init()
 {
     fConnectionShutdownDelegate  = ::etl::delegate<void()>();
@@ -450,7 +495,7 @@ AbstractTransportLayer::ErrorCode DiagDispatcher::init()
     return AbstractTransportLayer::ErrorCode::TP_OK;
 }
 
-ESR_NO_INLINE bool DiagDispatcher::shutdown_local(ShutdownDelegate const delegate)
+ESR_NO_INLINE bool DiagDispatcher::shutdown(ShutdownDelegate const delegate)
 {
     Logger::debug(UDS, "DiagDispatcher::shutdown()");
     fEnabled          = false;
@@ -460,8 +505,6 @@ ESR_NO_INLINE bool DiagDispatcher::shutdown_local(ShutdownDelegate const delegat
             create<DiagDispatcher, &DiagDispatcher::connectionManagerShutdownComplete>(*this));
     return false;
 }
-
-bool DiagDispatcher::shutdown(ShutdownDelegate const delegate) { return shutdown_local(delegate); }
 
 void DiagDispatcher::connectionManagerShutdownComplete()
 {

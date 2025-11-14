@@ -68,6 +68,8 @@
             "inherits": "_config-base",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
+                "CMAKE_C_COMPILER_LAUNCHER": "sccache",
+                "CMAKE_CXX_COMPILER_LAUNCHER": "sccache",
                 "BUILD_REFERENCE": "ON",
                 "BUILD_TARGET_PLATFORM": "POSIX",
                 "BUILD_TARGET_RTOS": "FREERTOS"

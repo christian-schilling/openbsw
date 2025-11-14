@@ -13,11 +13,10 @@
 #include <transport/AbstractTransportLayer.h>
 #include <transport/ITransportMessageProcessedListener.h>
 #include <transport/ITransportMessageProvidingListener.h>
+#include <transport/TransportJob.h>
 #include <transport/TransportMessage.h>
 
-#ifdef IS_VARIANT_HANDLING_NEEDED
-#include "uds/DiagnosisConfiguration.h"
-#endif
+#include <etl/queue.h>
 
 namespace http
 {
@@ -51,14 +50,16 @@ class DiagDispatcher
 public:
     /**
      * Constructor
-     * \param   configuration   AbstractDiagnosisConfiguration holding
+     * \param   configuration   DiagnosisConfiguration holding
      * the configuration for this DiagDispatcher
      * \param   sessionManager  IDiagSessionManager
      * \param   context  Context used to handle DiagDispatcher's
      * timeouts
      */
     DiagDispatcher(
-        AbstractDiagnosisConfiguration& configuration,
+        ::etl::ipool& incomingDiagConnectionPool,
+        ::etl::iqueue<transport::TransportJob>& sendJobQueue,
+        DiagnosisConfiguration& configuration,
         IDiagSessionManager& sessionManager,
         DiagJobRoot& jobRoot);
 
@@ -94,58 +95,20 @@ public:
 
     void shutdownIncomingConnections(::etl::delegate<void()> delegate);
 
-    uint16_t getDispatcherSourceId() const override { return fConfiguration.DiagAddress; }
-
-#ifdef IS_VARIANT_HANDLING_NEEDED
-    virtual void setSourceAddress(uint16_t diagAddress)
-    {
-        fConfiguration.DiagAddress = diagAddress;
-    }
-#endif
-
 private:
     using SendBusyResponseCallback
         = ::etl::delegate<void(transport::TransportMessage const* const)>;
-
-    // workaround for large non virtual thunks
-    bool shutdown_local(ShutdownDelegate delegate);
-    transport::AbstractTransportLayer::ErrorCode send_local(
-        transport::TransportMessage& transportMessage,
-        transport::ITransportMessageProcessedListener* pNotificationListener);
 
     static uint8_t const BUSY_MESSAGE_LENGTH = 3U;
 
     friend class ::http::html::UdsController;
     friend class IncomingDiagConnection;
 
-    class DefaultTransportMessageProcessedListener
-    : public transport::ITransportMessageProcessedListener
-    , public ::etl::uncopyable
-    {
-    public:
-        DefaultTransportMessageProcessedListener() {}
-
-        /**
-         * \see transport::ITransportMessageProcessedListener::transportMessageProcessed()
-         */
-
-        void transportMessageProcessed(
-            transport::TransportMessage& /* transportMessage */,
-            ProcessingResult const /* result */) override
-        {}
-    };
-
     void connectionManagerShutdownComplete();
-
-    transport::AbstractTransportLayer::ErrorCode enqueueMessage(
-        transport::TransportMessage& transportMessage,
-        transport::ITransportMessageProcessedListener* pNotificationListener);
-
-    void trigger();
 
     static void dispatchIncomingRequest(
         transport::TransportJob& job,
-        AbstractDiagnosisConfiguration& configuration,
+        DiagnosisConfiguration& configuration,
         DiagDispatcher& dispatcher,
         DiagJobRoot& diagJobRoot,
         transport::ITransportMessageProvidingListener& providingListener,
@@ -166,24 +129,36 @@ private:
     static transport::TransportMessage* copyFunctionalRequest(
         transport::TransportMessage& request,
         transport::ITransportMessageProvidingListener& providingListener,
-        AbstractDiagnosisConfiguration& configuration);
-
-    IncomingDiagConnection* requestIncomingConnection(transport::TransportMessage& requestMessage);
+        DiagnosisConfiguration& configuration);
 
     void diagConnectionTerminated(IncomingDiagConnection& diagConnection);
 
     void checkConnectionShutdownProgress();
 
-    AbstractDiagnosisConfiguration& fConfiguration;
+    ::etl::ipool& incomingDiagConnectionPool;
+    ::etl::iqueue<transport::TransportJob>& sendJobQueue;
+    DiagnosisConfiguration& fConfiguration;
     ::etl::delegate<void()> fConnectionShutdownDelegate;
     bool fConnectionShutdownRequested;
 
     ShutdownDelegate fShutdownDelegate;
-    DefaultTransportMessageProcessedListener fDefaultTransportMessageProcessedListener;
+    ::transport::DefaultTransportMessageProcessedListener fDefaultTransportMessageProcessedListener;
     transport::TransportMessage fBusyMessage;
     uint8_t fBusyMessageBuffer[BUSY_MESSAGE_LENGTH + UdsVmsConstants::BUSY_MESSAGE_EXTRA_BYTES];
     ::async::Function fAsyncProcessQueue;
     DiagJobRoot& fDiagJobRoot;
 };
+
+// FIXME: This should not be public api, it is just exposed here because
+// of strange usage in tests.
+inline IncomingDiagConnection*
+acquireIncomingDiagConnection(::etl::ipool& pool, ::async::ContextType context)
+{
+    if (pool.full())
+    {
+        return nullptr;
+    }
+    return pool.template create<IncomingDiagConnection>(context);
+}
 
 } // namespace uds

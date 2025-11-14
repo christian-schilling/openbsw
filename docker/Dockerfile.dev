@@ -22,10 +22,10 @@ RUN for i in 1 2 3; do \
         && break || { echo "Apt install failed, retrying ($i/3)..."; sleep 10; }; \
     done
 
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.28.3/cmake-3.28.3-linux-x86_64.sh \
-    && chmod +x cmake-3.28.3-linux-x86_64.sh \
-    && ./cmake-3.28.3-linux-x86_64.sh --skip-license --prefix=/usr/local \
-    && rm cmake-3.28.3-linux-x86_64.sh
+RUN wget https://github.com/Kitware/CMake/releases/download/v4.2.0-rc2/cmake-4.2.0-rc2-linux-x86_64.sh \
+    && chmod +x cmake-4.2.0-rc2-linux-x86_64.sh \
+    && ./cmake-4.2.0-rc2-linux-x86_64.sh --skip-license --prefix=/usr/local \
+    && rm cmake-4.2.0-rc2-linux-x86_64.sh
 
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz \
     && tar xf arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz \

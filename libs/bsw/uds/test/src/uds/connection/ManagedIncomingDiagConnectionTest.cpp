@@ -41,8 +41,9 @@ struct ManagedIncomingDiagConnectionTest : Test
     async::TestContext fContext;
     async::AsyncMock fAsyncMock;
     IncomingDiagConnection* fpIncomingDiagConnection;
-    DiagnosisConfiguration<NUM_INCOMING_CONNECTIONS, MAX_NUM_INCOMING_MESSAGES>*
-        fpDiagnosisConfiguration;
+    DiagnosisConfiguration* fpDiagnosisConfiguration;
+    ::etl::pool<IncomingDiagConnection, NUM_INCOMING_CONNECTIONS> _connectionPool;
+    ::etl::queue<transport::TransportJob, MAX_NUM_INCOMING_MESSAGES> _sendJobQueue;
     TransportMessageProvidingListenerMock* fpTpRouterMock;
     AbstractTransportLayerMock* fpTpLayerMock;
     DiagDispatcher* diagDispatcher;
@@ -61,18 +62,22 @@ struct ManagedIncomingDiagConnectionTest : Test
         fpDiagJobRoot     = new DiagJobRoot();
         AbstractDiagJob::setDefaultDiagSessionManager(*fpSessionProvider);
 
-        fpDiagnosisConfiguration
-            = new DiagnosisConfiguration<NUM_INCOMING_CONNECTIONS, MAX_NUM_INCOMING_MESSAGES>(
-                DIAGNOSIS_ID,
-                BROADCAST_ID,
-                0u,
-                TransportConfiguration::DIAG_PAYLOAD_SIZE,
-                false,
-                true,
-                fContext);
+        fpDiagnosisConfiguration = new DiagnosisConfiguration{
+            DIAGNOSIS_ID,
+            BROADCAST_ID,
+            TransportConfiguration::DIAG_PAYLOAD_SIZE,
+            0u,
+            true,
+            false,
+            true,
+            fContext};
 
-        diagDispatcher
-            = new DiagDispatcher(*fpDiagnosisConfiguration, *fpSessionProvider, *fpDiagJobRoot);
+        diagDispatcher = new DiagDispatcher(
+            _connectionPool,
+            _sendJobQueue,
+            *fpDiagnosisConfiguration,
+            *fpSessionProvider,
+            *fpDiagJobRoot);
 
         fpIncomingDiagConnection                     = new IncomingDiagConnection(fContext);
         fpIncomingDiagConnection->messageSender      = fpTpLayerMock;
@@ -190,10 +195,11 @@ TEST_F(ManagedIncomingDiagConnectionTest, sendPositiveResponse)
     pExpectedResponse->setPayloadLength(4); // +1 because of 1 identifier (service id)
 
     TransportMessageWithBuffer pRequest(MAX_PAYLOAD_LENGTH);
-    fpIncomingDiagConnection->sourceAddress  = TESTER_ID;
-    fpIncomingDiagConnection->targetAddress  = DIAGNOSIS_ID;
-    fpIncomingDiagConnection->serviceId      = SERVICE_ID;
-    fpIncomingDiagConnection->requestMessage = pRequest.get();
+    fpIncomingDiagConnection->sourceAddress         = TESTER_ID;
+    fpIncomingDiagConnection->targetAddress         = DIAGNOSIS_ID;
+    fpIncomingDiagConnection->responseSourceAddress = DIAGNOSIS_ID;
+    fpIncomingDiagConnection->serviceId             = SERVICE_ID;
+    fpIncomingDiagConnection->requestMessage        = pRequest.get();
     fpIncomingDiagConnection->open(false);
     // save service id
     fpIncomingDiagConnection->addIdentifier();

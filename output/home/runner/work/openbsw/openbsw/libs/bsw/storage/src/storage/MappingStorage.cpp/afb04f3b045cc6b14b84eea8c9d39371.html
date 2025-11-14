@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../../bsw.html">bsw</a></li>
+        
+        <li><a href="../../../../storage.html">storage</a></li>
+        
+        <li><a href="../../../src.html">src</a></li>
+        
+        <li ><a href="../../storage.html">storage</a>
+            </li>
+
+        
+        <li class="active"><a href="../MappingStorage.cpp.html">MappingStorage.cpp</a>:117
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">storage::MappingStorage::callback(storage::StorageJob&amp;)</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x0001cb64</td>
+                <td>
+    <span class="label label-success">x-module</span>
+    
+</td>
+                <td>56 (static)</td>
+                <td>448</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="../../../../../3rdparty/etl/include/etl/private/delegate_cpp11.h/74dc2834e6cb658047f43b88831e1a56.html">void etl::delegate&lt;void (storage::StorageJob&amp;)&gt;::method_stub&lt;storage::MappingStorage, &amp;storage::MappingStorage::callback&gt;(void*, storage::StorageJob&amp;) (4)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (2,
+                            <span title="sum of used bytes by all callees">
+                            Σ=328
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="./dd02cd666fbbeb56d9f959bcd7c0b190.html">storage::MappingStorage::getConfigEntry(unsigned long) const (96)</a>
+                    
+                        ,
+                    
+                
+                    <a href="./2df2689c32c011ddcab3aa426100db45.html">storage::MappingStorage::triggerJob(storage::StorageJob&amp;, storage::MappingConfig const&amp;, unsigned int) (232)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./2df2689c32c011ddcab3aa426100db45.html">storage::MappingStorage::triggerJob(storage::StorageJob&amp;, storage::MappingConfig const&amp;, unsigned int) (232)</a></pre>
+    
+
+    <pre>
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cb64:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+
+    _ZNK3etl4spanIPN7storage10StorageJobELj4294967295EE4sizeEv():
+
+       1cb68:	6a03      	ldr	r3, [r0, #32]
+
+       1cb6a:	6a42      	ldr	r2, [r0, #36]	; 0x24
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cb6c:	460d      	mov	r5, r1
+
+    _ZNK3etl4spanIPN7storage10StorageJobELj4294967295EE4sizeEv():
+
+       1cb6e:	1ad1      	subs	r1, r2, r3
+
+    _ZNK7storage14MappingStorage14getUsedSlotIdxERNS_10StorageJobE():
+
+       1cb70:	1089      	asrs	r1, r1, #2
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cb72:	b085      	sub	sp, #20
+
+       1cb74:	4606      	mov	r6, r0
+
+    _ZNK7storage14MappingStorage14getUsedSlotIdxERNS_10StorageJobE():
+
+       1cb76:	f000 80ca 	beq.w	1cd0e <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1aa>
+
+       1cb7a:	3b04      	subs	r3, #4
+
+       1cb7c:	2400      	movs	r4, #0
+
+       1cb7e:	e003      	b.n	1cb88 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x24>
+
+       1cb80:	3401      	adds	r4, #1
+
+       1cb82:	42a1      	cmp	r1, r4
+
+       1cb84:	f000 80b3 	beq.w	1ccee <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x18a>
+
+       1cb88:	f853 2f04 	ldr.w	r2, [r3, #4]!
+
+       1cb8c:	4295      	cmp	r5, r2
+
+       1cb8e:	ea4f 0784 	mov.w	r7, r4, lsl #2
+
+       1cb92:	d1f5      	bne.n	1cb80 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1c>
+
+    _ZNK3etl4spanIPN7storage10StorageJobELj4294967295EE4sizeEv():
+
+       1cb94:	69b2      	ldr	r2, [r6, #24]
+
+       1cb96:	69f3      	ldr	r3, [r6, #28]
+
+       1cb98:	1a9b      	subs	r3, r3, r2
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cb9a:	ebb4 0fa3 	cmp.w	r4, r3, asr #2
+
+       1cb9e:	d26c      	bcs.n	1cc7a <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x116>
+
+       1cba0:	f852 8007 	ldr.w	r8, [r2, r7]
+
+       1cba4:	f10d 0904 	add.w	r9, sp, #4
+
+       1cba8:	f1b8 0f00 	cmp.w	r8, #0
+
+       1cbac:	d075      	beq.n	1cc9a <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x136>
+
+       1cbae:	6a6b      	ldr	r3, [r5, #36]	; 0x24
+
+       1cbb0:	2b02      	cmp	r3, #2
+
+       1cbb2:	d07d      	beq.n	1ccb0 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x14c>
+
+    _ZN3etl7variantIJN7storage10StorageJob6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEC4ERKS8_():
+
+       1cbb4:	692b      	ldr	r3, [r5, #16]
+
+       1cbb6:	f8d5 a00c 	ldr.w	sl, [r5, #12]
+
+       1cbba:	9303      	str	r3, [sp, #12]
+
+       1cbbc:	3301      	adds	r3, #1
+
+       1cbbe:	f8cd a008 	str.w	sl, [sp, #8]
+
+       1cbc2:	f000 8096 	beq.w	1ccf2 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x18e>
+
+       1cbc6:	f105 0208 	add.w	r2, r5, #8
+
+       1cbca:	4649      	mov	r1, r9
+
+       1cbcc:	2000      	movs	r0, #0
+
+    _ZN7storage10StorageJob10sendResultEN3etl7variantIJNS0_6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEE():
+
+       1cbce:	f108 0508 	add.w	r5, r8, #8
+
+    _ZN3etl7variantIJN7storage10StorageJob6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEC4ERKS8_():
+
+       1cbd2:	47d0      	blx	sl
+
+    _ZN3etl7variantIJN7storage10StorageJob6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEaSERKS8_():
+
+       1cbd4:	454d      	cmp	r5, r9
+
+       1cbd6:	d013      	beq.n	1cc00 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x9c>
+
+       1cbd8:	9b03      	ldr	r3, [sp, #12]
+
+       1cbda:	3301      	adds	r3, #1
+
+       1cbdc:	f000 808d 	beq.w	1ccfa <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x196>
+
+       1cbe0:	f8d8 300c 	ldr.w	r3, [r8, #12]
+
+       1cbe4:	2200      	movs	r2, #0
+
+       1cbe6:	4629      	mov	r1, r5
+
+       1cbe8:	2002      	movs	r0, #2
+
+       1cbea:	4798      	blx	r3
+
+       1cbec:	9b02      	ldr	r3, [sp, #8]
+
+       1cbee:	f8c8 300c 	str.w	r3, [r8, #12]
+
+       1cbf2:	4629      	mov	r1, r5
+
+       1cbf4:	464a      	mov	r2, r9
+
+       1cbf6:	2000      	movs	r0, #0
+
+       1cbf8:	4798      	blx	r3
+
+       1cbfa:	9b03      	ldr	r3, [sp, #12]
+
+       1cbfc:	f8c8 3010 	str.w	r3, [r8, #16]
+
+    _ZNK3etl8delegateIFvRN7storage10StorageJobEEE8is_validEv():
+
+       1cc00:	f8d8 302c 	ldr.w	r3, [r8, #44]	; 0x2c
+
+    _ZN7storage10StorageJob10sendResultEN3etl7variantIJNS0_6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEE():
+
+       1cc04:	b11b      	cbz	r3, 1cc0e <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0xaa>
+
+    _ZNK3etl8delegateIFvRN7storage10StorageJobEEEclIJS3_EEEvDpOT_():
+
+       1cc06:	f8d8 0028 	ldr.w	r0, [r8, #40]	; 0x28
+
+       1cc0a:	4641      	mov	r1, r8
+
+       1cc0c:	4798      	blx	r3
+
+    _ZN3etl7variantIJN7storage10StorageJob6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEED4Ev():
+
+       1cc0e:	9b03      	ldr	r3, [sp, #12]
+
+       1cc10:	3301      	adds	r3, #1
+
+       1cc12:	d004      	beq.n	1cc1e <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0xba>
+
+       1cc14:	9b02      	ldr	r3, [sp, #8]
+
+       1cc16:	4649      	mov	r1, r9
+
+       1cc18:	2200      	movs	r2, #0
+
+       1cc1a:	2002      	movs	r0, #2
+
+       1cc1c:	4798      	blx	r3
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc1e:	f3ef 8210 	mrs	r2, PRIMASK
+
+    getMachineStateRegisterValueAndSuspendAllInterrupts():
+
+       1cc22:	b672      	cpsid	i
+
+    _ZNK3etl19intrusive_list_baseINS_18bidirectional_linkILj0EEEE5emptyEv():
+
+       1cc24:	6bf5      	ldr	r5, [r6, #60]	; 0x3c
+
+       1cc26:	f106 0338 	add.w	r3, r6, #56	; 0x38
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc2a:	429d      	cmp	r5, r3
+
+       1cc2c:	d01d      	beq.n	1cc6a <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x106>
+
+    _ZN3etl18bidirectional_linkILj0EE6unlinkEv():
+
+       1cc2e:	682b      	ldr	r3, [r5, #0]
+
+       1cc30:	b10b      	cbz	r3, 1cc36 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0xd2>
+
+       1cc32:	6869      	ldr	r1, [r5, #4]
+
+       1cc34:	6059      	str	r1, [r3, #4]
+
+       1cc36:	6869      	ldr	r1, [r5, #4]
+
+       1cc38:	b101      	cbz	r1, 1cc3c <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0xd8>
+
+       1cc3a:	600b      	str	r3, [r1, #0]
+
+    _ZN3etl19intrusive_list_baseINS_18bidirectional_linkILj0EEEE15disconnect_linkEPS2_():
+
+       1cc3c:	6c33      	ldr	r3, [r6, #64]	; 0x40
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc3e:	69b0      	ldr	r0, [r6, #24]
+
+    _ZN3etl18bidirectional_linkILj0EE5clearEv():
+
+       1cc40:	2100      	movs	r1, #0
+
+    _ZN3etl19intrusive_list_baseINS_18bidirectional_linkILj0EEEE15disconnect_linkEPS2_():
+
+       1cc42:	3b01      	subs	r3, #1
+
+    _ZN3etl18bidirectional_linkILj0EE5clearEv():
+
+       1cc44:	6029      	str	r1, [r5, #0]
+
+       1cc46:	6069      	str	r1, [r5, #4]
+
+    _ZN3etl19intrusive_list_baseINS_18bidirectional_linkILj0EEEE15disconnect_linkEPS2_():
+
+       1cc48:	6433      	str	r3, [r6, #64]	; 0x40
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc4a:	51c5      	str	r5, [r0, r7]
+
+       1cc4c:	f382 8810 	msr	PRIMASK, r2
+
+       1cc50:	6b29      	ldr	r1, [r5, #48]	; 0x30
+
+       1cc52:	4630      	mov	r0, r6
+
+       1cc54:	f7ff fe82 	bl	1c95c <<a href="./dd02cd666fbbeb56d9f959bcd7c0b190.html">storage::MappingStorage::getConfigEntry(unsigned long) const</a>>
+
+       1cc58:	4623      	mov	r3, r4
+
+       1cc5a:	4602      	mov	r2, r0
+
+       1cc5c:	4629      	mov	r1, r5
+
+       1cc5e:	4630      	mov	r0, r6
+
+       1cc60:	b005      	add	sp, #20
+
+       1cc62:	e8bd 4ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+
+       1cc66:	f7ff bf09 	b.w	1ca7c <<a href="./2df2689c32c011ddcab3aa426100db45.html">storage::MappingStorage::triggerJob(storage::StorageJob&, storage::MappingConfig const&, unsigned int)</a>>
+
+       1cc6a:	69b3      	ldr	r3, [r6, #24]
+
+       1cc6c:	2100      	movs	r1, #0
+
+       1cc6e:	51d9      	str	r1, [r3, r7]
+
+       1cc70:	f382 8810 	msr	PRIMASK, r2
+
+       1cc74:	b005      	add	sp, #20
+
+       1cc76:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1cc7a:	4a26      	ldr	r2, [pc, #152]	; (1cd14 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1b0>)
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc7c:	4b26      	ldr	r3, [pc, #152]	; (1cd18 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1b4>)
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1cc7e:	9201      	str	r2, [sp, #4]
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc80:	f10d 0904 	add.w	r9, sp, #4
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1cc84:	2279      	movs	r2, #121	; 0x79
+
+       1cc86:	9202      	str	r2, [sp, #8]
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc88:	681b      	ldr	r3, [r3, #0]
+
+       1cc8a:	4648      	mov	r0, r9
+
+       1cc8c:	4798      	blx	r3
+
+    _ZNK3etl4spanIPN7storage10StorageJobELj4294967295EEixEj():
+
+       1cc8e:	69b2      	ldr	r2, [r6, #24]
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc90:	f852 8007 	ldr.w	r8, [r2, r7]
+
+       1cc94:	f1b8 0f00 	cmp.w	r8, #0
+
+       1cc98:	d189      	bne.n	1cbae <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x4a>
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1cc9a:	4a20      	ldr	r2, [pc, #128]	; (1cd1c <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1b8>)
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cc9c:	4b1e      	ldr	r3, [pc, #120]	; (1cd18 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1b4>)
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1cc9e:	9201      	str	r2, [sp, #4]
+
+       1cca0:	2280      	movs	r2, #128	; 0x80
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cca2:	681b      	ldr	r3, [r3, #0]
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1cca4:	9202      	str	r2, [sp, #8]
+
+    storage::MappingStorage::callback(storage::StorageJob&):
+
+       1cca6:	4648      	mov	r0, r9
+
+       1cca8:	4798      	blx	r3
+
+       1ccaa:	6a6b      	ldr	r3, [r5, #36]	; 0x24
+
+       1ccac:	2b02      	cmp	r3, #2
+
+       1ccae:	d181      	bne.n	1cbb4 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x50>
+
+    _ZN3etl3getILj2EJN7storage10StorageJob4Type4NoneENS3_5WriteENS3_4ReadEEEERNS_19variant_alternativeIXT_ENS_7variantIJDpT0_EEEE4typeERSB_():
+
+       1ccb0:	f8d8 3024 	ldr.w	r3, [r8, #36]	; 0x24
+
+       1ccb4:	2b02      	cmp	r3, #2
+
+       1ccb6:	d016      	beq.n	1cce6 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x182>
+
+       1ccb8:	f8df a05c 	ldr.w	sl, [pc, #92]	; 1cd18 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1b4>
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1ccbc:	4a18      	ldr	r2, [pc, #96]	; (1cd20 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1bc>)
+
+    _ZN3etl3getILj2EJN7storage10StorageJob4Type4NoneENS3_5WriteENS3_4ReadEEEERNS_19variant_alternativeIXT_ENS_7variantIJDpT0_EEEE4typeERSB_():
+
+       1ccbe:	f8da 3000 	ldr.w	r3, [sl]
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1ccc2:	9201      	str	r2, [sp, #4]
+
+       1ccc4:	f240 4bec 	movw	fp, #1260	; 0x4ec
+
+       1ccc8:	f8cd b008 	str.w	fp, [sp, #8]
+
+    _ZN3etl3getILj2EJN7storage10StorageJob4Type4NoneENS3_5WriteENS3_4ReadEEEERNS_19variant_alternativeIXT_ENS_7variantIJDpT0_EEEE4typeERSB_():
+
+       1cccc:	4648      	mov	r0, r9
+
+       1ccce:	4798      	blx	r3
+
+       1ccd0:	6a6b      	ldr	r3, [r5, #36]	; 0x24
+
+       1ccd2:	2b02      	cmp	r3, #2
+
+       1ccd4:	d007      	beq.n	1cce6 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x182>
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1ccd6:	4a12      	ldr	r2, [pc, #72]	; (1cd20 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x1bc>)
+
+    _ZN3etl3getILj2EJN7storage10StorageJob4Type4NoneENS3_5WriteENS3_4ReadEEEERNS_19variant_alternativeIXT_ENS_7variantIJDpT0_EEEE4typeERSB_():
+
+       1ccd8:	f8da 3000 	ldr.w	r3, [sl]
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1ccdc:	9201      	str	r2, [sp, #4]
+
+       1ccde:	f8cd b008 	str.w	fp, [sp, #8]
+
+    _ZN3etl3getILj2EJN7storage10StorageJob4Type4NoneENS3_5WriteENS3_4ReadEEEERNS_19variant_alternativeIXT_ENS_7variantIJDpT0_EEEE4typeERSB_():
+
+       1cce2:	4648      	mov	r0, r9
+
+       1cce4:	4798      	blx	r3
+
+    _ZNK7storage10StorageJob4Type4Read11getReadSizeEv():
+
+       1cce6:	69eb      	ldr	r3, [r5, #28]
+
+    _ZN7storage10StorageJob4Type4Read11setReadSizeEj():
+
+       1cce8:	f8c8 301c 	str.w	r3, [r8, #28]
+
+       1ccec:	e762      	b.n	1cbb4 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x50>
+
+    _ZNK3etl4spanIPN7storage10StorageJobELj4294967295EEixEj():
+
+       1ccee:	00a7      	lsls	r7, r4, #2
+
+       1ccf0:	e750      	b.n	1cb94 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x30>
+
+    _ZN7storage10StorageJob10sendResultEN3etl7variantIJNS0_6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEE():
+
+       1ccf2:	f108 0308 	add.w	r3, r8, #8
+
+    _ZN3etl7variantIJN7storage10StorageJob6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEaSERKS8_():
+
+       1ccf6:	4599      	cmp	r9, r3
+
+       1ccf8:	d082      	beq.n	1cc00 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x9c>
+
+    _ZNK3etl8delegateIFvRN7storage10StorageJobEEE8is_validEv():
+
+       1ccfa:	f8d8 302c 	ldr.w	r3, [r8, #44]	; 0x2c
+
+    _ZN3etl7variantIJN7storage10StorageJob6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEaSERKS8_():
+
+       1ccfe:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+
+       1cd02:	f8c8 2010 	str.w	r2, [r8, #16]
+
+    _ZN7storage10StorageJob10sendResultEN3etl7variantIJNS0_6Result4InitENS3_5ErrorENS3_8DataLossENS3_7SuccessEEEE():
+
+       1cd06:	2b00      	cmp	r3, #0
+
+       1cd08:	f47f af7d 	bne.w	1cc06 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0xa2>
+
+       1cd0c:	e787      	b.n	1cc1e <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0xba>
+
+    _ZNK7storage14MappingStorage14getUsedSlotIdxERNS_10StorageJobE():
+
+       1cd0e:	460f      	mov	r7, r1
+
+       1cd10:	460c      	mov	r4, r1
+
+       1cd12:	e73f      	b.n	1cb94 <<a href="./afb04f3b045cc6b14b84eea8c9d39371.html">storage::MappingStorage::callback(storage::StorageJob&)</a>+0x30>
+
+       1cd14:	00028434 	.word	0x00028434
+
+       1cd18:	1ffe0120 	.word	0x1ffe0120
+
+       1cd1c:	00028458 	.word	0x00028458
+
+       1cd20:	00023e10 	.word	0x00023e10
+
+    </pre>
+
+    
+    <pre><a href="../../../../../3rdparty/etl/include/etl/private/delegate_cpp11.h/74dc2834e6cb658047f43b88831e1a56.html">void etl::delegate&lt;void (storage::StorageJob&amp;)&gt;::method_stub&lt;storage::MappingStorage, &amp;storage::MappingStorage::callback&gt;(void*, storage::StorageJob&amp;) (4)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 176</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 872</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    176
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                32 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    872
+                    
+                    
+                </td>
+                <td class="col_size">264</td>
+                <td><a href="../../../../../3rdparty/freeRtos/include/task.h/5822df0c752554b0290890c533493c1a.html" class="icon-function">xTaskGenericNotify</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    144
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    608
+                    
+                    
+                </td>
+                <td class="col_size">104</td>
+                <td><a href="../../../../asyncFreeRtos/src/async/Async.cpp/4dfe65e158466f2f9a73b985dc4b0ecc.html" class="icon-function">async::execute(unsigned char, async::IRunnable&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    120
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    504
+                    
+                    
+                </td>
+                <td class="col_size">92</td>
+                <td><a href="./44c4c9164bae29dbb80f0c682bf52863.html" class="icon-function">storage::MappingStorage::jobFailed(storage::StorageJob&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    412
+                    
+                    
+                </td>
+                <td class="col_size">180</td>
+                <td><a href="./d9e5276640894b3a3d8a29bbce8a77a7.html" class="icon-function">storage::MappingStorage::process(storage::StorageJob&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>5</th>
+                <td class="col_size">
+                    
+                    96
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">232</td>
+                <td><a href="./2df2689c32c011ddcab3aa426100db45.html" class="icon-function">storage::MappingStorage::triggerJob(storage::StorageJob&amp;, storage::MappingConfig const&amp;, unsigned int)</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">56
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+            <p>No callers for this function.</p>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

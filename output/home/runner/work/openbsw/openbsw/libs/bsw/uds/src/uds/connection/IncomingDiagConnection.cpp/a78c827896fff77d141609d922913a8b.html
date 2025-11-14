@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../../../bsw.html">bsw</a></li>
+        
+        <li><a href="../../../../../uds.html">uds</a></li>
+        
+        <li><a href="../../../../src.html">src</a></li>
+        
+        <li><a href="../../../uds.html">uds</a></li>
+        
+        <li ><a href="../../connection.html">connection</a>
+            </li>
+
+        
+        <li class="active"><a href="../IncomingDiagConnection.cpp.html">IncomingDiagConnection.cpp</a>:274
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x00018200</td>
+                <td>
+    <span class="label label-success">x-module</span>
+    
+</td>
+                <td>32 (static)</td>
+                <td>384</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="../../../../../../3rdparty/etl/include/etl/private/delegate_cpp11.h/157bc099e79c9fafb7dafa33a2d3f045.html">void etl::delegate&lt;void (unsigned char, uds::AbstractDiagJob*)&gt;::method_stub&lt;uds::IncomingDiagConnection, &amp;uds::IncomingDiagConnection::asyncSendNegativeResponse&gt;(void*, unsigned char, uds::AbstractDiagJob*) (4)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (8,
+                            <span title="sum of used bytes by all callees">
+                            Σ=748
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="../../../../../asyncFreeRtos/src/async/Types.cpp/3decd3b646058460a8725450b13ebf07.html">async::TimeoutType::cancel() (144)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../NestedDiagRequest.cpp/0217a3c9115338b0c27db54fd4fd1a35.html">uds::NestedDiagRequest::handleNegativeResponseCode(uds::DiagReturnCode::Type) (28)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../transport/src/TransportMessage.cpp/015d887b65e4e2abda950a7ebf753854.html">transport::TransportMessage::setPayloadLength(unsigned short) (80)</a>
+                    
+                        ,
+                    
+                
+                    <a href="./923c38b3ca76b4d66eeccb28817c1535.html">uds::IncomingDiagConnection::sourceAddressForResponse() const (88)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../transport/src/TransportMessage.cpp/4676b1e784ac36fff34fb835f91376b8.html">transport::TransportMessage::append(unsigned char) (60)</a>
+                    
+                        ,
+                    
+                
+                    <a href="./cc0f285864e23d19179f58d9175ecbd2.html">uds::IncomingDiagConnection::sendResponse() (76)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../asyncFreeRtos/src/async/Async.cpp/5aa4f4e4ce0ff8166656d629d7628e7e.html">async::schedule(unsigned char, async::IRunnable&amp;, async::TimeoutType&amp;, unsigned long, async::TimeUnit::Type) (128)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../transport/include/transport/TransportMessage.h/74e5d0c6d5baede66432b38684e33c22.html">uds::IncomingDiagConnection::sendResponsePending() (144)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="../../../../../../3rdparty/etl/include/etl/private/delegate_cpp11.h/25975bcf8e49a4296f1b6f8efaf49418.html">void etl::delegate&lt;void (transport::TransportMessage*, transport::ITransportMessageProcessedListener::ProcessingResult)&gt;::method_stub&lt;uds::IncomingDiagConnection, &amp;uds::IncomingDiagConnection::asyncTransportMessageProcessed&gt;(void*, transport::TransportMessage*, transport::ITransportMessageProcessedListener::ProcessingResult) (4)</a></pre>
+    
+
+    <pre>
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       18200:	b5f0      	push	{r4, r5, r6, r7, lr}
+
+       18202:	f8d0 3128 	ldr.w	r3, [r0, #296]	; 0x128
+
+       18206:	b083      	sub	sp, #12
+
+       18208:	4604      	mov	r4, r0
+
+       1820a:	460d      	mov	r5, r1
+
+       1820c:	4616      	mov	r6, r2
+
+       1820e:	b35b      	cbz	r3, 18268 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x68>
+
+       18210:	f890 2074 	ldrb.w	r2, [r0, #116]	; 0x74
+
+       18214:	2978      	cmp	r1, #120	; 0x78
+
+       18216:	f102 32ff 	add.w	r2, r2, #4294967295	; 0xffffffff
+
+       1821a:	f880 2074 	strb.w	r2, [r0, #116]	; 0x74
+
+       1821e:	d117      	bne.n	18250 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x50>
+
+       18220:	7b5a      	ldrb	r2, [r3, #13]
+
+       18222:	b9c2      	cbnz	r2, 18256 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x56>
+
+       18224:	609e      	str	r6, [r3, #8]
+
+       18226:	f890 3074 	ldrb.w	r3, [r0, #116]	; 0x74
+
+       1822a:	2b00      	cmp	r3, #0
+
+       1822c:	bf14      	ite	ne
+
+       1822e:	2301      	movne	r3, #1
+
+       18230:	2300      	moveq	r3, #0
+
+       18232:	f880 3078 	strb.w	r3, [r0, #120]	; 0x78
+
+       18236:	f000 8096 	beq.w	18366 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x166>
+
+    _ZN3uds22IncomingDiagConnection21restartPendingTimeoutEv():
+
+       1823a:	f104 0530 	add.w	r5, r4, #48	; 0x30
+
+       1823e:	4628      	mov	r0, r5
+
+       18240:	f7fc f99a 	bl	14578 <<a href="../../../../../asyncFreeRtos/src/async/Types.cpp/3decd3b646058460a8725450b13ebf07.html">async::TimeoutType::cancel()</a>>
+
+       18244:	f894 3077 	ldrb.w	r3, [r4, #119]	; 0x77
+
+       18248:	2b00      	cmp	r3, #0
+
+       1824a:	d17f      	bne.n	1834c <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x14c>
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       1824c:	b003      	add	sp, #12
+
+       1824e:	bdf0      	pop	{r4, r5, r6, r7, pc}
+
+       18250:	4618      	mov	r0, r3
+
+       18252:	f000 f9b1 	bl	185b8 <<a href="../NestedDiagRequest.cpp/0217a3c9115338b0c27db54fd4fd1a35.html">uds::NestedDiagRequest::handleNegativeResponseCode(uds::DiagReturnCode::Type)</a>>
+
+       18256:	6833      	ldr	r3, [r6, #0]
+
+       18258:	681b      	ldr	r3, [r3, #0]
+
+       1825a:	2200      	movs	r2, #0
+
+       1825c:	4621      	mov	r1, r4
+
+       1825e:	4630      	mov	r0, r6
+
+       18260:	b003      	add	sp, #12
+
+       18262:	e8bd 40f0 	ldmia.w	sp!, {r4, r5, r6, r7, lr}
+
+       18266:	4718      	bx	r3
+
+       18268:	69c0      	ldr	r0, [r0, #28]
+
+       1826a:	2103      	movs	r1, #3
+
+       1826c:	f7fe fd3a 	bl	16ce4 <<a href="../../../../../transport/src/TransportMessage.cpp/015d887b65e4e2abda950a7ebf753854.html">transport::TransportMessage::setPayloadLength(unsigned short)</a>>
+
+       18270:	4620      	mov	r0, r4
+
+       18272:	69e7      	ldr	r7, [r4, #28]
+
+       18274:	f7ff feaa 	bl	17fcc <<a href="./923c38b3ca76b4d66eeccb28817c1535.html">uds::IncomingDiagConnection::sourceAddressForResponse() const</a>>
+
+    _ZN9transport16TransportMessage16setSourceAddressEt():
+
+       18278:	8138      	strh	r0, [r7, #8]
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       1827a:	69e0      	ldr	r0, [r4, #28]
+
+       1827c:	88a3      	ldrh	r3, [r4, #4]
+
+    _ZN9transport16TransportMessage16setTargetAddressEt():
+
+       1827e:	8143      	strh	r3, [r0, #10]
+
+    _ZNK9transport16TransportMessage9serviceIdEv():
+
+       18280:	6803      	ldr	r3, [r0, #0]
+
+       18282:	781b      	ldrb	r3, [r3, #0]
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       18284:	2b7f      	cmp	r3, #127	; 0x7f
+
+       18286:	d009      	beq.n	1829c <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x9c>
+
+       18288:	f884 310b 	strb.w	r3, [r4, #267]	; 0x10b
+
+       1828c:	6803      	ldr	r3, [r0, #0]
+
+       1828e:	785b      	ldrb	r3, [r3, #1]
+
+       18290:	f884 310c 	strb.w	r3, [r4, #268]	; 0x10c
+
+       18294:	6803      	ldr	r3, [r0, #0]
+
+       18296:	789b      	ldrb	r3, [r3, #2]
+
+       18298:	f884 310d 	strb.w	r3, [r4, #269]	; 0x10d
+
+    _ZN9transport16TransportMessage15resetValidBytesEv():
+
+       1829c:	2700      	movs	r7, #0
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       1829e:	217f      	movs	r1, #127	; 0x7f
+
+    _ZN9transport16TransportMessage15resetValidBytesEv():
+
+       182a0:	81c7      	strh	r7, [r0, #14]
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       182a2:	f7fe fda9 	bl	16df8 <<a href="../../../../../transport/src/TransportMessage.cpp/4676b1e784ac36fff34fb835f91376b8.html">transport::TransportMessage::append(unsigned char)</a>>
+
+       182a6:	7a21      	ldrb	r1, [r4, #8]
+
+       182a8:	69e0      	ldr	r0, [r4, #28]
+
+       182aa:	f7fe fda5 	bl	16df8 <<a href="../../../../../transport/src/TransportMessage.cpp/4676b1e784ac36fff34fb835f91376b8.html">transport::TransportMessage::append(unsigned char)</a>>
+
+       182ae:	69e0      	ldr	r0, [r4, #28]
+
+       182b0:	4629      	mov	r1, r5
+
+       182b2:	f7fe fda1 	bl	16df8 <<a href="../../../../../transport/src/TransportMessage.cpp/4676b1e784ac36fff34fb835f91376b8.html">transport::TransportMessage::append(unsigned char)</a>>
+
+       182b6:	2d78      	cmp	r5, #120	; 0x78
+
+       182b8:	6726      	str	r6, [r4, #112]	; 0x70
+
+       182ba:	d016      	beq.n	182ea <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0xea>
+
+       182bc:	6920      	ldr	r0, [r4, #16]
+
+    _ZNK3etl4spanIhLj4294967295EE4dataEv():
+
+       182be:	69e3      	ldr	r3, [r4, #28]
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       182c0:	6802      	ldr	r2, [r0, #0]
+
+       182c2:	681b      	ldr	r3, [r3, #0]
+
+       182c4:	9700      	str	r7, [sp, #0]
+
+       182c6:	69d6      	ldr	r6, [r2, #28]
+
+       182c8:	3303      	adds	r3, #3
+
+       182ca:	462a      	mov	r2, r5
+
+       182cc:	4621      	mov	r1, r4
+
+       182ce:	47b0      	blx	r6
+
+       182d0:	88e3      	ldrh	r3, [r4, #6]
+
+       182d2:	2bdf      	cmp	r3, #223	; 0xdf
+
+       182d4:	d023      	beq.n	1831e <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x11e>
+
+       182d6:	f894 307a 	ldrb.w	r3, [r4, #122]	; 0x7a
+
+       182da:	2b00      	cmp	r3, #0
+
+       182dc:	d1b6      	bne.n	1824c <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x4c>
+
+       182de:	4620      	mov	r0, r4
+
+       182e0:	b003      	add	sp, #12
+
+       182e2:	e8bd 40f0 	ldmia.w	sp!, {r4, r5, r6, r7, lr}
+
+       182e6:	f7ff bd1b 	b.w	17d20 <<a href="./cc0f285864e23d19179f58d9175ecbd2.html">uds::IncomingDiagConnection::sendResponse()</a>>
+
+       182ea:	f894 307a 	ldrb.w	r3, [r4, #122]	; 0x7a
+
+       182ee:	2b00      	cmp	r3, #0
+
+       182f0:	d1ac      	bne.n	1824c <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x4c>
+
+    _ZN3uds22IncomingDiagConnection21restartPendingTimeoutEv():
+
+       182f2:	f104 0530 	add.w	r5, r4, #48	; 0x30
+
+       182f6:	4628      	mov	r0, r5
+
+       182f8:	f7fc f93e 	bl	14578 <<a href="../../../../../asyncFreeRtos/src/async/Types.cpp/3decd3b646058460a8725450b13ebf07.html">async::TimeoutType::cancel()</a>>
+
+       182fc:	f894 3077 	ldrb.w	r3, [r4, #119]	; 0x77
+
+       18300:	2b00      	cmp	r3, #0
+
+       18302:	d0ec      	beq.n	182de <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0xde>
+
+       18304:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
+
+       18308:	f8d4 3124 	ldr.w	r3, [r4, #292]	; 0x124
+
+       1830c:	9200      	str	r2, [sp, #0]
+
+       1830e:	f894 0025 	ldrb.w	r0, [r4, #37]	; 0x25
+
+       18312:	462a      	mov	r2, r5
+
+       18314:	f104 0128 	add.w	r1, r4, #40	; 0x28
+
+       18318:	f7fb fe40 	bl	13f9c <<a href="../../../../../asyncFreeRtos/src/async/Async.cpp/5aa4f4e4ce0ff8166656d629d7628e7e.html">async::schedule(unsigned char, async::IRunnable&, async::TimeoutType&, unsigned long, async::TimeUnit::Type)</a>>
+
+       1831c:	e7df      	b.n	182de <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0xde>
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       1831e:	f1a5 0311 	sub.w	r3, r5, #17
+
+       18322:	2b01      	cmp	r3, #1
+
+       18324:	d904      	bls.n	18330 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x130>
+
+       18326:	2d31      	cmp	r5, #49	; 0x31
+
+       18328:	d002      	beq.n	18330 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x130>
+
+       1832a:	3d7e      	subs	r5, #126	; 0x7e
+
+       1832c:	2d01      	cmp	r5, #1
+
+       1832e:	d8d2      	bhi.n	182d6 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0xd6>
+
+       18330:	f894 3074 	ldrb.w	r3, [r4, #116]	; 0x74
+
+       18334:	6f20      	ldr	r0, [r4, #112]	; 0x70
+
+       18336:	3b01      	subs	r3, #1
+
+       18338:	f884 3074 	strb.w	r3, [r4, #116]	; 0x74
+
+       1833c:	2800      	cmp	r0, #0
+
+       1833e:	d085      	beq.n	1824c <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x4c>
+
+       18340:	6803      	ldr	r3, [r0, #0]
+
+       18342:	2200      	movs	r2, #0
+
+       18344:	681b      	ldr	r3, [r3, #0]
+
+       18346:	6722      	str	r2, [r4, #112]	; 0x70
+
+       18348:	4621      	mov	r1, r4
+
+       1834a:	e789      	b.n	18260 <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x60>
+
+    _ZN3uds22IncomingDiagConnection21restartPendingTimeoutEv():
+
+       1834c:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
+
+       18350:	f8d4 3124 	ldr.w	r3, [r4, #292]	; 0x124
+
+       18354:	9200      	str	r2, [sp, #0]
+
+       18356:	f894 0025 	ldrb.w	r0, [r4, #37]	; 0x25
+
+       1835a:	462a      	mov	r2, r5
+
+       1835c:	f104 0128 	add.w	r1, r4, #40	; 0x28
+
+       18360:	f7fb fe1c 	bl	13f9c <<a href="../../../../../asyncFreeRtos/src/async/Async.cpp/5aa4f4e4ce0ff8166656d629d7628e7e.html">async::schedule(unsigned char, async::IRunnable&, async::TimeoutType&, unsigned long, async::TimeUnit::Type)</a>>
+
+       18364:	e772      	b.n	1824c <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x4c>
+
+    uds::IncomingDiagConnection::sendResponsePending():
+
+       18366:	f890 3024 	ldrb.w	r3, [r0, #36]	; 0x24
+
+       1836a:	2b00      	cmp	r3, #0
+
+       1836c:	f43f af65 	beq.w	1823a <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x3a>
+
+       18370:	6983      	ldr	r3, [r0, #24]
+
+       18372:	2b00      	cmp	r3, #0
+
+       18374:	f43f af61 	beq.w	1823a <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x3a>
+
+       18378:	f7ff fe54 	bl	18024 <<a href="../../../../../transport/include/transport/TransportMessage.h/74e5d0c6d5baede66432b38684e33c22.html">uds::IncomingDiagConnection::sendResponsePending()</a>.part.0>
+
+       1837c:	e75d      	b.n	1823a <<a href="./a78c827896fff77d141609d922913a8b.html">uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*)</a>+0x3a>
+
+    uds::IncomingDiagConnection::asyncSendNegativeResponse(unsigned char, uds::AbstractDiagJob*):
+
+       1837e:	bf00      	nop
+
+    </pre>
+
+    
+    <pre><a href="../../../../../../3rdparty/etl/include/etl/private/delegate_cpp11.h/157bc099e79c9fafb7dafa33a2d3f045.html">void etl::delegate&lt;void (unsigned char, uds::AbstractDiagJob*)&gt;::method_stub&lt;uds::IncomingDiagConnection, &amp;uds::IncomingDiagConnection::asyncSendNegativeResponse&gt;(void*, unsigned char, uds::AbstractDiagJob*) (4)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 124</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 204</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    124
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                48 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    204
+                    
+                    
+                </td>
+                <td class="col_size">68</td>
+                <td><a href="../../../../../util/src/util/logger/Logger.cpp/d658d7c78dcca1ca01e61ef198b3eeaa.html" class="icon-function">util::logger::Logger::doLog(unsigned char, util::logger::Level, char const*, std::__va_list)</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    76
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                20 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    136
+                    
+                    
+                </td>
+                <td class="col_size">56</td>
+                <td><a href="../../../../../util/include/util/logger/Logger.h/6be3c2c875c07680bc44f008f830057e.html" class="icon-function">util::logger::Logger::critical(unsigned char, char const*, ...)</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    56
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">80</td>
+                <td><a href="../../../../../transport/src/TransportMessage.cpp/015d887b65e4e2abda950a7ebf753854.html" class="icon-function">transport::TransportMessage::setPayloadLength(unsigned short)</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">32
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+            <p>No callers for this function.</p>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

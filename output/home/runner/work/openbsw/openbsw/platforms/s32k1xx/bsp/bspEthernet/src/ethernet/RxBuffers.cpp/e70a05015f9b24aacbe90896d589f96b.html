@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../platforms.html">platforms</a></li>
+        
+        <li><a href="../../../../../../s32k1xx.html">s32k1xx</a></li>
+        
+        <li><a href="../../../../../bsp.html">bsp</a></li>
+        
+        <li><a href="../../../../bspEthernet.html">bspEthernet</a></li>
+        
+        <li><a href="../../../src.html">src</a></li>
+        
+        <li ><a href="../../ethernet.html">ethernet</a>
+            </li>
+
+        
+        <li class="active"><a href="../RxBuffers.cpp.html">RxBuffers.cpp</a>:178
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">ethernet::RxBuffers::readFrame(netif*&amp;)</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x0002137c</td>
+                <td>
+    
+    
+</td>
+                <td>40 (static)</td>
+                <td>304</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="./5f47fadeae1acd540b8b74806e9c9ac9.html">ethernet::RxBuffers::interrupt() (216)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (4,
+                            <span title="sum of used bytes by all callees">
+                            Σ=212
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="./e9027c95267edd2deb70bb81832e5bbd.html">ethernet::RxBuffers::handleLastBuffer(pbuf*&amp;, pbuf*&amp;, pbuf*) const (60)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/3rdparty/lwip/src/core/pbuf.c/10167fb6905f20490b0e8e5bdc4aa1e0.html">pbuf_chain (84)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/bsw/util/include/util/logger/Logger.h/16ed4f7f357fda1c5edc4479ef99d0a4.html">util::logger::Logger::log(unsigned char, util::logger::Level, char const*, ...) (60)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/3rdparty/lwip/src/core/pbuf.c/9b6fd2596874539050b4147be9634d35.html">pbuf_free (8)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./e9027c95267edd2deb70bb81832e5bbd.html">ethernet::RxBuffers::handleLastBuffer(pbuf*&amp;, pbuf*&amp;, pbuf*) const (60)</a></pre>
+    
+
+    <pre>
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       2137c:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+
+       21380:	4604      	mov	r4, r0
+
+       21382:	b082      	sub	sp, #8
+
+       21384:	f894 204c 	ldrb.w	r2, [r4, #76]	; 0x4c
+
+    _ZNK3etl4spanI9ENET_ERXDLj4294967295EEixEj():
+
+       21388:	6b61      	ldr	r1, [r4, #52]	; 0x34
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       2138a:	eb01 1342 	add.w	r3, r1, r2, lsl #5
+
+       2138e:	2000      	movs	r0, #0
+
+       21390:	f8b3 c002 	ldrh.w	ip, [r3, #2]
+
+       21394:	9001      	str	r0, [sp, #4]
+
+       21396:	f41c 4f40 	tst.w	ip, #49152	; 0xc000
+
+       2139a:	d157      	bne.n	2144c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xd0>
+
+    _ZN8ethernet21handleErrornousBufferERP4pbufS1_():
+
+       2139c:	4d3e      	ldr	r5, [pc, #248]	; (21498 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x11c>)
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       2139e:	4e3f      	ldr	r6, [pc, #252]	; (2149c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x120>)
+
+    isErrornousBuffer():
+
+       213a0:	f8df a104 	ldr.w	sl, [pc, #260]	; 214a8 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x12c>
+
+       213a4:	fa0f f882 	sxth.w	r8, r2
+
+    _ZN8ethernet9RxBuffers16getCurrentBufferEv():
+
+       213a8:	6be3      	ldr	r3, [r4, #60]	; 0x3c
+
+    _ZNK3etl4spanI9ENET_ERXDLj4294967295EEixEj():
+
+       213aa:	eb01 1e48 	add.w	lr, r1, r8, lsl #5
+
+    _ZN8ethernet9RxBuffers16getCurrentBufferEv():
+
+       213ae:	f853 7028 	ldr.w	r7, [r3, r8, lsl #2]
+
+       213b2:	f8de 0004 	ldr.w	r0, [lr, #4]
+
+       213b6:	2300      	movs	r3, #0
+
+       213b8:	f44c 4980 	orr.w	r9, ip, #16384	; 0x4000
+
+    isErrornousBuffer():
+
+       213bc:	f01c 0f01 	tst.w	ip, #1
+
+    _ZN8ethernet9RxBuffers16getCurrentBufferEv():
+
+       213c0:	f8ae 9002 	strh.w	r9, [lr, #2]
+
+       213c4:	6078      	str	r0, [r7, #4]
+
+       213c6:	603b      	str	r3, [r7, #0]
+
+       213c8:	73bb      	strb	r3, [r7, #14]
+
+    isErrornousBuffer():
+
+       213ca:	d142      	bne.n	21452 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xd6>
+
+       213cc:	f41c 6f00 	tst.w	ip, #2048	; 0x800
+
+       213d0:	f40c 6300 	and.w	r3, ip, #2048	; 0x800
+
+       213d4:	d00c      	beq.n	213f0 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x74>
+
+       213d6:	f01c 0f32 	tst.w	ip, #50	; 0x32
+
+       213da:	d150      	bne.n	2147e <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x102>
+
+       213dc:	f8be 000e 	ldrh.w	r0, [lr, #14]
+
+       213e0:	07c0      	lsls	r0, r0, #31
+
+       213e2:	d505      	bpl.n	213f0 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x74>
+
+       213e4:	f8be 0008 	ldrh.w	r0, [lr, #8]
+
+       213e8:	f000 0030 	and.w	r0, r0, #48	; 0x30
+
+       213ec:	2800      	cmp	r0, #0
+
+       213ee:	d14d      	bne.n	2148c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x110>
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       213f0:	b1fb      	cbz	r3, 21432 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xb6>
+
+       213f2:	aa01      	add	r2, sp, #4
+
+       213f4:	4629      	mov	r1, r5
+
+       213f6:	463b      	mov	r3, r7
+
+       213f8:	4620      	mov	r0, r4
+
+       213fa:	f7ff ffa1 	bl	21340 <<a href="./e9027c95267edd2deb70bb81832e5bbd.html">ethernet::RxBuffers::handleLastBuffer(pbuf*&, pbuf*&, pbuf*) const</a>>
+
+       213fe:	f894 204c 	ldrb.w	r2, [r4, #76]	; 0x4c
+
+    _ZNK3etl4spanI9ENET_ERXDLj4294967295EE4sizeEv():
+
+       21402:	6b61      	ldr	r1, [r4, #52]	; 0x34
+
+       21404:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+
+       21406:	1a5b      	subs	r3, r3, r1
+
+       21408:	115b      	asrs	r3, r3, #5
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       2140a:	3201      	adds	r2, #1
+
+       2140c:	fbb2 f0f3 	udiv	r0, r2, r3
+
+       21410:	fb03 2210 	mls	r2, r3, r0, r2
+
+       21414:	b2d2      	uxtb	r2, r2
+
+       21416:	eb01 1342 	add.w	r3, r1, r2, lsl #5
+
+       2141a:	9801      	ldr	r0, [sp, #4]
+
+       2141c:	f884 204c 	strb.w	r2, [r4, #76]	; 0x4c
+
+       21420:	f8b3 c002 	ldrh.w	ip, [r3, #2]
+
+       21424:	b990      	cbnz	r0, 2144c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xd0>
+
+       21426:	f41c 4f40 	tst.w	ip, #49152	; 0xc000
+
+       2142a:	d10f      	bne.n	2144c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xd0>
+
+       2142c:	fa0f f882 	sxth.w	r8, r2
+
+       21430:	e7ba      	b.n	213a8 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x2c>
+
+    _ZNK8ethernet9RxBuffers12handleBufferERP4pbufS2_():
+
+       21432:	6828      	ldr	r0, [r5, #0]
+
+       21434:	f8be 3000 	ldrh.w	r3, [lr]
+
+       21438:	817b      	strh	r3, [r7, #10]
+
+       2143a:	813b      	strh	r3, [r7, #8]
+
+       2143c:	b1d8      	cbz	r0, 21476 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xfa>
+
+       2143e:	4639      	mov	r1, r7
+
+       21440:	f7ed f82a 	bl	e498 <<a href="../../../../../../../libs/3rdparty/lwip/src/core/pbuf.c/10167fb6905f20490b0e8e5bdc4aa1e0.html">pbuf_chain</a>>
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       21444:	f894 204c 	ldrb.w	r2, [r4, #76]	; 0x4c
+
+    _ZNK3etl4spanI9ENET_ERXDLj4294967295EE4sizeEv():
+
+       21448:	6b61      	ldr	r1, [r4, #52]	; 0x34
+
+       2144a:	e7db      	b.n	21404 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x88>
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       2144c:	b002      	add	sp, #8
+
+       2144e:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+
+    isErrornousBuffer():
+
+       21452:	4a13      	ldr	r2, [pc, #76]	; (214a0 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x124>)
+
+       21454:	7830      	ldrb	r0, [r6, #0]
+
+       21456:	2102      	movs	r1, #2
+
+       21458:	f7ff fcf4 	bl	20e44 <<a href="../../../../../../../libs/bsw/util/include/util/logger/Logger.h/16ed4f7f357fda1c5edc4479ef99d0a4.html">util::logger::Logger::log(unsigned char, util::logger::Level, char const*, ...)</a>>
+
+    _ZN8ethernet21handleErrornousBufferERP4pbufS1_():
+
+       2145c:	6828      	ldr	r0, [r5, #0]
+
+       2145e:	b118      	cbz	r0, 21468 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xec>
+
+       21460:	f7ec ffe6 	bl	e430 <<a href="../../../../../../../libs/3rdparty/lwip/src/core/pbuf.c/9b6fd2596874539050b4147be9634d35.html">pbuf_free</a>>
+
+       21464:	2300      	movs	r3, #0
+
+       21466:	602b      	str	r3, [r5, #0]
+
+       21468:	4638      	mov	r0, r7
+
+       2146a:	f7ec ffe1 	bl	e430 <<a href="../../../../../../../libs/3rdparty/lwip/src/core/pbuf.c/9b6fd2596874539050b4147be9634d35.html">pbuf_free</a>>
+
+    ethernet::RxBuffers::readFrame(netif*&):
+
+       2146e:	f894 204c 	ldrb.w	r2, [r4, #76]	; 0x4c
+
+    _ZNK3etl4spanI9ENET_ERXDLj4294967295EE4sizeEv():
+
+       21472:	6b61      	ldr	r1, [r4, #52]	; 0x34
+
+    _ZN8ethernet21handleErrornousBufferERP4pbufS1_():
+
+       21474:	e7c6      	b.n	21404 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x88>
+
+    _ZNK8ethernet9RxBuffers12handleBufferERP4pbufS2_():
+
+       21476:	2301      	movs	r3, #1
+
+       21478:	602f      	str	r7, [r5, #0]
+
+       2147a:	73bb      	strb	r3, [r7, #14]
+
+       2147c:	e7c2      	b.n	21404 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x88>
+
+    isErrornousBuffer():
+
+       2147e:	4a09      	ldr	r2, [pc, #36]	; (214a4 <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0x128>)
+
+       21480:	7830      	ldrb	r0, [r6, #0]
+
+       21482:	464b      	mov	r3, r9
+
+       21484:	2102      	movs	r1, #2
+
+       21486:	f7ff fcdd 	bl	20e44 <<a href="../../../../../../../libs/bsw/util/include/util/logger/Logger.h/16ed4f7f357fda1c5edc4479ef99d0a4.html">util::logger::Logger::log(unsigned char, util::logger::Level, char const*, ...)</a>>
+
+       2148a:	e7e7      	b.n	2145c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xe0>
+
+       2148c:	7830      	ldrb	r0, [r6, #0]
+
+       2148e:	4652      	mov	r2, sl
+
+       21490:	2102      	movs	r1, #2
+
+       21492:	f7ff fcd7 	bl	20e44 <<a href="../../../../../../../libs/bsw/util/include/util/logger/Logger.h/16ed4f7f357fda1c5edc4479ef99d0a4.html">util::logger::Logger::log(unsigned char, util::logger::Level, char const*, ...)</a>>
+
+       21496:	e7e1      	b.n	2145c <<a href="./e70a05015f9b24aacbe90896d589f96b.html">ethernet::RxBuffers::readFrame(netif*&)</a>+0xe0>
+
+       21498:	1fff6ae4 	.word	0x1fff6ae4
+
+       2149c:	1ffe012b 	.word	0x1ffe012b
+
+       214a0:	000299b0 	.word	0x000299b0
+
+       214a4:	000299c0 	.word	0x000299c0
+
+       214a8:	000299d0 	.word	0x000299d0
+
+    </pre>
+
+    
+    <pre><a href="./5f47fadeae1acd540b8b74806e9c9ac9.html">ethernet::RxBuffers::interrupt() (216)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 400</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 2,592</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    400
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    2,592
+                    
+                    
+                </td>
+                <td class="col_size">136</td>
+                <td><a href="../../../../../../../libs/3rdparty/printf/src/printf/printf.c/aead89a8c09454d3b52c82329b9d6539.html" class="icon-function">out_rev_</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    360
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                112 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    2,456
+                    
+                    
+                </td>
+                <td class="col_size">656</td>
+                <td><a href="../../../../../../../libs/3rdparty/printf/src/printf/printf.c/ac6598d6032c1151c802f0c9a9979746.html" class="icon-function">print_integer</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    248
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                96 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    1,800
+                    
+                    
+                </td>
+                <td class="col_size">1,572</td>
+                <td><a href="../../../../../../../libs/3rdparty/printf/src/printf/printf.c/6d7d630ec5529648e33ae989eebb2cb7.html" class="icon-function">_vsnprintf</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    152
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    228
+                    
+                    
+                </td>
+                <td class="col_size">32</td>
+                <td><a href="../../../../../../../libs/3rdparty/printf/src/printf/printf.c/529535ce0d5bfecabb7841bebeaf251c.html" class="icon-function">vsnprintf_</a></td>
+            </tr>
+        
+            <tr>
+                <th>5</th>
+                <td class="col_size">
+                    
+                    136
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    196
+                    
+                    
+                </td>
+                <td class="col_size">52</td>
+                <td><a href="../../../../../../../executables/referenceApp/application/src/logger/logger.cpp/98866fb3d81ee8db78cbfd1e2dfd931d.html" class="icon-function">log_lwipInfo</a></td>
+            </tr>
+        
+            <tr>
+                <th>6</th>
+                <td class="col_size">
+                    
+                    120
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                8 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    144
+                    
+                    
+                </td>
+                <td class="col_size">84</td>
+                <td><a href="../../../../../../../libs/3rdparty/lwip/src/core/pbuf.c/10167fb6905f20490b0e8e5bdc4aa1e0.html" class="icon-function">pbuf_chain</a></td>
+            </tr>
+        
+            <tr>
+                <th>7</th>
+                <td class="col_size">
+                    
+                    112
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">60</td>
+                <td><a href="./e9027c95267edd2deb70bb81832e5bbd.html" class="icon-function">ethernet::RxBuffers::handleLastBuffer(pbuf*&amp;, pbuf*&amp;, pbuf*) const</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">96
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 96</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 564</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    96
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    564
+                    
+                    
+                </td>
+                <td class="col_size">304</td>
+                <td><a href="./e70a05015f9b24aacbe90896d589f96b.html" class="icon-function">ethernet::RxBuffers::readFrame(netif*&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    56
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    260
+                    
+                    
+                </td>
+                <td class="col_size">216</td>
+                <td><a href="./5f47fadeae1acd540b8b74806e9c9ac9.html" class="icon-function">ethernet::RxBuffers::interrupt()</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">44</td>
+                <td><a href="../EnetDriver.cpp/d73c6856ae94204df84a1e64d54fc496.html" class="icon-function">ethernet::EnetDriver::interruptGroup0()</a></td>
+            </tr>
+        
+        </tbody>
+        
+    </table>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

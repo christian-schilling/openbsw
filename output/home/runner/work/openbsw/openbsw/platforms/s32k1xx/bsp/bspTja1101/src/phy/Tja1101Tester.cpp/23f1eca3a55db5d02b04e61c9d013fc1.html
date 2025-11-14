@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../platforms.html">platforms</a></li>
+        
+        <li><a href="../../../../../../s32k1xx.html">s32k1xx</a></li>
+        
+        <li><a href="../../../../../bsp.html">bsp</a></li>
+        
+        <li><a href="../../../../bspTja1101.html">bspTja1101</a></li>
+        
+        <li><a href="../../../src.html">src</a></li>
+        
+        <li ><a href="../../phy.html">phy</a>
+            </li>
+
+        
+        <li class="active"><a href="../Tja1101Tester.cpp.html">Tja1101Tester.cpp</a>:21
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&amp;, unsigned char)</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x0001fc5c</td>
+                <td>
+    
+    
+</td>
+                <td>40 (static)</td>
+                <td>204</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>No Callers</th>
+                <td colspan="5">
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (8,
+                            <span title="sum of used bytes by all callees">
+                            Σ=460
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="../../../../../../../libs/bsw/util/src/util/format/SharedStringWriter.cpp/24de4bdafd640327a685592964dac867.html">util::format::SharedStringWriter::SharedStringWriter(util::stream::ISharedOutputStream&amp;) (24)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../Tja1101.cpp/fb235333df04917fed515c1327880076.html">enetphy::Tja1101::stop() (48)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/bsw/util/src/util/format/SharedStringWriter.cpp/75b447666d62ed8c6c384efa69c8d1d1.html">util::format::SharedStringWriter::~SharedStringWriter() (20)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../Tja1101.cpp/2ac1e3dfbe51be7094a3f0ff0a04757f.html">enetphy::Tja1101::start() (32)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/bsw/util/include/util/command/CommandContext.h/8c091e8e2108d680275eaeb483069924.html">unsigned char util::command::CommandContext::scanIntToken&lt;unsigned char&gt;() (216)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/bsw/util/src/util/command/CommandContext.cpp/af39a4065f86e9957b5727628c6f7577.html">util::command::CommandContext::checkEol() (36)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../Tja1101.cpp/d91488e634ca946c5320f24f8dee5bfd.html">enetphy::Tja1101::readMiimRegister(unsigned char, unsigned short&amp;) (24)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../../libs/bsw/util/src/util/format/StringWriter.cpp/97429f3089d9f361a2822ba86177689e.html">util::format::StringWriter::printf(char const*, ...) (60)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./43804bb57d30da2f58c54ae8f5a8bc79.html">enetphy::Tja1101Tester::Tja1101Tester(enetphy::Tja1101&amp;) (24)</a></pre>
+    
+
+    <pre>
+
+    enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char):
+
+       1fc5c:	b5f0      	push	{r4, r5, r6, r7, lr}
+
+       1fc5e:	b085      	sub	sp, #20
+
+       1fc60:	4605      	mov	r5, r0
+
+       1fc62:	4614      	mov	r4, r2
+
+       1fc64:	a802      	add	r0, sp, #8
+
+       1fc66:	460e      	mov	r6, r1
+
+       1fc68:	f7f5 fb10 	bl	1528c <<a href="../../../../../../../libs/bsw/util/src/util/format/SharedStringWriter.cpp/24de4bdafd640327a685592964dac867.html">util::format::SharedStringWriter::SharedStringWriter(util::stream::ISharedOutputStream&)</a>>
+
+       1fc6c:	2c03      	cmp	r4, #3
+
+       1fc6e:	d806      	bhi.n	1fc7e <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x22>
+
+       1fc70:	e8df f004 	tbb	[pc, r4]
+
+       1fc74:	020a122c 	.word	0x020a122c
+
+       1fc78:	68a8      	ldr	r0, [r5, #8]
+
+       1fc7a:	f7ff ffab 	bl	1fbd4 <<a href="../Tja1101.cpp/fb235333df04917fed515c1327880076.html">enetphy::Tja1101::stop()</a>>
+
+       1fc7e:	a802      	add	r0, sp, #8
+
+       1fc80:	f7f5 fb10 	bl	152a4 <<a href="../../../../../../../libs/bsw/util/src/util/format/SharedStringWriter.cpp/75b447666d62ed8c6c384efa69c8d1d1.html">util::format::SharedStringWriter::~SharedStringWriter()</a>>
+
+       1fc84:	b005      	add	sp, #20
+
+       1fc86:	bdf0      	pop	{r4, r5, r6, r7, pc}
+
+       1fc88:	68a8      	ldr	r0, [r5, #8]
+
+       1fc8a:	f7ff ffbb 	bl	1fc04 <<a href="../Tja1101.cpp/2ac1e3dfbe51be7094a3f0ff0a04757f.html">enetphy::Tja1101::start()</a>>
+
+       1fc8e:	a802      	add	r0, sp, #8
+
+       1fc90:	f7f5 fb08 	bl	152a4 <<a href="../../../../../../../libs/bsw/util/src/util/format/SharedStringWriter.cpp/75b447666d62ed8c6c384efa69c8d1d1.html">util::format::SharedStringWriter::~SharedStringWriter()</a>>
+
+       1fc94:	b005      	add	sp, #20
+
+       1fc96:	bdf0      	pop	{r4, r5, r6, r7, pc}
+
+       1fc98:	4630      	mov	r0, r6
+
+       1fc9a:	f7ef fb7f 	bl	f39c <<a href="../../../../../../../libs/bsw/util/include/util/command/CommandContext.h/8c091e8e2108d680275eaeb483069924.html">unsigned char util::command::CommandContext::scanIntToken<unsigned char>()</a>>
+
+       1fc9e:	4604      	mov	r4, r0
+
+       1fca0:	4630      	mov	r0, r6
+
+       1fca2:	f7f5 fbcb 	bl	1543c <<a href="../../../../../../../libs/bsw/util/src/util/command/CommandContext.cpp/af39a4065f86e9957b5727628c6f7577.html">util::command::CommandContext::checkEol()</a>>
+
+       1fca6:	2800      	cmp	r0, #0
+
+       1fca8:	d0e9      	beq.n	1fc7e <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x22>
+
+       1fcaa:	f10d 0206 	add.w	r2, sp, #6
+
+       1fcae:	4621      	mov	r1, r4
+
+       1fcb0:	2300      	movs	r3, #0
+
+       1fcb2:	68a8      	ldr	r0, [r5, #8]
+
+       1fcb4:	f8ad 3006 	strh.w	r3, [sp, #6]
+
+       1fcb8:	f7ff ffb4 	bl	1fc24 <<a href="../Tja1101.cpp/d91488e634ca946c5320f24f8dee5bfd.html">enetphy::Tja1101::readMiimRegister(unsigned char, unsigned short&)</a>>
+
+       1fcbc:	f8bd 3006 	ldrh.w	r3, [sp, #6]
+
+       1fcc0:	4914      	ldr	r1, [pc, #80]	; (1fd14 <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0xb8>)
+
+       1fcc2:	4622      	mov	r2, r4
+
+       1fcc4:	a802      	add	r0, sp, #8
+
+       1fcc6:	f7f5 f8d3 	bl	14e70 <<a href="../../../../../../../libs/bsw/util/src/util/format/StringWriter.cpp/97429f3089d9f361a2822ba86177689e.html">util::format::StringWriter::printf(char const*, ...)</a>>
+
+       1fcca:	e7d8      	b.n	1fc7e <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x22>
+
+       1fccc:	4a12      	ldr	r2, [pc, #72]	; (1fd18 <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0xbc>)
+
+       1fcce:	7816      	ldrb	r6, [r2, #0]
+
+       1fcd0:	2300      	movs	r3, #0
+
+       1fcd2:	f8ad 3006 	strh.w	r3, [sp, #6]
+
+       1fcd6:	2e00      	cmp	r6, #0
+
+       1fcd8:	d0d1      	beq.n	1fc7e <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x22>
+
+       1fcda:	4c10      	ldr	r4, [pc, #64]	; (1fd1c <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0xc0>)
+
+       1fcdc:	4f10      	ldr	r7, [pc, #64]	; (1fd20 <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0xc4>)
+
+       1fcde:	4426      	add	r6, r4
+
+       1fce0:	e007      	b.n	1fcf2 <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x96>
+
+       1fce2:	f8bd 3006 	ldrh.w	r3, [sp, #6]
+
+       1fce6:	f814 2c01 	ldrb.w	r2, [r4, #-1]
+
+       1fcea:	f7f5 f8c1 	bl	14e70 <<a href="../../../../../../../libs/bsw/util/src/util/format/StringWriter.cpp/97429f3089d9f361a2822ba86177689e.html">util::format::StringWriter::printf(char const*, ...)</a>>
+
+       1fcee:	42b4      	cmp	r4, r6
+
+       1fcf0:	d0c5      	beq.n	1fc7e <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x22>
+
+       1fcf2:	f814 1b01 	ldrb.w	r1, [r4], #1
+
+       1fcf6:	68a8      	ldr	r0, [r5, #8]
+
+       1fcf8:	f10d 0206 	add.w	r2, sp, #6
+
+       1fcfc:	f7ff ff92 	bl	1fc24 <<a href="../Tja1101.cpp/d91488e634ca946c5320f24f8dee5bfd.html">enetphy::Tja1101::readMiimRegister(unsigned char, unsigned short&)</a>>
+
+       1fd00:	4603      	mov	r3, r0
+
+       1fd02:	4639      	mov	r1, r7
+
+       1fd04:	a802      	add	r0, sp, #8
+
+       1fd06:	2b00      	cmp	r3, #0
+
+       1fd08:	d1eb      	bne.n	1fce2 <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x86>
+
+       1fd0a:	4906      	ldr	r1, [pc, #24]	; (1fd24 <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0xc8>)
+
+       1fd0c:	a802      	add	r0, sp, #8
+
+       1fd0e:	f7f5 f8af 	bl	14e70 <<a href="../../../../../../../libs/bsw/util/src/util/format/StringWriter.cpp/97429f3089d9f361a2822ba86177689e.html">util::format::StringWriter::printf(char const*, ...)</a>>
+
+       1fd12:	e7b4      	b.n	1fc7e <<a href="./23f1eca3a55db5d02b04e61c9d013fc1.html">enetphy::Tja1101Tester::executeCommand(util::command::CommandContext&, unsigned char)</a>+0x22>
+
+       1fd14:	00029514 	.word	0x00029514
+
+       1fd18:	000294ed 	.word	0x000294ed
+
+       1fd1c:	000294dc 	.word	0x000294dc
+
+       1fd20:	000294f0 	.word	0x000294f0
+
+       1fd24:	00029508 	.word	0x00029508
+
+    </pre>
+
+    
+    <pre><a href="../../mdio/MdioTja1101.cpp/ef01c613d567ec78544a6e1750175912.html">enetphy::MdioTja1101::transfer(unsigned long*, bool) const (464)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 284</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 1,228</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    284
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    1,228
+                    
+                    
+                </td>
+                <td class="col_size">420</td>
+                <td><a href="../../../../../../../libs/bsw/util/src/util/format/PrintfFormatter.cpp/4aadf02dd7dcf4f301c4d79e66b22e38.html" class="icon-function">util::format::PrintfFormatter::formatIntDatatype(char*, util::format::ParamInfo const&amp;, util::format::ParamVariant const&amp;, signed char&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    260
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                96 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    808
+                    
+                    
+                </td>
+                <td class="col_size">420</td>
+                <td><a href="../../../../../../../libs/bsw/util/src/util/format/PrintfFormatter.cpp/a55fbe8aa7abfc498675bef9f2e3bbf3.html" class="icon-function">util::format::PrintfFormatter::formatIntParam(util::format::ParamInfo const&amp;, util::format::ParamVariant const&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    164
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    388
+                    
+                    
+                </td>
+                <td class="col_size">136</td>
+                <td><a href="../../../../../../../libs/bsw/util/src/util/format/PrintfFormatter.cpp/1fd658a3cadf7a6a384e16e0b788aef4.html" class="icon-function">util::format::PrintfFormatter::formatParam(util::format::ParamInfo const&amp;, util::format::ParamVariant const&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    140
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                56 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    252
+                    
+                    
+                </td>
+                <td class="col_size">192</td>
+                <td><a href="../../../../../../../libs/bsw/util/src/util/format/PrintfFormatter.cpp/54d7602074146c5884ce6c1e97059b8b.html" class="icon-function">util::format::PrintfFormatter::format(char const*, util::format::IPrintfArgumentReader&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>5</th>
+                <td class="col_size">
+                    
+                    84
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                44 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">60</td>
+                <td><a href="../../../../../../../libs/bsw/util/src/util/format/StringWriter.cpp/97429f3089d9f361a2822ba86177689e.html" class="icon-function">util::format::StringWriter::printf(char const*, ...)</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">40
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+            <p>No callers for this function.</p>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

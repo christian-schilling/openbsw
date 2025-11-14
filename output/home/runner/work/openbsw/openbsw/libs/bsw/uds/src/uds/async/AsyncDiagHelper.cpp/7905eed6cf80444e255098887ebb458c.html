@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../../../bsw.html">bsw</a></li>
+        
+        <li><a href="../../../../../uds.html">uds</a></li>
+        
+        <li><a href="../../../../src.html">src</a></li>
+        
+        <li><a href="../../../uds.html">uds</a></li>
+        
+        <li ><a href="../../async.html">async</a>
+            </li>
+
+        
+        <li class="active"><a href="../AsyncDiagHelper.cpp.html">AsyncDiagHelper.cpp</a>:27
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&amp;, unsigned char const*, unsigned short)</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x0001725c</td>
+                <td>
+    
+    
+</td>
+                <td>40 (static)</td>
+                <td>168</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>No Callers</th>
+                <td colspan="5">
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    No Callees
+                    
+                </th>
+                <td colspan="5">
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./801b6df4f9ea52968944f4952dabef6c.html">uds::AsyncDiagHelper::getDiagContext() const (8)</a></pre>
+    
+
+    <pre>
+
+    uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short):
+
+       1725c:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
+
+       17260:	69c4      	ldr	r4, [r0, #28]
+
+    _ZNK3etl5ipool4fullEv():
+
+       17262:	68a0      	ldr	r0, [r4, #8]
+
+       17264:	6966      	ldr	r6, [r4, #20]
+
+    uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short):
+
+       17266:	4286      	cmp	r6, r0
+
+       17268:	b083      	sub	sp, #12
+
+       1726a:	d03e      	beq.n	172ea <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x8e>
+
+       1726c:	461f      	mov	r7, r3
+
+    _ZN3etl5ipool8allocateIN3uds16IAsyncDiagHelper13StoredRequestEEEPT_v():
+
+       1726e:	6923      	ldr	r3, [r4, #16]
+
+       17270:	2b13      	cmp	r3, #19
+
+       17272:	4689      	mov	r9, r1
+
+       17274:	4690      	mov	r8, r2
+
+       17276:	d80a      	bhi.n	1728e <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x32>
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       17278:	4a1f      	ldr	r2, [pc, #124]	; (172f8 <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x9c>)
+
+    _ZN3etl5ipool8allocateIN3uds16IAsyncDiagHelper13StoredRequestEEEPT_v():
+
+       1727a:	4b20      	ldr	r3, [pc, #128]	; (172fc <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0xa0>)
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       1727c:	9200      	str	r2, [sp, #0]
+
+       1727e:	f44f 72a0 	mov.w	r2, #320	; 0x140
+
+    _ZN3etl5ipool8allocateIN3uds16IAsyncDiagHelper13StoredRequestEEEPT_v():
+
+       17282:	4668      	mov	r0, sp
+
+       17284:	681b      	ldr	r3, [r3, #0]
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       17286:	9201      	str	r2, [sp, #4]
+
+    _ZN3etl5ipool8allocateIN3uds16IAsyncDiagHelper13StoredRequestEEEPT_v():
+
+       17288:	4798      	blx	r3
+
+    _ZN3etl5ipool13allocate_itemEv():
+
+       1728a:	68a0      	ldr	r0, [r4, #8]
+
+       1728c:	6966      	ldr	r6, [r4, #20]
+
+       1728e:	42b0      	cmp	r0, r6
+
+       17290:	d21e      	bcs.n	172d0 <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x74>
+
+       17292:	68e3      	ldr	r3, [r4, #12]
+
+       17294:	42b3      	cmp	r3, r6
+
+       17296:	d209      	bcs.n	172ac <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x50>
+
+       17298:	f8d4 c010 	ldr.w	ip, [r4, #16]
+
+       1729c:	6825      	ldr	r5, [r4, #0]
+
+       1729e:	fb0c f103 	mul.w	r1, ip, r3
+
+       172a2:	186a      	adds	r2, r5, r1
+
+       172a4:	3301      	adds	r3, #1
+
+       172a6:	4462      	add	r2, ip
+
+       172a8:	506a      	str	r2, [r5, r1]
+
+       172aa:	60e3      	str	r3, [r4, #12]
+
+       172ac:	1c45      	adds	r5, r0, #1
+
+       172ae:	42b5      	cmp	r5, r6
+
+       172b0:	6860      	ldr	r0, [r4, #4]
+
+       172b2:	60a5      	str	r5, [r4, #8]
+
+       172b4:	d21d      	bcs.n	172f2 <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x96>
+
+       172b6:	6803      	ldr	r3, [r0, #0]
+
+       172b8:	6063      	str	r3, [r4, #4]
+
+    _ZN3etl18bidirectional_linkILj0EEC4Ev():
+
+       172ba:	2300      	movs	r3, #0
+
+       172bc:	6003      	str	r3, [r0, #0]
+
+       172be:	6043      	str	r3, [r0, #4]
+
+    _ZN3uds16IAsyncDiagHelper13StoredRequestC4ERNS_22IncomingDiagConnectionEPKht():
+
+       172c0:	f8c0 9008 	str.w	r9, [r0, #8]
+
+       172c4:	f8c0 800c 	str.w	r8, [r0, #12]
+
+       172c8:	8207      	strh	r7, [r0, #16]
+
+    uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short):
+
+       172ca:	b003      	add	sp, #12
+
+       172cc:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       172d0:	490b      	ldr	r1, [pc, #44]	; (17300 <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0xa4>)
+
+    _ZN3etl5ipool13allocate_itemEv():
+
+       172d2:	4b0a      	ldr	r3, [pc, #40]	; (172fc <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0xa0>)
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       172d4:	f240 224b 	movw	r2, #587	; 0x24b
+
+    _ZN3etl5ipool13allocate_itemEv():
+
+       172d8:	4668      	mov	r0, sp
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       172da:	e9cd 1200 	strd	r1, r2, [sp]
+
+    _ZN3etl5ipool13allocate_itemEv():
+
+       172de:	681b      	ldr	r3, [r3, #0]
+
+       172e0:	4798      	blx	r3
+
+       172e2:	2000      	movs	r0, #0
+
+    uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short):
+
+       172e4:	b003      	add	sp, #12
+
+       172e6:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+
+       172ea:	2000      	movs	r0, #0
+
+       172ec:	b003      	add	sp, #12
+
+       172ee:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+
+    _ZN3etl5ipool13allocate_itemEv():
+
+       172f2:	2300      	movs	r3, #0
+
+       172f4:	e7e0      	b.n	172b8 <<a href="./7905eed6cf80444e255098887ebb458c.html">uds::AsyncDiagHelper::allocateRequest(uds::IncomingDiagConnection&, unsigned char const*, unsigned short)</a>+0x5c>
+
+       172f6:	bf00      	nop
+
+       172f8:	00024308 	.word	0x00024308
+
+       172fc:	1ffe0120 	.word	0x1ffe0120
+
+       17300:	00024310 	.word	0x00024310
+
+    </pre>
+
+    
+    <pre><a href="./e66c2d6d81d78259be4aaa8c79a47bcb.html">uds::AsyncDiagHelper::processAndReleaseRequest(uds::AbstractDiagJob&amp;, uds::IAsyncDiagHelper::StoredRequest&amp;) (188)</a></pre>
+    
+
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../../bsw.html">bsw</a></li>
+        
+        <li><a href="../../../../stdioConsoleInput.html">stdioConsoleInput</a></li>
+        
+        <li><a href="../../../src.html">src</a></li>
+        
+        <li ><a href="../../console.html">console</a>
+            </li>
+
+        
+        <li class="active"><a href="../StdioConsoleInput.cpp.html">StdioConsoleInput.cpp</a>:121
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">console::StdioConsoleInput::run()</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x0001253c</td>
+                <td>
+    <span class="label label-success">x-module</span>
+    
+</td>
+                <td>32 (static)</td>
+                <td>476</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="../../../../../../executables/referenceApp/application/src/console/console.cpp/ddb280e29837a3ba9bb6cede53fbb24c.html">console::run() (24)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (2,
+                            <span title="sum of used bytes by all callees">
+                            Σ=24
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/bc118f5aee818c2804e0f8698afb9326.html">getByteFromStdin (20)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout (4)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./cdb56485aa409bec22b58dc161eec9b3.html">console::StdioConsoleInput::init(etl::delegate&lt;void (util::stream::ISharedOutputStream&amp;, etl::ibasic_string&lt;char&gt; const&amp;, etl::delegate&lt;void ()&gt; const&amp;)&gt; const&amp;) (12)</a></pre>
+    
+
+    <pre>
+
+    console::StdioConsoleInput::run():
+
+       1253c:	b570      	push	{r4, r5, r6, lr}
+
+       1253e:	f890 50d4 	ldrb.w	r5, [r0, #212]	; 0xd4
+
+       12542:	b084      	sub	sp, #16
+
+       12544:	b10d      	cbz	r5, 1254a <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xe>
+
+       12546:	b004      	add	sp, #16
+
+       12548:	bd70      	pop	{r4, r5, r6, pc}
+
+       1254a:	4604      	mov	r4, r0
+
+       1254c:	f00e fa22 	bl	20994 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/bc118f5aee818c2804e0f8698afb9326.html">getByteFromStdin</a>>
+
+    getline():
+
+       12550:	f010 00ff 	ands.w	r0, r0, #255	; 0xff
+
+       12554:	d0f7      	beq.n	12546 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xa>
+
+       12556:	6ba2      	ldr	r2, [r4, #56]	; 0x38
+
+       12558:	6be3      	ldr	r3, [r4, #60]	; 0x3c
+
+       1255a:	429a      	cmp	r2, r3
+
+       1255c:	f000 808c 	beq.w	12678 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x13c>
+
+       12560:	f1a0 0320 	sub.w	r3, r0, #32
+
+       12564:	2b5e      	cmp	r3, #94	; 0x5e
+
+       12566:	d974      	bls.n	12652 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x116>
+
+       12568:	281b      	cmp	r0, #27
+
+       1256a:	f000 80b0 	beq.w	126ce <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x192>
+
+       1256e:	2808      	cmp	r0, #8
+
+       12570:	d023      	beq.n	125ba <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x7e>
+
+       12572:	287f      	cmp	r0, #127	; 0x7f
+
+       12574:	d021      	beq.n	125ba <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x7e>
+
+       12576:	280d      	cmp	r0, #13
+
+       12578:	d001      	beq.n	1257e <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x42>
+
+       1257a:	280a      	cmp	r0, #10
+
+       1257c:	d1e3      	bne.n	12546 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xa>
+
+    _ZNK3etl11string_base5emptyEv():
+
+       1257e:	6ba2      	ldr	r2, [r4, #56]	; 0x38
+
+    console::StdioConsoleInput::run():
+
+       12580:	200d      	movs	r0, #13
+
+       12582:	2a00      	cmp	r2, #0
+
+       12584:	d057      	beq.n	12636 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xfa>
+
+    printNewline():
+
+       12586:	f00e fa03 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+       1258a:	200a      	movs	r0, #10
+
+       1258c:	f00e fa00 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+    _ZN3etl8delegateIFvvEE18invocation_elementC4EPvPFvS4_E():
+
+       12590:	4b5e      	ldr	r3, [pc, #376]	; (1270c <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x1d0>)
+
+    _ZNK3etl8delegateIFvRN4util6stream19ISharedOutputStreamERKNS_13ibasic_stringIcEERKNS0_IFvvEEEEE8is_validEv():
+
+       12592:	f8d4 50d0 	ldr.w	r5, [r4, #208]	; 0xd0
+
+    console::StdioConsoleInput::run():
+
+       12596:	2201      	movs	r2, #1
+
+    _ZN3etl8delegateIFvvEE18invocation_elementC4EPvPFvS4_E():
+
+       12598:	e9cd 4300 	strd	r4, r3, [sp]
+
+    console::StdioConsoleInput::run():
+
+       1259c:	f884 20d4 	strb.w	r2, [r4, #212]	; 0xd4
+
+    _ZNK3etl8delegateIFvRN4util6stream19ISharedOutputStreamERKNS_13ibasic_stringIcEERKNS0_IFvvEEEEEclIJRNS2_24TaggedSharedOutputStreamERNS_6stringILj128EEESA_EEEvDpOT_():
+
+       125a0:	2d00      	cmp	r5, #0
+
+       125a2:	f000 8088 	beq.w	126b6 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x17a>
+
+       125a6:	f8d4 00cc 	ldr.w	r0, [r4, #204]	; 0xcc
+
+       125aa:	466b      	mov	r3, sp
+
+       125ac:	f104 0238 	add.w	r2, r4, #56	; 0x38
+
+       125b0:	f104 0110 	add.w	r1, r4, #16
+
+       125b4:	47a8      	blx	r5
+
+    console::StdioConsoleInput::run():
+
+       125b6:	b004      	add	sp, #16
+
+       125b8:	bd70      	pop	{r4, r5, r6, pc}
+
+    getline():
+
+       125ba:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+
+       125bc:	2b00      	cmp	r3, #0
+
+       125be:	d0c2      	beq.n	12546 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xa>
+
+       125c0:	2008      	movs	r0, #8
+
+       125c2:	f00e f9e5 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+       125c6:	2020      	movs	r0, #32
+
+       125c8:	f00e f9e2 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+       125cc:	2008      	movs	r0, #8
+
+       125ce:	f00e f9df 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+    _ZNK3etl11string_base6lengthEv():
+
+       125d2:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+
+    _ZN3etl13ibasic_stringIcE6resizeEjc():
+
+       125d4:	6be2      	ldr	r2, [r4, #60]	; 0x3c
+
+    getline():
+
+       125d6:	1e59      	subs	r1, r3, #1
+
+    _ZN3etl13ibasic_stringIcE6resizeEjc():
+
+       125d8:	4291      	cmp	r1, r2
+
+       125da:	d905      	bls.n	125e8 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xac>
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       125dc:	f894 0040 	ldrb.w	r0, [r4, #64]	; 0x40
+
+       125e0:	f040 0001 	orr.w	r0, r0, #1
+
+       125e4:	f884 0040 	strb.w	r0, [r4, #64]	; 0x40
+
+       125e8:	4291      	cmp	r1, r2
+
+       125ea:	bf28      	it	cs
+
+       125ec:	4611      	movcs	r1, r2
+
+    _ZN3etl13ibasic_stringIcE6resizeEjc():
+
+       125ee:	428b      	cmp	r3, r1
+
+       125f0:	6c62      	ldr	r2, [r4, #68]	; 0x44
+
+       125f2:	f080 8088 	bcs.w	12706 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x1ca>
+
+       125f6:	4413      	add	r3, r2
+
+       125f8:	440a      	add	r2, r1
+
+    _ZN3etl4fillIPccEEvT_S2_RKT0_():
+
+       125fa:	4293      	cmp	r3, r2
+
+       125fc:	d006      	beq.n	1260c <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xd0>
+
+       125fe:	2000      	movs	r0, #0
+
+       12600:	f803 0b01 	strb.w	r0, [r3], #1
+
+       12604:	429a      	cmp	r2, r3
+
+       12606:	d1fb      	bne.n	12600 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xc4>
+
+    _ZN3etl13ibasic_stringIcE6resizeEjc():
+
+       12608:	6c62      	ldr	r2, [r4, #68]	; 0x44
+
+       1260a:	440a      	add	r2, r1
+
+       1260c:	2000      	movs	r0, #0
+
+       1260e:	63a1      	str	r1, [r4, #56]	; 0x38
+
+       12610:	7010      	strb	r0, [r2, #0]
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       12612:	f894 3040 	ldrb.w	r3, [r4, #64]	; 0x40
+
+       12616:	079b      	lsls	r3, r3, #30
+
+       12618:	d595      	bpl.n	12546 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xa>
+
+       1261a:	6ba2      	ldr	r2, [r4, #56]	; 0x38
+
+       1261c:	6c61      	ldr	r1, [r4, #68]	; 0x44
+
+       1261e:	6be4      	ldr	r4, [r4, #60]	; 0x3c
+
+    _ZN3etl12memory_clearEPVcj():
+
+       12620:	4294      	cmp	r4, r2
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       12622:	eb01 0302 	add.w	r3, r1, r2
+
+    _ZN3etl12memory_clearEPVcj():
+
+       12626:	d08e      	beq.n	12546 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xa>
+
+       12628:	4421      	add	r1, r4
+
+       1262a:	461a      	mov	r2, r3
+
+       1262c:	3301      	adds	r3, #1
+
+       1262e:	428b      	cmp	r3, r1
+
+       12630:	7010      	strb	r0, [r2, #0]
+
+       12632:	d1fa      	bne.n	1262a <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xee>
+
+       12634:	e787      	b.n	12546 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xa>
+
+    console::StdioConsoleInput::run():
+
+       12636:	f00e f9ab 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+    printNewline():
+
+       1263a:	200a      	movs	r0, #10
+
+       1263c:	f00e f9a8 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+    console::StdioConsoleInput::run():
+
+       12640:	203e      	movs	r0, #62	; 0x3e
+
+    printPrompt():
+
+       12642:	f00e f9a5 	bl	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+       12646:	2020      	movs	r0, #32
+
+    console::StdioConsoleInput::run():
+
+       12648:	b004      	add	sp, #16
+
+       1264a:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+
+    printPrompt():
+
+       1264e:	f00e b99f 	b.w	20990 <<a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html">putByteToStdout</a>>
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       12652:	6be2      	ldr	r2, [r4, #60]	; 0x3c
+
+    _ZN3etl13ibasic_stringIcE6appendEjc():
+
+       12654:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       12656:	429a      	cmp	r2, r3
+
+       12658:	f894 2040 	ldrb.w	r2, [r4, #64]	; 0x40
+
+       1265c:	d026      	beq.n	126ac <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x170>
+
+    _ZN3etl6fill_nIPcjcEET_S2_T0_RKT1_():
+
+       1265e:	6c61      	ldr	r1, [r4, #68]	; 0x44
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       12660:	f022 0201 	bic.w	r2, r2, #1
+
+       12664:	f884 2040 	strb.w	r2, [r4, #64]	; 0x40
+
+    _ZN3etl6fill_nIPcjcEET_S2_T0_RKT1_():
+
+       12668:	54c8      	strb	r0, [r1, r3]
+
+    _ZN3etl13ibasic_stringIcE6appendEjc():
+
+       1266a:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+
+       1266c:	3301      	adds	r3, #1
+
+       1266e:	6c62      	ldr	r2, [r4, #68]	; 0x44
+
+       12670:	63a3      	str	r3, [r4, #56]	; 0x38
+
+       12672:	2100      	movs	r1, #0
+
+       12674:	54d1      	strb	r1, [r2, r3]
+
+    getline():
+
+       12676:	e7e7      	b.n	12648 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x10c>
+
+    _ZN3etl13ibasic_stringIcE10initialiseEv():
+
+       12678:	6c63      	ldr	r3, [r4, #68]	; 0x44
+
+       1267a:	63a5      	str	r5, [r4, #56]	; 0x38
+
+       1267c:	701d      	strb	r5, [r3, #0]
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       1267e:	f894 3040 	ldrb.w	r3, [r4, #64]	; 0x40
+
+       12682:	f023 0201 	bic.w	r2, r3, #1
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       12686:	0799      	lsls	r1, r3, #30
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       12688:	f884 2040 	strb.w	r2, [r4, #64]	; 0x40
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       1268c:	f57f af68 	bpl.w	12560 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x24>
+
+       12690:	6ba2      	ldr	r2, [r4, #56]	; 0x38
+
+       12692:	6be6      	ldr	r6, [r4, #60]	; 0x3c
+
+       12694:	6c61      	ldr	r1, [r4, #68]	; 0x44
+
+    _ZN3etl12memory_clearEPVcj():
+
+       12696:	4296      	cmp	r6, r2
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       12698:	eb01 0302 	add.w	r3, r1, r2
+
+    _ZN3etl12memory_clearEPVcj():
+
+       1269c:	f43f af60 	beq.w	12560 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x24>
+
+       126a0:	4431      	add	r1, r6
+
+       126a2:	701d      	strb	r5, [r3, #0]
+
+       126a4:	3301      	adds	r3, #1
+
+       126a6:	428b      	cmp	r3, r1
+
+       126a8:	d1fb      	bne.n	126a2 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x166>
+
+       126aa:	e759      	b.n	12560 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x24>
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       126ac:	f042 0201 	orr.w	r2, r2, #1
+
+       126b0:	f884 2040 	strb.w	r2, [r4, #64]	; 0x40
+
+    _ZN3etl6fill_nIPcjcEET_S2_T0_RKT1_():
+
+       126b4:	e7db      	b.n	1266e <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x132>
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       126b6:	4916      	ldr	r1, [pc, #88]	; (12710 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x1d4>)
+
+    _ZNK3etl8delegateIFvRN4util6stream19ISharedOutputStreamERKNS_13ibasic_stringIcEERKNS0_IFvvEEEEEclIJRNS2_24TaggedSharedOutputStreamERNS_6stringILj128EEESA_EEEvDpOT_():
+
+       126b8:	4b16      	ldr	r3, [pc, #88]	; (12714 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x1d8>)
+
+    _ZN3etl9exceptionC4EPKcS2_i():
+
+       126ba:	f44f 72bf 	mov.w	r2, #382	; 0x17e
+
+       126be:	e9cd 1202 	strd	r1, r2, [sp, #8]
+
+    _ZNK3etl8delegateIFvRN4util6stream19ISharedOutputStreamERKNS_13ibasic_stringIcEERKNS0_IFvvEEEEEclIJRNS2_24TaggedSharedOutputStreamERNS_6stringILj128EEESA_EEEvDpOT_():
+
+       126c2:	681b      	ldr	r3, [r3, #0]
+
+       126c4:	a802      	add	r0, sp, #8
+
+       126c6:	4798      	blx	r3
+
+       126c8:	f8d4 50d0 	ldr.w	r5, [r4, #208]	; 0xd0
+
+       126cc:	e76b      	b.n	125a6 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x6a>
+
+    _ZN3etl13ibasic_stringIcE10initialiseEv():
+
+       126ce:	6c63      	ldr	r3, [r4, #68]	; 0x44
+
+       126d0:	2100      	movs	r1, #0
+
+       126d2:	63a1      	str	r1, [r4, #56]	; 0x38
+
+       126d4:	7019      	strb	r1, [r3, #0]
+
+    _ZN3etl5flagsIhLh255EE3setILh1EEERS1_b():
+
+       126d6:	f894 3040 	ldrb.w	r3, [r4, #64]	; 0x40
+
+       126da:	f023 0201 	bic.w	r2, r3, #1
+
+       126de:	f884 2040 	strb.w	r2, [r4, #64]	; 0x40
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       126e2:	079a      	lsls	r2, r3, #30
+
+       126e4:	f57f af4b 	bpl.w	1257e <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x42>
+
+       126e8:	6ba2      	ldr	r2, [r4, #56]	; 0x38
+
+       126ea:	6be5      	ldr	r5, [r4, #60]	; 0x3c
+
+       126ec:	6c60      	ldr	r0, [r4, #68]	; 0x44
+
+    _ZN3etl12memory_clearEPVcj():
+
+       126ee:	4295      	cmp	r5, r2
+
+    _ZN3etl13ibasic_stringIcE7cleanupEv():
+
+       126f0:	eb00 0302 	add.w	r3, r0, r2
+
+    _ZN3etl12memory_clearEPVcj():
+
+       126f4:	f43f af44 	beq.w	12580 <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x44>
+
+       126f8:	4428      	add	r0, r5
+
+       126fa:	461a      	mov	r2, r3
+
+       126fc:	3301      	adds	r3, #1
+
+       126fe:	4283      	cmp	r3, r0
+
+       12700:	7011      	strb	r1, [r2, #0]
+
+       12702:	d1fa      	bne.n	126fa <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x1be>
+
+       12704:	e73b      	b.n	1257e <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0x42>
+
+    _ZN3etl13ibasic_stringIcE6resizeEjc():
+
+       12706:	440a      	add	r2, r1
+
+       12708:	e780      	b.n	1260c <<a href="./eef7c492925a836588c8e8540506e9fb.html">console::StdioConsoleInput::run()</a>+0xd0>
+
+       1270a:	bf00      	nop
+
+       1270c:	00012479 	.word	0x00012479
+
+       12710:	00023a28 	.word	0x00023a28
+
+       12714:	1ffe0120 	.word	0x1ffe0120
+
+    </pre>
+
+    
+    <pre><a href="../../../../../3rdparty/freeRtos/src/tasks.c/a2700cf07d00ca1673883a9bd6c17b5a.html">prvAddCurrentTaskToDelayedList (168)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 72</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 364</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    72
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                8 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    364
+                    
+                    
+                </td>
+                <td class="col_size">232</td>
+                <td><a href="../../../../../../platforms/s32k1xx/bsp/bspIo/src/io/Io.cpp/4d2b35f004d57c9527b81a1790cf7eec.html" class="icon-function">bios::Io::setConfiguration(unsigned short, bios::Io::PinConfiguration const&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    132
+                    
+                    
+                </td>
+                <td class="col_size">24</td>
+                <td><a href="../../../../../../platforms/s32k1xx/bsp/bspIo/src/io/Io.cpp/cec6484b130ee51f1f05d1885b5b84f0.html" class="icon-function">bios::Io::setDefaultConfiguration(unsigned short)</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    64
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                8 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    108
+                    
+                    
+                </td>
+                <td class="col_size">60</td>
+                <td><a href="../../../../../../platforms/s32k1xx/bsp/bspSci/src/SciDevice.cpp/e6e261f1047bc6cb2d1ba76aaec8c3a7.html" class="icon-function">sciInit</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    56
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    48
+                    
+                    
+                </td>
+                <td class="col_size">44</td>
+                <td><a href="../../../../../bsp/bspCharInputOutput/src/charInputOutput/charIoSerial.cpp/7c143691f161d442db34feae6e5c35e5.html" class="icon-function">SerialLogger_putc</a></td>
+            </tr>
+        
+            <tr>
+                <th>5</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">4</td>
+                <td><a href="../../../../../../executables/referenceApp/platforms/s32k148evb/bspConfiguration/src/bsp/stdIo/stdIo.cpp/b4518472f943892ec1c4fd3c765433f9.html" class="icon-function">putByteToStdout</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">40
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 40</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 560</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    40
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                32 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    560
+                    
+                    
+                </td>
+                <td class="col_size">476</td>
+                <td><a href="./eef7c492925a836588c8e8540506e9fb.html" class="icon-function">console::StdioConsoleInput::run()</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    84
+                    
+                    
+                </td>
+                <td class="col_size">24</td>
+                <td><a href="../../../../../../executables/referenceApp/application/src/console/console.cpp/ddb280e29837a3ba9bb6cede53fbb24c.html" class="icon-function">console::run()</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                </td>
+                <td class="col_size">
+            
+                8 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">60</td>
+                <td><a href="../../../../../../executables/referenceApp/application/src/app/app.cpp/ce40fba5641de4644b68d678cfee651d.html" class="icon-function">app::IdleHandler::execute()</a></td>
+            </tr>
+        
+        </tbody>
+        
+    </table>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

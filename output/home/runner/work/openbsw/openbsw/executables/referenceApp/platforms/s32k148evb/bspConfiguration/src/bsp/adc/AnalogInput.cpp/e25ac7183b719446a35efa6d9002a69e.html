@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../../executables.html">executables</a></li>
+        
+        <li><a href="../../../../../../../../referenceApp.html">referenceApp</a></li>
+        
+        <li><a href="../../../../../../../platforms.html">platforms</a></li>
+        
+        <li><a href="../../../../../../s32k148evb.html">s32k148evb</a></li>
+        
+        <li><a href="../../../../../bspConfiguration.html">bspConfiguration</a></li>
+        
+        <li><a href="../../../../src.html">src</a></li>
+        
+        <li><a href="../../../bsp.html">bsp</a></li>
+        
+        <li ><a href="../../adc.html">adc</a>
+            </li>
+
+        
+        <li class="active"><a href="../AnalogInput.cpp.html">AnalogInput.cpp</a>:26
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">bios::AnalogInput::init()</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x000204c0</td>
+                <td>
+    <span class="label label-success">x-module</span>
+    
+</td>
+                <td>24 (static)</td>
+                <td>272</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="../../../../../main/src/lifecycle/StaticBsp.cpp/bbaf0c02e73cc075f1271c2d33d1014c.html">StaticBsp::hwInit() (240)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (1,
+                            <span title="sum of used bytes by all callees">
+                            Σ=24
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="../../../../../../../../../platforms/s32k1xx/bsp/bspIo/src/io/Io.cpp/cec6484b130ee51f1f05d1885b5b84f0.html">bios::Io::setDefaultConfiguration(unsigned short) (24)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./94c0bf5033fc16d8f921762ff7992503.html">bios::AnalogInput::AnalogInput() (16)</a></pre>
+    
+
+    <pre>
+
+    bios::AnalogInput::init():
+
+       204c0:	b570      	push	{r4, r5, r6, lr}
+
+       204c2:	4b3d      	ldr	r3, [pc, #244]	; (205b8 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xf8>)
+
+    _ZN4bios30AnalogInputScaleImplementationImtE4initEtPKPFmtE():
+
+       204c4:	4a3d      	ldr	r2, [pc, #244]	; (205bc <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xfc>)
+
+       204c6:	4c3e      	ldr	r4, [pc, #248]	; (205c0 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x100>)
+
+       204c8:	4d3e      	ldr	r5, [pc, #248]	; (205c4 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x104>)
+
+       204ca:	6025      	str	r5, [r4, #0]
+
+    bios::AnalogInput::init():
+
+       204cc:	2100      	movs	r1, #0
+
+    _ZN4bios30AnalogInputScaleImplementationImtE4initEtPKPFmtE():
+
+       204ce:	2004      	movs	r0, #4
+
+       204d0:	8010      	strh	r0, [r2, #0]
+
+    bios::AnalogInput::init():
+
+       204d2:	6199      	str	r1, [r3, #24]
+
+       204d4:	685a      	ldr	r2, [r3, #4]
+
+    _ZN4bios3AdcINS_15AdcInResolutionItLNS_12tAdcDataMaskE4095ELNS_18tAdcDataResolutionE0EEENS_21Adc12BitConfigurationELh16EE4initEv():
+
+       204d6:	4d3c      	ldr	r5, [pc, #240]	; (205c8 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x108>)
+
+    bios::AnalogInput::init():
+
+       204d8:	f422 5200 	bic.w	r2, r2, #8192	; 0x2000
+
+       204dc:	605a      	str	r2, [r3, #4]
+
+    _ZN4bios3AdcINS_15AdcInResolutionItLNS_12tAdcDataMaskE4095ELNS_18tAdcDataResolutionE0EEENS_21Adc12BitConfigurationELh16EE4initEv():
+
+       204de:	686a      	ldr	r2, [r5, #4]
+
+       204e0:	2329      	movs	r3, #41	; 0x29
+
+       204e2:	6410      	str	r0, [r2, #64]	; 0x40
+
+       204e4:	6453      	str	r3, [r2, #68]	; 0x44
+
+       204e6:	2040      	movs	r0, #64	; 0x40
+
+       204e8:	2330      	movs	r3, #48	; 0x30
+
+       204ea:	f8c2 1088 	str.w	r1, [r2, #136]	; 0x88
+
+       204ee:	f8c2 108c 	str.w	r1, [r2, #140]	; 0x8c
+
+       204f2:	f8c2 0098 	str.w	r0, [r2, #152]	; 0x98
+
+       204f6:	f8c2 109c 	str.w	r1, [r2, #156]	; 0x9c
+
+       204fa:	f8c2 10a0 	str.w	r1, [r2, #160]	; 0xa0
+
+       204fe:	f8c2 30a4 	str.w	r3, [r2, #164]	; 0xa4
+
+       20502:	2337      	movs	r3, #55	; 0x37
+
+       20504:	f8c2 30a8 	str.w	r3, [r2, #168]	; 0xa8
+
+    bios::AnalogInput::init():
+
+       20508:	b082      	sub	sp, #8
+
+    _ZN4bios3AdcINS_15AdcInResolutionItLNS_12tAdcDataMaskE4095ELNS_18tAdcDataResolutionE0EEENS_21Adc12BitConfigurationELh16EE4initEv():
+
+       2050a:	460b      	mov	r3, r1
+
+       2050c:	f8c2 10d0 	str.w	r1, [r2, #208]	; 0xd0
+
+       20510:	213f      	movs	r1, #63	; 0x3f
+
+       20512:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
+
+       20516:	3301      	adds	r3, #1
+
+       20518:	2b10      	cmp	r3, #16
+
+       2051a:	d1fa      	bne.n	20512 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x52>
+
+       2051c:	2300      	movs	r3, #0
+
+       2051e:	f8c2 30b8 	str.w	r3, [r2, #184]	; 0xb8
+
+       20522:	f8c2 30bc 	str.w	r3, [r2, #188]	; 0xbc
+
+       20526:	f8c2 30c0 	str.w	r3, [r2, #192]	; 0xc0
+
+       2052a:	f8c2 30c4 	str.w	r3, [r2, #196]	; 0xc4
+
+       2052e:	f8c2 30c8 	str.w	r3, [r2, #200]	; 0xc8
+
+       20532:	f8c2 30cc 	str.w	r3, [r2, #204]	; 0xcc
+
+       20536:	6c90      	ldr	r0, [r2, #72]	; 0x48
+
+       20538:	9001      	str	r0, [sp, #4]
+
+       2053a:	2187      	movs	r1, #135	; 0x87
+
+       2053c:	f8c2 3090 	str.w	r3, [r2, #144]	; 0x90
+
+       20540:	f06f 03ff 	mvn.w	r3, #255	; 0xff
+
+       20544:	f8c2 1094 	str.w	r1, [r2, #148]	; 0x94
+
+       20548:	e001      	b.n	2054e <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x8e>
+
+       2054a:	3b01      	subs	r3, #1
+
+       2054c:	d002      	beq.n	20554 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x94>
+
+       2054e:	6811      	ldr	r1, [r2, #0]
+
+       20550:	0609      	lsls	r1, r1, #24
+
+       20552:	d5fa      	bpl.n	2054a <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x8a>
+
+       20554:	6c91      	ldr	r1, [r2, #72]	; 0x48
+
+       20556:	9101      	str	r1, [sp, #4]
+
+       20558:	2300      	movs	r3, #0
+
+       2055a:	2004      	movs	r0, #4
+
+       2055c:	f44f 7180 	mov.w	r1, #256	; 0x100
+
+       20560:	4e1a      	ldr	r6, [pc, #104]	; (205cc <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0x10c>)
+
+       20562:	f8c2 00b0 	str.w	r0, [r2, #176]	; 0xb0
+
+       20566:	8129      	strh	r1, [r5, #8]
+
+       20568:	f8c2 3090 	str.w	r3, [r2, #144]	; 0x90
+
+       2056c:	461c      	mov	r4, r3
+
+       2056e:	f8c2 3094 	str.w	r3, [r2, #148]	; 0x94
+
+    bios::AnalogInput::init():
+
+       20572:	6833      	ldr	r3, [r6, #0]
+
+       20574:	5d1a      	ldrb	r2, [r3, r4]
+
+       20576:	4423      	add	r3, r4
+
+       20578:	b122      	cbz	r2, 20584 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xc4>
+
+       2057a:	3404      	adds	r4, #4
+
+       2057c:	2c10      	cmp	r4, #16
+
+       2057e:	d1f8      	bne.n	20572 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xb2>
+
+       20580:	b002      	add	sp, #8
+
+       20582:	bd70      	pop	{r4, r5, r6, pc}
+
+       20584:	7898      	ldrb	r0, [r3, #2]
+
+       20586:	f7ff fa31 	bl	1f9ec <<a href="../../../../../../../../../platforms/s32k1xx/bsp/bspIo/src/io/Io.cpp/cec6484b130ee51f1f05d1885b5b84f0.html">bios::Io::setDefaultConfiguration(unsigned short)</a>>
+
+       2058a:	6833      	ldr	r3, [r6, #0]
+
+       2058c:	4423      	add	r3, r4
+
+       2058e:	78da      	ldrb	r2, [r3, #3]
+
+    _ZN4bios3AdcINS_15AdcInResolutionItLNS_12tAdcDataMaskE4095ELNS_18tAdcDataResolutionE0EEENS_21Adc12BitConfigurationELh16EE13enableChannelEhhb():
+
+       20590:	2a0f      	cmp	r2, #15
+
+       20592:	d8f2      	bhi.n	2057a <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xba>
+
+       20594:	785b      	ldrb	r3, [r3, #1]
+
+       20596:	6869      	ldr	r1, [r5, #4]
+
+       20598:	f003 033f 	and.w	r3, r3, #63	; 0x3f
+
+       2059c:	f841 3022 	str.w	r3, [r1, r2, lsl #2]
+
+       205a0:	2a00      	cmp	r2, #0
+
+       205a2:	d1ea      	bne.n	2057a <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xba>
+
+       205a4:	f06f 03ff 	mvn.w	r3, #255	; 0xff
+
+       205a8:	e001      	b.n	205ae <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xee>
+
+       205aa:	3b01      	subs	r3, #1
+
+       205ac:	d002      	beq.n	205b4 <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xf4>
+
+       205ae:	680a      	ldr	r2, [r1, #0]
+
+       205b0:	0612      	lsls	r2, r2, #24
+
+       205b2:	d5fa      	bpl.n	205aa <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xea>
+
+       205b4:	6c8b      	ldr	r3, [r1, #72]	; 0x48
+
+       205b6:	e7e0      	b.n	2057a <<a href="./e25ac7183b719446a35efa6d9002a69e.html">bios::AnalogInput::init()</a>+0xba>
+
+       205b8:	40048000 	.word	0x40048000
+
+       205bc:	1ffefcc8 	.word	0x1ffefcc8
+
+       205c0:	1ffefccc 	.word	0x1ffefccc
+
+       205c4:	000298c8 	.word	0x000298c8
+
+       205c8:	1fff693c 	.word	0x1fff693c
+
+       205cc:	1fff6938 	.word	0x1fff6938
+
+    </pre>
+
+    
+    <pre><a href="./f9ba954667950579ad25dae7689b4527.html">bios::AnalogInput::start() (20)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 72</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 256</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    72
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                8 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    256
+                    
+                    
+                </td>
+                <td class="col_size">232</td>
+                <td><a href="../../../../../../../../../platforms/s32k1xx/bsp/bspIo/src/io/Io.cpp/4d2b35f004d57c9527b81a1790cf7eec.html" class="icon-function">bios::Io::setConfiguration(unsigned short, bios::Io::PinConfiguration const&amp;)</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">24</td>
+                <td><a href="../../../../../../../../../platforms/s32k1xx/bsp/bspIo/src/io/Io.cpp/cec6484b130ee51f1f05d1885b5b84f0.html" class="icon-function">bios::Io::setDefaultConfiguration(unsigned short)</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">64
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 64</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 648</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    64
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    648
+                    
+                    
+                </td>
+                <td class="col_size">272</td>
+                <td><a href="./e25ac7183b719446a35efa6d9002a69e.html" class="icon-function">bios::AnalogInput::init()</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    40
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    376
+                    
+                    
+                </td>
+                <td class="col_size">240</td>
+                <td><a href="../../../../../main/src/lifecycle/StaticBsp.cpp/bbaf0c02e73cc075f1271c2d33d1014c.html" class="icon-function">StaticBsp::hwInit()</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    136
+                    
+                    
+                </td>
+                <td class="col_size">4</td>
+                <td><a href="../../../../../main/src/lifecycle/StaticBsp.cpp/f42c098a5d902487276fda6a241ec854.html" class="icon-function">StaticBsp::init()</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">132</td>
+                <td><a href="../../../../../main/src/main.cpp/fad58de7366495db4650cfefac2fcd61.html" class="icon-function">main</a></td>
+            </tr>
+        
+        </tbody>
+        
+    </table>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

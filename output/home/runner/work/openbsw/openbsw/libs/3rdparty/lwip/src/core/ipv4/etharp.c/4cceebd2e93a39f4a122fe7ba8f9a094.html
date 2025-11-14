@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../../../3rdparty.html">3rdparty</a></li>
+        
+        <li><a href="../../../../../lwip.html">lwip</a></li>
+        
+        <li><a href="../../../../src.html">src</a></li>
+        
+        <li><a href="../../../core.html">core</a></li>
+        
+        <li ><a href="../../ipv4.html">ipv4</a>
+            </li>
+
+        
+        <li class="active"><a href="../etharp.c.html">etharp.c</a>:934
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">etharp_query</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x0000cd90</td>
+                <td>
+    
+    
+</td>
+                <td>56 (static)</td>
+                <td>460</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="./792102a3418797f3a7721995499b1bb3.html">etharp_output (292)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (9,
+                            <span title="sum of used bytes by all callees">
+                            Σ=820
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="../ip4_addr.c/212eebf156fd7f3954882e0492a918a0.html">ip4_addr_isbroadcast_u32 (60)</a>
+                    
+                        ,
+                    
+                
+                    <a href="./9114f828754c22d8266ab241703e95fd.html">etharp_find_entry (260)</a>
+                    
+                        ,
+                    
+                
+                    <a href="./17416148c5c81a9651efae22862d1d6d.html">etharp_raw (208)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../netif/ethernet.c/3836369e8fc91043303e16d509d8555e.html">ethernet_output (124)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../pbuf.c/b1e9f5f05fc261ade8a2ac2ca88ae3d4.html">pbuf_ref (28)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../memp.c/080225340a3623bfcc0fc6f05dfe360c.html">memp_malloc (40)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../pbuf.c/cb8c644da5edde8baf6c2f9518b22342.html">pbuf_clone (32)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../pbuf.c/9b6fd2596874539050b4147be9634d35.html">pbuf_free (8)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../memp.c/39d50c52143357af896630c36b8c515f.html">memp_free (60)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./1124dd2ed5330ffc5b11b4580b321f82.html">etharp_input (412)</a></pre>
+    
+
+    <pre>
+
+    etharp_query():
+
+        cd90:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+
+        cd94:	4605      	mov	r5, r0
+
+        cd96:	b085      	sub	sp, #20
+
+        cd98:	6808      	ldr	r0, [r1, #0]
+
+        cd9a:	460c      	mov	r4, r1
+
+        cd9c:	4629      	mov	r1, r5
+
+        cd9e:	4616      	mov	r6, r2
+
+        cda0:	f000 fff8 	bl	dd94 <<a href="../ip4_addr.c/212eebf156fd7f3954882e0492a918a0.html">ip4_addr_isbroadcast_u32</a>>
+
+        cda4:	2800      	cmp	r0, #0
+
+        cda6:	f040 80c2 	bne.w	cf2e <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x19e>
+
+        cdaa:	6823      	ldr	r3, [r4, #0]
+
+        cdac:	f003 02f0 	and.w	r2, r3, #240	; 0xf0
+
+        cdb0:	2ae0      	cmp	r2, #224	; 0xe0
+
+        cdb2:	f000 80bc 	beq.w	cf2e <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x19e>
+
+        cdb6:	2b00      	cmp	r3, #0
+
+        cdb8:	f000 80b9 	beq.w	cf2e <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x19e>
+
+        cdbc:	462a      	mov	r2, r5
+
+        cdbe:	2101      	movs	r1, #1
+
+        cdc0:	4620      	mov	r0, r4
+
+        cdc2:	f7ff fd63 	bl	c88c <<a href="./9114f828754c22d8266ab241703e95fd.html">etharp_find_entry</a>>
+
+        cdc6:	1e03      	subs	r3, r0, #0
+
+        cdc8:	db43      	blt.n	ce52 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xc2>
+
+        cdca:	b2df      	uxtb	r7, r3
+
+        cdcc:	f8df 8188 	ldr.w	r8, [pc, #392]	; cf58 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1c8>
+
+        cdd0:	eb07 0a47 	add.w	sl, r7, r7, lsl #1
+
+        cdd4:	eb08 0aca 	add.w	sl, r8, sl, lsl #3
+
+        cdd8:	f105 0b3e 	add.w	fp, r5, #62	; 0x3e
+
+        cddc:	f89a 2014 	ldrb.w	r2, [sl, #20]
+
+        cde0:	ea4f 0947 	mov.w	r9, r7, lsl #1
+
+        cde4:	b14a      	cbz	r2, cdfa <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x6a>
+
+        cde6:	2e00      	cmp	r6, #0
+
+        cde8:	d069      	beq.n	cebe <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x12e>
+
+        cdea:	2a01      	cmp	r2, #1
+
+        cdec:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+
+        cdf0:	d81e      	bhi.n	ce30 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xa0>
+
+        cdf2:	d03d      	beq.n	ce70 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xe0>
+
+        cdf4:	b005      	add	sp, #20
+
+        cdf6:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+
+        cdfa:	2301      	movs	r3, #1
+
+    etharp_request_dst():
+
+        cdfc:	9402      	str	r4, [sp, #8]
+
+    etharp_query():
+
+        cdfe:	f8ca 5008 	str.w	r5, [sl, #8]
+
+    etharp_request_dst():
+
+        ce02:	9303      	str	r3, [sp, #12]
+
+    etharp_query():
+
+        ce04:	f88a 3014 	strb.w	r3, [sl, #20]
+
+    etharp_request_dst():
+
+        ce08:	4b4f      	ldr	r3, [pc, #316]	; (cf48 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1b8>)
+
+        ce0a:	9301      	str	r3, [sp, #4]
+
+        ce0c:	1d2b      	adds	r3, r5, #4
+
+        ce0e:	9300      	str	r3, [sp, #0]
+
+        ce10:	4a4e      	ldr	r2, [pc, #312]	; (cf4c <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1bc>)
+
+        ce12:	465b      	mov	r3, fp
+
+        ce14:	4659      	mov	r1, fp
+
+        ce16:	4628      	mov	r0, r5
+
+        ce18:	f7ff fdba 	bl	c990 <<a href="./17416148c5c81a9651efae22862d1d6d.html">etharp_raw</a>>
+
+    etharp_query():
+
+        ce1c:	b310      	cbz	r0, ce64 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xd4>
+
+        ce1e:	2e00      	cmp	r6, #0
+
+        ce20:	d0e8      	beq.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        ce22:	eb09 0307 	add.w	r3, r9, r7
+
+        ce26:	eb08 03c3 	add.w	r3, r8, r3, lsl #3
+
+        ce2a:	7d1a      	ldrb	r2, [r3, #20]
+
+        ce2c:	2a01      	cmp	r2, #1
+
+        ce2e:	d9e0      	bls.n	cdf2 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x62>
+
+        ce30:	4c47      	ldr	r4, [pc, #284]	; (cf50 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1c0>)
+
+        ce32:	2318      	movs	r3, #24
+
+        ce34:	7027      	strb	r7, [r4, #0]
+
+        ce36:	fb03 8307 	mla	r3, r3, r7, r8
+
+        ce3a:	f44f 6400 	mov.w	r4, #2048	; 0x800
+
+        ce3e:	465a      	mov	r2, fp
+
+        ce40:	4631      	mov	r1, r6
+
+        ce42:	4628      	mov	r0, r5
+
+        ce44:	330c      	adds	r3, #12
+
+        ce46:	9400      	str	r4, [sp, #0]
+
+        ce48:	f001 f82e 	bl	dea8 <<a href="../../../netif/ethernet.c/3836369e8fc91043303e16d509d8555e.html">ethernet_output</a>>
+
+        ce4c:	b005      	add	sp, #20
+
+        ce4e:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+
+        ce52:	b11e      	cbz	r6, ce5c <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xcc>
+
+        ce54:	493f      	ldr	r1, [pc, #252]	; (cf54 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1c4>)
+
+        ce56:	6c8a      	ldr	r2, [r1, #72]	; 0x48
+
+        ce58:	3201      	adds	r2, #1
+
+        ce5a:	648a      	str	r2, [r1, #72]	; 0x48
+
+        ce5c:	b258      	sxtb	r0, r3
+
+        ce5e:	b005      	add	sp, #20
+
+        ce60:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+
+        ce64:	f89a 3014 	ldrb.w	r3, [sl, #20]
+
+        ce68:	2b01      	cmp	r3, #1
+
+        ce6a:	d1d8      	bne.n	ce1e <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x8e>
+
+        ce6c:	2e00      	cmp	r6, #0
+
+        ce6e:	d0c1      	beq.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        ce70:	4633      	mov	r3, r6
+
+        ce72:	7b1a      	ldrb	r2, [r3, #12]
+
+        ce74:	0652      	lsls	r2, r2, #25
+
+        ce76:	d438      	bmi.n	ceea <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x15a>
+
+        ce78:	681b      	ldr	r3, [r3, #0]
+
+        ce7a:	2b00      	cmp	r3, #0
+
+        ce7c:	d1f9      	bne.n	ce72 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xe2>
+
+        ce7e:	4630      	mov	r0, r6
+
+        ce80:	f001 fae4 	bl	e44c <<a href="../../pbuf.c/b1e9f5f05fc261ade8a2ac2ca88ae3d4.html">pbuf_ref</a>>
+
+        ce84:	2005      	movs	r0, #5
+
+        ce86:	f7f9 ffb9 	bl	6dfc <<a href="../../memp.c/080225340a3623bfcc0fc6f05dfe360c.html">memp_malloc</a>>
+
+        ce8a:	2800      	cmp	r0, #0
+
+        ce8c:	d055      	beq.n	cf3a <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1aa>
+
+        ce8e:	eb09 0207 	add.w	r2, r9, r7
+
+        ce92:	00d2      	lsls	r2, r2, #3
+
+        ce94:	6046      	str	r6, [r0, #4]
+
+        ce96:	f858 6002 	ldr.w	r6, [r8, r2]
+
+        ce9a:	2300      	movs	r3, #0
+
+        ce9c:	6003      	str	r3, [r0, #0]
+
+        ce9e:	2e00      	cmp	r6, #0
+
+        cea0:	d041      	beq.n	cf26 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x196>
+
+        cea2:	6834      	ldr	r4, [r6, #0]
+
+        cea4:	2c00      	cmp	r4, #0
+
+        cea6:	d045      	beq.n	cf34 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1a4>
+
+        cea8:	2201      	movs	r2, #1
+
+        ceaa:	4625      	mov	r5, r4
+
+        ceac:	6824      	ldr	r4, [r4, #0]
+
+        ceae:	3201      	adds	r2, #1
+
+        ceb0:	2c00      	cmp	r4, #0
+
+        ceb2:	d1fa      	bne.n	ceaa <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x11a>
+
+        ceb4:	2a02      	cmp	r2, #2
+
+        ceb6:	6028      	str	r0, [r5, #0]
+
+        ceb8:	d827      	bhi.n	cf0a <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x17a>
+
+        ceba:	4620      	mov	r0, r4
+
+        cebc:	e79a      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+    etharp_request_dst():
+
+        cebe:	2301      	movs	r3, #1
+
+        cec0:	9303      	str	r3, [sp, #12]
+
+        cec2:	4b21      	ldr	r3, [pc, #132]	; (cf48 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1b8>)
+
+        cec4:	9301      	str	r3, [sp, #4]
+
+        cec6:	1d2b      	adds	r3, r5, #4
+
+        cec8:	9300      	str	r3, [sp, #0]
+
+        ceca:	4a20      	ldr	r2, [pc, #128]	; (cf4c <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1bc>)
+
+        cecc:	9402      	str	r4, [sp, #8]
+
+        cece:	465b      	mov	r3, fp
+
+        ced0:	4659      	mov	r1, fp
+
+        ced2:	4628      	mov	r0, r5
+
+        ced4:	f7ff fd5c 	bl	c990 <<a href="./17416148c5c81a9651efae22862d1d6d.html">etharp_raw</a>>
+
+    etharp_query():
+
+        ced8:	2800      	cmp	r0, #0
+
+        ceda:	d18b      	bne.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cedc:	f89a 3014 	ldrb.w	r3, [sl, #20]
+
+        cee0:	2b01      	cmp	r3, #1
+
+        cee2:	d187      	bne.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cee4:	f8aa 0012 	strh.w	r0, [sl, #18]
+
+        cee8:	e784      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        ceea:	4632      	mov	r2, r6
+
+        ceec:	f44f 7120 	mov.w	r1, #640	; 0x280
+
+        cef0:	2014      	movs	r0, #20
+
+        cef2:	f001 fbe1 	bl	e6b8 <<a href="../../pbuf.c/cb8c644da5edde8baf6c2f9518b22342.html">pbuf_clone</a>>
+
+        cef6:	4606      	mov	r6, r0
+
+        cef8:	2800      	cmp	r0, #0
+
+        cefa:	d1c3      	bne.n	ce84 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0xf4>
+
+        cefc:	4a15      	ldr	r2, [pc, #84]	; (cf54 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x1c4>)
+
+        cefe:	6c93      	ldr	r3, [r2, #72]	; 0x48
+
+        cf00:	3301      	adds	r3, #1
+
+        cf02:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+
+        cf06:	6493      	str	r3, [r2, #72]	; 0x48
+
+        cf08:	e774      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cf0a:	eb09 0307 	add.w	r3, r9, r7
+
+        cf0e:	6832      	ldr	r2, [r6, #0]
+
+        cf10:	6870      	ldr	r0, [r6, #4]
+
+        cf12:	f848 2033 	str.w	r2, [r8, r3, lsl #3]
+
+        cf16:	f001 fa8b 	bl	e430 <<a href="../../pbuf.c/9b6fd2596874539050b4147be9634d35.html">pbuf_free</a>>
+
+        cf1a:	2005      	movs	r0, #5
+
+        cf1c:	4631      	mov	r1, r6
+
+        cf1e:	f7f9 ff81 	bl	6e24 <<a href="../../memp.c/39d50c52143357af896630c36b8c515f.html">memp_free</a>>
+
+        cf22:	4620      	mov	r0, r4
+
+        cf24:	e766      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cf26:	f848 0002 	str.w	r0, [r8, r2]
+
+        cf2a:	4630      	mov	r0, r6
+
+        cf2c:	e762      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cf2e:	f06f 000f 	mvn.w	r0, #15
+
+        cf32:	e75f      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cf34:	6030      	str	r0, [r6, #0]
+
+        cf36:	4620      	mov	r0, r4
+
+        cf38:	e75c      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cf3a:	4630      	mov	r0, r6
+
+        cf3c:	f001 fa78 	bl	e430 <<a href="../../pbuf.c/9b6fd2596874539050b4147be9634d35.html">pbuf_free</a>>
+
+        cf40:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+
+        cf44:	e756      	b.n	cdf4 <<a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html">etharp_query</a>+0x64>
+
+        cf46:	bf00      	nop
+
+        cf48:	00025804 	.word	0x00025804
+
+        cf4c:	000257fc 	.word	0x000257fc
+
+        cf50:	1fff3fe8 	.word	0x1fff3fe8
+
+        cf54:	1fff31c8 	.word	0x1fff31c8
+
+        cf58:	1fff3400 	.word	0x1fff3400
+
+    </pre>
+
+    
+    <pre><a href="./792102a3418797f3a7721995499b1bb3.html">etharp_output (292)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 472</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 2,984</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    472
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    2,984
+                    
+                    
+                </td>
+                <td class="col_size">136</td>
+                <td><a href="../../../../../printf/src/printf/printf.c/aead89a8c09454d3b52c82329b9d6539.html" class="icon-function">out_rev_</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    432
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                112 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    2,848
+                    
+                    
+                </td>
+                <td class="col_size">656</td>
+                <td><a href="../../../../../printf/src/printf/printf.c/ac6598d6032c1151c802f0c9a9979746.html" class="icon-function">print_integer</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    320
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                96 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    2,192
+                    
+                    
+                </td>
+                <td class="col_size">1,572</td>
+                <td><a href="../../../../../printf/src/printf/printf.c/6d7d630ec5529648e33ae989eebb2cb7.html" class="icon-function">_vsnprintf</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    224
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    620
+                    
+                    
+                </td>
+                <td class="col_size">32</td>
+                <td><a href="../../../../../printf/src/printf/printf.c/529535ce0d5bfecabb7841bebeaf251c.html" class="icon-function">vsnprintf_</a></td>
+            </tr>
+        
+            <tr>
+                <th>5</th>
+                <td class="col_size">
+                    
+                    208
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    588
+                    
+                    
+                </td>
+                <td class="col_size">52</td>
+                <td><a href="../../../../../../../executables/referenceApp/application/src/logger/logger.cpp/98866fb3d81ee8db78cbfd1e2dfd931d.html" class="icon-function">log_lwipInfo</a></td>
+            </tr>
+        
+            <tr>
+                <th>6</th>
+                <td class="col_size">
+                    
+                    192
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    536
+                    
+                    
+                </td>
+                <td class="col_size">60</td>
+                <td><a href="../../memp.c/39d50c52143357af896630c36b8c515f.html" class="icon-function">memp_free</a></td>
+            </tr>
+        
+            <tr>
+                <th>7</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    476
+                    
+                    
+                </td>
+                <td class="col_size">112</td>
+                <td><a href="../../pbuf.c/9b6fd2596874539050b4147be9634d35.html" class="icon-function">pbuf_free</a></td>
+            </tr>
+        
+            <tr>
+                <th>8</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    364
+                    
+                    
+                </td>
+                <td class="col_size">8</td>
+                <td><a href="../../pbuf.c/9b6fd2596874539050b4147be9634d35.html" class="icon-function">pbuf_free</a></td>
+            </tr>
+        
+            <tr>
+                <th>9</th>
+                <td class="col_size">
+                    
+                    176
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    356
+                    
+                    
+                </td>
+                <td class="col_size">96</td>
+                <td><a href="./522bfc688d8c2278e45d1224eb8bd858.html" class="icon-function">etharp_free_entry</a></td>
+            </tr>
+        
+            <tr>
+                <th>10</th>
+                <td class="col_size">
+                    
+                    152
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                56 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">260</td>
+                <td><a href="./9114f828754c22d8266ab241703e95fd.html" class="icon-function">etharp_find_entry</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">96
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 96</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 752</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    96
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                56 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    752
+                    
+                    
+                </td>
+                <td class="col_size">460</td>
+                <td><a href="./4cceebd2e93a39f4a122fe7ba8f9a094.html" class="icon-function">etharp_query</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">292</td>
+                <td><a href="./792102a3418797f3a7721995499b1bb3.html" class="icon-function">etharp_output</a></td>
+            </tr>
+        
+        </tbody>
+        
+    </table>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

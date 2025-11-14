@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../3rdparty.html">3rdparty</a></li>
+        
+        <li><a href="../../../freeRtos.html">freeRtos</a></li>
+        
+        <li ><a href="../../include.html">include</a>
+            </li>
+
+        
+        <li class="active"><a href="../timers.h.html">timers.h</a>:1350
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">xTimerCreateTimerTask</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x00013868</td>
+                <td>
+    <span class="label label-success">x-module</span>
+    
+</td>
+                <td>40 (static)</td>
+                <td>84</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>Callers (1)</th>
+                <td colspan="5">
+                
+                    <a href="../task.h/f63e0c737b2bc0ba20133fcf0cb62874.html">vTaskStartScheduler (152)</a>
+                    
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Callees (3,
+                            <span title="sum of used bytes by all callees">
+                            Σ=744
+                            </span>
+                        )
+                    
+                </th>
+                <td colspan="5">
+                
+                    <a href="../../src/timers.c/25fd83c3d905940072a19718ff477a03.html">prvCheckForValidListAndQueue (108)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../../../../bsw/asyncFreeRtos/src/async/Async.cpp/969fa3803577a7054a0fca784f9c20f7.html">vApplicationGetTimerTaskMemory (128)</a>
+                    
+                        ,
+                    
+                
+                    <a href="../task.h/a56b3291178fbc8037383670ab7415bb.html">xTaskCreateStatic (508)</a>
+                    
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="../../src/timers.c/d35f72ab680b9bc7eb2ff3e6cd07ece5.html">prvTimerTask (488)</a></pre>
+    
+
+    <pre>
+
+    xTimerCreateTimerTask():
+
+       13868:	b510      	push	{r4, lr}
+
+       1386a:	b088      	sub	sp, #32
+
+       1386c:	f7ff fe82 	bl	13574 <<a href="../../src/timers.c/25fd83c3d905940072a19718ff477a03.html">prvCheckForValidListAndQueue</a>>
+
+       13870:	4b0e      	ldr	r3, [pc, #56]	; (138ac <<a href="./3c747f35b7e966dd4eda189278fe89bf.html">xTimerCreateTimerTask</a>+0x44>)
+
+       13872:	6818      	ldr	r0, [r3, #0]
+
+       13874:	b1c0      	cbz	r0, 138a8 <<a href="./3c747f35b7e966dd4eda189278fe89bf.html">xTimerCreateTimerTask</a>+0x40>
+
+       13876:	2400      	movs	r4, #0
+
+       13878:	aa07      	add	r2, sp, #28
+
+       1387a:	a906      	add	r1, sp, #24
+
+       1387c:	a805      	add	r0, sp, #20
+
+       1387e:	9405      	str	r4, [sp, #20]
+
+       13880:	9406      	str	r4, [sp, #24]
+
+       13882:	f000 fb15 	bl	13eb0 <<a href="../../../../bsw/asyncFreeRtos/src/async/Async.cpp/969fa3803577a7054a0fca784f9c20f7.html">vApplicationGetTimerTaskMemory</a>>
+
+       13886:	9805      	ldr	r0, [sp, #20]
+
+       13888:	9906      	ldr	r1, [sp, #24]
+
+       1388a:	9002      	str	r0, [sp, #8]
+
+       1388c:	2309      	movs	r3, #9
+
+       1388e:	9101      	str	r1, [sp, #4]
+
+       13890:	9300      	str	r3, [sp, #0]
+
+       13892:	9a07      	ldr	r2, [sp, #28]
+
+       13894:	4906      	ldr	r1, [pc, #24]	; (138b0 <<a href="./3c747f35b7e966dd4eda189278fe89bf.html">xTimerCreateTimerTask</a>+0x48>)
+
+       13896:	4807      	ldr	r0, [pc, #28]	; (138b4 <<a href="./3c747f35b7e966dd4eda189278fe89bf.html">xTimerCreateTimerTask</a>+0x4c>)
+
+       13898:	4623      	mov	r3, r4
+
+       1389a:	f7ff f8df 	bl	12a5c <<a href="../task.h/a56b3291178fbc8037383670ab7415bb.html">xTaskCreateStatic</a>>
+
+       1389e:	4b06      	ldr	r3, [pc, #24]	; (138b8 <<a href="./3c747f35b7e966dd4eda189278fe89bf.html">xTimerCreateTimerTask</a>+0x50>)
+
+       138a0:	6018      	str	r0, [r3, #0]
+
+       138a2:	1b00      	subs	r0, r0, r4
+
+       138a4:	bf18      	it	ne
+
+       138a6:	2001      	movne	r0, #1
+
+       138a8:	b008      	add	sp, #32
+
+       138aa:	bd10      	pop	{r4, pc}
+
+       138ac:	1fff6718 	.word	0x1fff6718
+
+       138b0:	0002667c 	.word	0x0002667c
+
+       138b4:	00013681 	.word	0x00013681
+
+       138b8:	1fff671c 	.word	0x1fff671c
+
+    </pre>
+
+    
+    <pre><a href="./72b980470cd099aab787d558fcab569a.html">xTimerGetTimerDaemonTaskHandle (12)</a></pre>
+    
+
+    
+        <h1>Stack Worst-Case Scenarios</h1>
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 200</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 524</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    200
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    524
+                    
+                    
+                </td>
+                <td class="col_size">208</td>
+                <td><a href="../task.h/743b1e332b78e221e06478f6fa7578e0.html" class="icon-function">xTaskRemoveFromEventList</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    184
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    316
+                    
+                    
+                </td>
+                <td class="col_size">132</td>
+                <td><a href="../queue.h/ab8b1461e5c95d9bc2914feae28c9534.html" class="icon-function">xQueueGenericReset</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    168
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                24 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    184
+                    
+                    
+                </td>
+                <td class="col_size">76</td>
+                <td><a href="../queue.h/0615b9724f1a85b23e5eea6a25411419.html" class="icon-function">xQueueGenericCreateStatic</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    144
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                32 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">108</td>
+                <td><a href="../../src/timers.c/25fd83c3d905940072a19718ff477a03.html" class="icon-function">prvCheckForValidListAndQueue</a></td>
+            </tr>
+        
+        </tbody>
+        
+        <tfoot>
+            <tr>
+                <th></th>
+                <th class="col_size">112
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        
+    </table>
+        
+        
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th rowspan="2">#</th>
+                <th colspan="2" style="text-align: center">Stack</th>
+                <th colspan="2" style="text-align: center">Code</th>
+                <th rowspan="2" width="100%">Name</th>
+            </tr>
+            <tr>
+                <th class="col_size">&sum; = 112</th>
+                <th class="col_size"></th>
+                <th class="col_size">&sum;= 444</th>
+                <th class="col_size"></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <tr>
+                <th>1</th>
+                <td class="col_size">
+                    
+                    112
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                40 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    444
+                    
+                    
+                </td>
+                <td class="col_size">84</td>
+                <td><a href="./3c747f35b7e966dd4eda189278fe89bf.html" class="icon-function">xTimerCreateTimerTask</a></td>
+            </tr>
+        
+            <tr>
+                <th>2</th>
+                <td class="col_size">
+                    
+                    72
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                48 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    360
+                    
+                    
+                </td>
+                <td class="col_size">152</td>
+                <td><a href="../task.h/f63e0c737b2bc0ba20133fcf0cb62874.html" class="icon-function">vTaskStartScheduler</a></td>
+            </tr>
+        
+            <tr>
+                <th>3</th>
+                <td class="col_size">
+                    
+                    24
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                8 
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    208
+                    
+                    
+                </td>
+                <td class="col_size">56</td>
+                <td><a href="../../../../../executables/referenceApp/application/src/app/app.cpp/f0c3e37b78904f0cb22bd585a8fa9842.html" class="icon-function">app::run()</a></td>
+            </tr>
+        
+            <tr>
+                <th>4</th>
+                <td class="col_size">
+                    
+                    
+                </td>
+                <td class="col_size">
+            
+                </td>
+                <td class="col_size">
+                    
+                    
+                    152
+                    
+                    
+                </td>
+                <td class="col_size">20</td>
+                <td><a href="../../../../../executables/referenceApp/application/src/main.cpp/5ca4565b9d11184b1d3b82aa1ebe323f.html" class="icon-function">app_main()</a></td>
+            </tr>
+        
+            <tr>
+                <th>5</th>
+                <td class="col_size">
+                </td>
+                <td class="col_size">
+            
+                16 
+            
+                </td>
+                <td class="col_size">
+                    
+                </td>
+                <td class="col_size">132</td>
+                <td><a href="../../../../../executables/referenceApp/platforms/s32k148evb/main/src/main.cpp/fad58de7366495db4650cfefac2fcd61.html" class="icon-function">main</a></td>
+            </tr>
+        
+        </tbody>
+        
+    </table>
+        
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

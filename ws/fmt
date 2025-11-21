@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+TREE=$(git write-tree)
+COMMIT=$(echo "WIP" | git commit-tree $TREE)
+git update-ref WS_HEAD $COMMIT
+
+git diff --stat HEAD..WS_HEAD
+
+josh-filter ::Dockerfile=docker/Dockerfile.fmt --update refs/ws/fmt/image WS_HEAD
+
+IMAGE_NAME=ws-image:$(git rev-parse refs/ws/fmt/image^{tree})
+if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
+    echo "Image exists locally"
+else
+    echo "Image does not exist locally"
+    git archive --format=tar $(git rev-parse refs/ws/posix/image^{tree}) | docker build --build-arg user_id=$(id -u) --platform linux/amd64 -t $IMAGE_NAME -
+fi
+
+docker run -it --rm -v "$PWD:/home/jenkins" -w /home/jenkins --platform linux/amd64 --user $(id -u):$(id -g) $IMAGE_NAME sh -c "treefmt"

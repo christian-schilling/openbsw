@@ -95,10 +95,10 @@ public:
 
     void shutdownIncomingConnections(::etl::delegate<void()> delegate);
 
-private:
-    using SendBusyResponseCallback
-        = ::etl::delegate<void(transport::TransportMessage const* const)>;
+    ::etl::ipool& incomingDiagConnectionPool;
+    bool fConnectionShutdownRequested = false;
 
+private:
     static uint8_t const BUSY_MESSAGE_LENGTH = 3U;
 
     friend class ::http::html::UdsController;
@@ -106,41 +106,20 @@ private:
 
     void connectionManagerShutdownComplete();
 
-    static void dispatchIncomingRequest(
-        transport::TransportJob& job,
-        DiagnosisConfiguration& configuration,
-        DiagDispatcher& dispatcher,
-        DiagJobRoot& diagJobRoot,
-        transport::ITransportMessageProvidingListener& providingListener,
-        transport::ITransportMessageProcessedListener* dispatcherProcessedListener,
-        SendBusyResponseCallback sendBusyResponse);
-
     void sendBusyResponse(transport::TransportMessage const* const message);
-
-    static bool isNegativeResponse(transport::TransportMessage const& transportMessage);
-
-    static bool isFromValidSender(transport::TransportMessage const& transportMessage);
 
     /**
      * Functional requests might be routed to other busses if this UDS layer
      * is instantiated on a gateway. Thus, its content must not be altered
      * which is why a copy is made for further processing.
      */
-    static transport::TransportMessage* copyFunctionalRequest(
-        transport::TransportMessage& request,
-        transport::ITransportMessageProvidingListener& providingListener,
-        DiagnosisConfiguration& configuration);
-
     void diagConnectionTerminated(IncomingDiagConnection& diagConnection);
 
     void checkConnectionShutdownProgress();
 
-    ::etl::ipool& incomingDiagConnectionPool;
     ::etl::iqueue<transport::TransportJob>& sendJobQueue;
     DiagnosisConfiguration& fConfiguration;
     ::etl::delegate<void()> fConnectionShutdownDelegate;
-    bool fConnectionShutdownRequested;
-
     ShutdownDelegate fShutdownDelegate;
     ::transport::DefaultTransportMessageProcessedListener fDefaultTransportMessageProcessedListener;
     transport::TransportMessage fBusyMessage;

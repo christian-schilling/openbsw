@@ -13,7 +13,6 @@
 #include <transport/AbstractTransportLayer.h>
 #include <transport/ITransportMessageProcessedListener.h>
 #include <transport/ITransportMessageProvidingListener.h>
-#include <transport/TransportJob.h>
 #include <transport/TransportMessage.h>
 
 #include <etl/queue.h>
@@ -26,15 +25,16 @@ class UdsController;
 }
 } // namespace http
 
-namespace transport
-{
-class TransportJob;
-}
-
 namespace uds
 {
 class IDiagSessionManager;
 class IncomingDiagConnection;
+
+struct TransportJob
+{
+    ::transport::TransportMessage* transportMessage                    = nullptr;
+    ::transport::ITransportMessageProcessedListener* processedListener = nullptr;
+};
 
 /**
  * DiagDispatcher is the ITransportMessageSender for a uds instance.
@@ -58,7 +58,7 @@ public:
      */
     DiagDispatcher(
         ::etl::ipool& incomingDiagConnectionPool,
-        ::etl::iqueue<transport::TransportJob>& sendJobQueue,
+        ::etl::iqueue<TransportJob>& sendJobQueue,
         DiagnosisConfiguration& configuration,
         IDiagSessionManager& sessionManager,
         DiagJobRoot& jobRoot);
@@ -117,7 +117,7 @@ private:
 
     void checkConnectionShutdownProgress();
 
-    ::etl::iqueue<transport::TransportJob>& sendJobQueue;
+    ::etl::iqueue<TransportJob>& sendJobQueue;
     DiagnosisConfiguration& fConfiguration;
     ::etl::delegate<void()> fConnectionShutdownDelegate;
     ShutdownDelegate fShutdownDelegate;

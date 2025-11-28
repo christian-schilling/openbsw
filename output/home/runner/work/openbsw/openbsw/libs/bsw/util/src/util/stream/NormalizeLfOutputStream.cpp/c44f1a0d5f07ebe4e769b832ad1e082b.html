@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../../../../../../../../../static/css/style.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Symbol - puncover</title>
+    
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="page-header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="../../../../../../../../../../../../index.html">
+                    Puncover
+                  </a>
+                </div>
+              </div>
+            </nav>
+          
+        </div>
+        <div id="inner_content">
+        
+    
+    <ol class="breadcrumb folders">
+        
+        <li><a href="../../../../../../../../../../../../home.html">home</a></li>
+        
+        <li><a href="../../../../../../../../../../../runner.html">runner</a></li>
+        
+        <li><a href="../../../../../../../../../../work.html">work</a></li>
+        
+        <li><a href="../../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../../openbsw.html">openbsw</a></li>
+        
+        <li><a href="../../../../../../../libs.html">libs</a></li>
+        
+        <li><a href="../../../../../../bsw.html">bsw</a></li>
+        
+        <li><a href="../../../../../util.html">util</a></li>
+        
+        <li><a href="../../../../src.html">src</a></li>
+        
+        <li><a href="../../../util.html">util</a></li>
+        
+        <li ><a href="../../stream.html">stream</a>
+            </li>
+
+        
+        <li class="active"><a href="../NormalizeLfOutputStream.cpp.html">NormalizeLfOutputStream.cpp</a>:13
+            </li>
+        
+    </ol>
+
+
+    <table class="table table-condensed">
+        <tbody>
+            <tr>
+                <th>Function</th>
+                <td colspan="5">
+                    <span class="icon-function">util::stream::NormalizeLfOutputStream::isEof() const</span>
+                </td>
+            </tr>
+
+            <tr>
+                <th rowspan="2"></th>
+                <th>Address</th>
+                <th>Remarks</th>
+                <th>Stack</th>
+                <th>Code</th>
+                <th>Static</th>
+            </tr>
+            <tr>
+                <td>0x000146ec</td>
+                <td>
+    
+    
+</td>
+                <td>0 (static)</td>
+                <td>100</td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th>No Callers</th>
+                <td colspan="5">
+                
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    No Callees
+                    
+                </th>
+                <td colspan="5">
+                
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <pre><a href="./4d47b3dc3b383e0f8a4b2e5af97be2dd.html">util::stream::NormalizeLfOutputStream::write(etl::span&lt;unsigned char const, 4294967295u&gt; const&amp;) (40)</a></pre>
+    
+
+    <pre>
+
+    util::stream::NormalizeLfOutputStream::isEof() const():
+
+       146ec:	6840      	ldr	r0, [r0, #4]
+
+       146ee:	4a17      	ldr	r2, [pc, #92]	@ (1474c <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x60>)
+
+       146f0:	6803      	ldr	r3, [r0, #0]
+
+       146f2:	681b      	ldr	r3, [r3, #0]
+
+       146f4:	4293      	cmp	r3, r2
+
+       146f6:	d127      	bne.n	14748 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5c>
+
+       146f8:	6840      	ldr	r0, [r0, #4]
+
+       146fa:	6802      	ldr	r2, [r0, #0]
+
+       146fc:	6812      	ldr	r2, [r2, #0]
+
+       146fe:	429a      	cmp	r2, r3
+
+       14700:	d121      	bne.n	14746 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5a>
+
+       14702:	6840      	ldr	r0, [r0, #4]
+
+       14704:	6803      	ldr	r3, [r0, #0]
+
+       14706:	681b      	ldr	r3, [r3, #0]
+
+       14708:	4293      	cmp	r3, r2
+
+       1470a:	d11d      	bne.n	14748 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5c>
+
+       1470c:	6840      	ldr	r0, [r0, #4]
+
+       1470e:	6802      	ldr	r2, [r0, #0]
+
+       14710:	6812      	ldr	r2, [r2, #0]
+
+       14712:	429a      	cmp	r2, r3
+
+       14714:	d117      	bne.n	14746 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5a>
+
+       14716:	6840      	ldr	r0, [r0, #4]
+
+       14718:	6803      	ldr	r3, [r0, #0]
+
+       1471a:	681b      	ldr	r3, [r3, #0]
+
+       1471c:	4293      	cmp	r3, r2
+
+       1471e:	d113      	bne.n	14748 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5c>
+
+       14720:	6840      	ldr	r0, [r0, #4]
+
+       14722:	6802      	ldr	r2, [r0, #0]
+
+       14724:	6812      	ldr	r2, [r2, #0]
+
+       14726:	429a      	cmp	r2, r3
+
+       14728:	d10d      	bne.n	14746 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5a>
+
+       1472a:	6840      	ldr	r0, [r0, #4]
+
+       1472c:	6803      	ldr	r3, [r0, #0]
+
+       1472e:	681b      	ldr	r3, [r3, #0]
+
+       14730:	4293      	cmp	r3, r2
+
+       14732:	d109      	bne.n	14748 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5c>
+
+       14734:	6840      	ldr	r0, [r0, #4]
+
+       14736:	6802      	ldr	r2, [r0, #0]
+
+       14738:	6812      	ldr	r2, [r2, #0]
+
+       1473a:	429a      	cmp	r2, r3
+
+       1473c:	d103      	bne.n	14746 <<a href="./c44f1a0d5f07ebe4e769b832ad1e082b.html">util::stream::NormalizeLfOutputStream::isEof() const</a>+0x5a>
+
+       1473e:	6840      	ldr	r0, [r0, #4]
+
+       14740:	6803      	ldr	r3, [r0, #0]
+
+       14742:	681b      	ldr	r3, [r3, #0]
+
+       14744:	4718      	bx	r3
+
+       14746:	4710      	bx	r2
+
+       14748:	4718      	bx	r3
+
+       1474a:	bf00      	nop
+
+       1474c:	000146ed 	.word	0x000146ed
+
+    </pre>
+
+    
+    <pre><a href="./ac8529e70f99fc7c03e2a64d3aee1426.html">util::stream::NormalizeLfOutputStream::write(unsigned char) (464)</a></pre>
+    
+
+    
+
+
+        </div>
+    <div id="page-footer">
+        <hr>
+        
+            brought to you with 💖
+            by <a href="https://twitter.com/hbehrens">Heiko Behrens</a>
+            <span class="secondary">– MIT license, copyright © 2014-2025</span>
+        
+    </div>
+    </div>
+</body>
+</html>

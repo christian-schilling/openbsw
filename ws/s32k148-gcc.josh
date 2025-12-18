@@ -1,0 +1,11 @@
+build = :+ws/dev-image
+run = :[
+    :+ws/openbsw
+    ::platforms/s32k1xx/
+    ::libs/
+    ::executables/referenceApp/
+    :/ws::run.sh:replace(
+        "CMAKE_PRESET":"s32k148-gcc"
+        "EXEC":""
+    )
+]
